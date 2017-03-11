@@ -1,0 +1,23 @@
+{
+    "poolConfig": {
+        "maxTotal": 200, 
+        "maxIdle": 20, 
+        "minIdle": 5, 
+        "lifo": true, 
+        "maxWaitMillis": -1, 
+        "minEvictableIdleTimeMillis": 1800000, 
+        "softMinEvictableIdleTimeMillis": 1800000, 
+        "numTestsPerEvictionRun": 3, 
+        "testOnBorrow": false, 
+        "testOnReturn": false, 
+        "testWhileIdle": false, 
+        "timeBetweenEvictionRunsMillis": -1, 
+        "blockWhenExhausted": true, 
+        "jmxEnabled": true
+    }, 
+    "host": "localhost",
+    "host_produce": "",
+    "port": 6379,
+    "timeout": 2000,
+    "password2":"vc5988"
+}

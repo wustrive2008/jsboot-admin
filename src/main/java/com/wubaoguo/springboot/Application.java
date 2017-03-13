@@ -8,14 +8,10 @@ import org.springframework.boot.context.embedded.ErrorPage;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
-import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 @MapperScan("com.wubaoguo.springboot.dao")
 
 @SpringBootApplication 
-@EnableScheduling
-@EnableAsync
 @EnableCaching
 public class Application {
 	

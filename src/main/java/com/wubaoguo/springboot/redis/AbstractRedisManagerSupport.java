@@ -5,11 +5,12 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Set;
 
+import org.wustrive.java.redis.HessianSerializer;
+import org.wustrive.java.redis.support.RedisCacheSupport;
+
 import redis.clients.jedis.Jedis;
 
 import com.wubaoguo.springboot.exception.BusinessException;
-import com.wubaoguo.springboot.redis.common.HessianSerializer;
-import com.wubaoguo.springboot.redis.common.support.RedisCacheSupport;
 
 
 public abstract class AbstractRedisManagerSupport extends RedisCacheSupport {

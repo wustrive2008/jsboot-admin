@@ -1,20 +1,14 @@
 package com.wubaoguo.springboot.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Map;
 
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.wubaoguo.springboot.dao.SysUserMapper;
-import com.wubaoguo.springboot.entity.SysUser;
+import com.wubaoguo.springboot.entity.SysAdmin;
 
-/**
- * <p>
- *  服务实现类
- * </p>
- *
- * @author z77z
- * @since 2017-02-10
- */
-@Service
-public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> {
-	
+public class SysUserService {
+
+    public List<SysAdmin> findByAccountAndPwd(Map<String, Object> param) {
+        return null;
+    }
+
 }

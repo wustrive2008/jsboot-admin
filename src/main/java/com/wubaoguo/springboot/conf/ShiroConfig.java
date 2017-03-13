@@ -22,8 +22,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.wubaoguo.springboot.entity.SysPermissionInit;
-import com.wubaoguo.springboot.service.SysPermissionInitService;
 import com.wubaoguo.springboot.shiro.MyShiroRealm;
 import com.wubaoguo.springboot.shiro.filter.KickoutSessionControlFilter;
 
@@ -32,8 +30,6 @@ import com.wubaoguo.springboot.shiro.filter.KickoutSessionControlFilter;
 public class ShiroConfig {
 	private Logger logger = Logger.getLogger(getClass());
 	
-	@Autowired
-	SysPermissionInitService sysPermissionInitService;
 	
 	@Value("${spring.redis.host}")
 	private String host;
@@ -80,12 +76,12 @@ public class ShiroConfig {
 		// <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
 		//logout这个拦截器是shiro已经实现好了的。
 		// 从数据库获取
-		List<SysPermissionInit> list = sysPermissionInitService.selectAll();
+		/*List<SysPermissionInit> list = sysPermissionInitService.selectAll();
 
 		for (SysPermissionInit sysPermissionInit : list) {
 			filterChainDefinitionMap.put(sysPermissionInit.getUrl(),
 					sysPermissionInit.getPermissionInit());
-		}
+		}*/
 
 		shiroFilterFactoryBean
 				.setFilterChainDefinitionMap(filterChainDefinitionMap);

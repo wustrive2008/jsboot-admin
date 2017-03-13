@@ -3,36 +3,18 @@ package com.wubaoguo.springboot.controller;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wubaoguo.springboot.shiro.ShiroService;
-import com.wubaoguo.springboot.vcode.Captcha;
-import com.wubaoguo.springboot.vcode.GifCaptcha;
-
-/**
- * shiro权限控制测试Controller
- * 
- * @author 作者: z77z
- * @date 创建时间：2017年2月10日 下午1:32:02
- */
 @Controller
 public class UserController {
 	
-	@Autowired
-	ShiroService shiroService;
-
 	//首页
 	@RequestMapping(value="index")
 	public String index() {
@@ -55,14 +37,6 @@ public class UserController {
 	@RequestMapping(value="403")
 	public String noPermissions() {
 		return "403";
-	}
-	
-	//更新权限
-	@RequestMapping(value="updatePermission")
-	@ResponseBody
-	public String updatePermission() {
-		shiroService.updatePermission();
-		return "true";
 	}
 	
 	//踢出用户
@@ -138,29 +112,4 @@ public class UserController {
 		return resultMap;
 	}
 	
-	/**
-	 * 获取验证码（Gif版本）
-	 * @param response
-	 */
-	@RequestMapping(value="getGifCode",method=RequestMethod.GET)
-	public void getGifCode(HttpServletResponse response,HttpServletRequest request){
-		try {
-			response.setHeader("Pragma", "No-cache");  
-	        response.setHeader("Cache-Control", "no-cache");  
-	        response.setDateHeader("Expires", 0);  
-	        response.setContentType("image/gif");  
-	        /**
-	         * gif格式动画验证码
-	         * 宽，高，位数。
-	         */
-	        Captcha captcha = new GifCaptcha(146,33,4);
-	        //输出
-	        captcha.out(response.getOutputStream());
-	        HttpSession session = request.getSession(true);  
-	        //存入Session
-	        session.setAttribute("_code",captcha.text().toLowerCase());  
-		} catch (Exception e) {
-			System.err.println("获取验证码异常："+e.getMessage());
-		}
-	}
 }

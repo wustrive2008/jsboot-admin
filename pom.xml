@@ -19,9 +19,28 @@
 		<spring.version>4.2.3.RELEASE</spring.version>
 		<spring.boot.version>1.3.0.RELEASE</spring.boot.version>
 		<tomcat.version>8.0.28</tomcat.version>
+		<base.version>0.0.1-SNAPSHOT</base.version>
 	</properties>
 	<dependencies>
-
+	
+		<dependency>
+			<groupId>com.wustrive.common</groupId>
+			<artifactId>wustrive-java-common</artifactId>
+			<version>${base.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.wustrive.dao</groupId>
+			<artifactId>wustrive-java-dao</artifactId>
+			<version>${base.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.wustrive.redis</groupId>
+			<artifactId>wustrive-java-redis</artifactId>
+			<version>${base.version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>

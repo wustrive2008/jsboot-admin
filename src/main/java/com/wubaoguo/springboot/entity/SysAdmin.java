@@ -14,20 +14,26 @@ import org.wustrive.java.dao.jdbc.bean.BaseBean;
 import com.wubaoguo.springboot.util.StringUtil;
 
 /**
- * 管理员角色
+ * 后台管理员表
  */
 @SuppressWarnings("unchecked")
-public class SysRole implements BaseBean{
+public class SysAdmin implements BaseBean{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5137957282828882736L;
 	public final static Map<String, String> KEYS = new HashMap<String, String>();
 	private Map<String, Object> BEAN_VALUES = null;
 	
 	static {
 		KEYS.put("id", "String");
 		KEYS.put("name", "String");
-		KEYS.put("code", "String");
+		KEYS.put("phone_number", "String");
+		KEYS.put("account", "String");
+		KEYS.put("password", "String");
 		KEYS.put("is_activity", "Integer");
-		KEYS.put("sort", "Integer");
+		KEYS.put("add_time", "Long");
 	}
 	public Map<String, String> getColumnMap(){
 		return KEYS;
@@ -38,27 +44,33 @@ public class SysRole implements BaseBean{
 	
 	private String name;
 	private Boolean isSetted_name = false;
-	private String code;
-	private Boolean isSetted_code = false;
+	private String phone_number;
+	private Boolean isSetted_phone_number = false;
+	private String account;
+	private Boolean isSetted_account = false;
+	private String password;
+	private Boolean isSetted_password = false;
 	private Integer is_activity;
 	private Boolean isSetted_is_activity = false;
-	private Integer sort;
-	private Boolean isSetted_sort = false;
+	private Long add_time;
+	private Boolean isSetted_add_time = false;
 
 	private void initBeanValues(){
 		BEAN_VALUES = new HashMap<String, Object>();
 		BEAN_VALUES.put("id",id);
 			BEAN_VALUES.put("name", null);
-			BEAN_VALUES.put("code", null);
+			BEAN_VALUES.put("phone_number", null);
+			BEAN_VALUES.put("account", null);
+			BEAN_VALUES.put("password", null);
 			BEAN_VALUES.put("is_activity", null);
-			BEAN_VALUES.put("sort", null);
+			BEAN_VALUES.put("add_time", null);
 	}
 	
-	public SysRole() {
+	public SysAdmin() {
 		initBeanValues();
 	}
 	
-	public SysRole(String id) {
+	public SysAdmin(String id) {
 		super();
 		this.id = id;
 		isSetted_id=true;
@@ -75,7 +87,7 @@ public class SysRole implements BaseBean{
 	/**
      * 设置ID
      */
-	public SysRole setId(String id) {
+	public SysAdmin setId(String id) {
 		this.id = id;
 		this.isSetted_id = true;
 		BEAN_VALUES.put("id",id);
@@ -84,18 +96,24 @@ public class SysRole implements BaseBean{
 	
 	@Override
 	public String getUpdateSql() {
-		StringBuffer sBuffer = new StringBuffer("update sys_role set ");
+		StringBuffer sBuffer = new StringBuffer("update sys_admin set ");
 			if (isSetted_name) {
 				sBuffer.append("name=:name,");
 			}
-			if (isSetted_code) {
-				sBuffer.append("code=:code,");
+			if (isSetted_phone_number) {
+				sBuffer.append("phone_number=:phone_number,");
+			}
+			if (isSetted_account) {
+				sBuffer.append("account=:account,");
+			}
+			if (isSetted_password) {
+				sBuffer.append("password=:password,");
 			}
 			if (isSetted_is_activity) {
 				sBuffer.append("is_activity=:is_activity,");
 			}
-			if (isSetted_sort) {
-				sBuffer.append("sort=:sort,");
+			if (isSetted_add_time) {
+				sBuffer.append("add_time=:add_time,");
 			}
 		String sql = sBuffer.toString();
 		return StringUtils.removeEnd(sql, ",") + " where id=:id";
@@ -104,20 +122,26 @@ public class SysRole implements BaseBean{
 	
 	@Override
 	public String getInsertSql() {
-		StringBuffer sBuffer = new StringBuffer("insert into sys_role set ");
+		StringBuffer sBuffer = new StringBuffer("insert into sys_admin set ");
 		StringBuffer fileds = new StringBuffer("id=:id,");
 		if(BEAN_VALUES!=null){
 			  	 if(BEAN_VALUES.get("name")!=null){
 					fileds.append("name=:name,");
 				  }
-			  	 if(BEAN_VALUES.get("code")!=null){
-					fileds.append("code=:code,");
+			  	 if(BEAN_VALUES.get("phone_number")!=null){
+					fileds.append("phone_number=:phone_number,");
+				  }
+			  	 if(BEAN_VALUES.get("account")!=null){
+					fileds.append("account=:account,");
+				  }
+			  	 if(BEAN_VALUES.get("password")!=null){
+					fileds.append("password=:password,");
 				  }
 			  	 if(BEAN_VALUES.get("is_activity")!=null){
 					fileds.append("is_activity=:is_activity,");
 				  }
-			  	 if(BEAN_VALUES.get("sort")!=null){
-					fileds.append("sort=:sort,");
+			  	 if(BEAN_VALUES.get("add_time")!=null){
+					fileds.append("add_time=:add_time,");
 				  }
 		}
 		sBuffer.append(StringUtils.removeEnd(fileds.toString(), ","));
@@ -126,63 +150,93 @@ public class SysRole implements BaseBean{
 	
 
 		/**
-		 * @return the name 角色名称<BR/>
+		 * @return the name 管理员名称<BR/>
 		 */
 		public String getName() {
 			return name;
 		}
 		/**
-		 * @param  the name to name 角色名称 set
+		 * @param  the name to name 管理员名称 set
 		 */
-		public SysRole setName(String name) {
+		public SysAdmin setName(String name) {
 			this.name = name;
 			this.isSetted_name = true;
 			BEAN_VALUES.put("name",name);
 			return this;
 		}
 		/**
-		 * @return the code 角色编码<BR/>
+		 * @return the phone_number 手机号码<BR/>
 		 */
-		public String getCode() {
-			return code;
+		public String getPhone_number() {
+			return phone_number;
 		}
 		/**
-		 * @param  the code to code 角色编码 set
+		 * @param  the phone_number to phone_number 手机号码 set
 		 */
-		public SysRole setCode(String code) {
-			this.code = code;
-			this.isSetted_code = true;
-			BEAN_VALUES.put("code",code);
+		public SysAdmin setPhone_number(String phone_number) {
+			this.phone_number = phone_number;
+			this.isSetted_phone_number = true;
+			BEAN_VALUES.put("phone_number",phone_number);
 			return this;
 		}
 		/**
-		 * @return the is_activity 角色活动状态 1启用2停用<BR/>
+		 * @return the account 管理员帐号<BR/>
+		 */
+		public String getAccount() {
+			return account;
+		}
+		/**
+		 * @param  the account to account 管理员帐号 set
+		 */
+		public SysAdmin setAccount(String account) {
+			this.account = account;
+			this.isSetted_account = true;
+			BEAN_VALUES.put("account",account);
+			return this;
+		}
+		/**
+		 * @return the password 管理员登录密码，MD5加密串<BR/>
+		 */
+		public String getPassword() {
+			return password;
+		}
+		/**
+		 * @param  the password to password 管理员登录密码，MD5加密串 set
+		 */
+		public SysAdmin setPassword(String password) {
+			this.password = password;
+			this.isSetted_password = true;
+			BEAN_VALUES.put("password",password);
+			return this;
+		}
+		/**
+		 * @return the is_activity 1启用，2作废<BR/>
 		 */
 		public Integer getIs_activity() {
 			return is_activity;
 		}
 		/**
-		 * @param  the is_activity to is_activity 角色活动状态 1启用2停用 set
+		 * @param  the is_activity to is_activity 1启用，2作废 set
 		 */
-		public SysRole setIs_activity(Integer is_activity) {
+		public SysAdmin setIs_activity(Integer is_activity) {
 			this.is_activity = is_activity;
 			this.isSetted_is_activity = true;
 			BEAN_VALUES.put("is_activity",is_activity);
 			return this;
 		}
 		/**
-		 * @return the sort 排序<BR/>
+		 * @return the add_time 添加时间<BR/>
 		 */
-		public Integer getSort() {
-			return sort;
+		public Long getAdd_time() {
+			return add_time;
 		}
 		/**
-		 * @param  the sort to sort 排序 set
+		 * @param  the add_time to add_time 添加时间 set
 		 */
-		public SysRole setSort(Integer sort) {
-			this.sort = sort;
-			this.isSetted_sort = true;
-			BEAN_VALUES.put("sort",sort);
+		public SysAdmin setAdd_time(Long add_time) {
+			this.add_time = add_time;
+			this.isSetted_add_time = true;
+			BEAN_VALUES.put("add_time",add_time);
 			return this;
 		}
 
@@ -197,7 +251,7 @@ public class SysRole implements BaseBean{
 		}
 	
 		@Override
-		public SysRole getInstanceById() {
+		public SysAdmin getInstanceById() {
 			if (StringUtils.isBlank(id)) {
 				throw new RuntimeException("获取Bean时ID不能为空");
 			}
@@ -207,22 +261,28 @@ public class SysRole implements BaseBean{
 		
 		
 		@Override
-		public SysRole queryForBean() {
-			StringBuffer sBuffer = new StringBuffer("select * from sys_role where ");
+		public SysAdmin queryForBean() {
+			StringBuffer sBuffer = new StringBuffer("select * from sys_admin where ");
 			if(isSetted_id){
 				sBuffer.append("id=:id and ");
 			}
 				if (isSetted_name) {
 					sBuffer.append("name=:name and ");
 				}
-				if (isSetted_code) {
-					sBuffer.append("code=:code and ");
+				if (isSetted_phone_number) {
+					sBuffer.append("phone_number=:phone_number and ");
+				}
+				if (isSetted_account) {
+					sBuffer.append("account=:account and ");
+				}
+				if (isSetted_password) {
+					sBuffer.append("password=:password and ");
 				}
 				if (isSetted_is_activity) {
 					sBuffer.append("is_activity=:is_activity and ");
 				}
-				if (isSetted_sort) {
-					sBuffer.append("sort=:sort and ");
+				if (isSetted_add_time) {
+					sBuffer.append("add_time=:add_time and ");
 				}
 			String sql = sBuffer.toString();
 			sql = StringUtils.removeEnd(sql, " and ");
@@ -238,14 +298,20 @@ public class SysRole implements BaseBean{
 				if (isSetted_name) {
 					sBuffer.append("name=:name and ");
 				}
-				if (isSetted_code) {
-					sBuffer.append("code=:code and ");
+				if (isSetted_phone_number) {
+					sBuffer.append("phone_number=:phone_number and ");
+				}
+				if (isSetted_account) {
+					sBuffer.append("account=:account and ");
+				}
+				if (isSetted_password) {
+					sBuffer.append("password=:password and ");
 				}
 				if (isSetted_is_activity) {
 					sBuffer.append("is_activity=:is_activity and ");
 				}
-				if (isSetted_sort) {
-					sBuffer.append("sort=:sort and ");
+				if (isSetted_add_time) {
+					sBuffer.append("add_time=:add_time and ");
 				}
 			
 			String sql = sBuffer.toString();
@@ -255,7 +321,7 @@ public class SysRole implements BaseBean{
 	
 		@Override
 		public String getTableName() {
-			return "sys_role";
+			return "sys_admin";
 		}
 		
 		
@@ -264,7 +330,7 @@ public class SysRole implements BaseBean{
 		}
 	
 		@Override
-		public SysRole insert() {
+		public SysAdmin insert() {
 			if (StringUtils.isBlank(id)) {
 				this.setId(StringUtil.getUUID());
 			}
@@ -273,7 +339,7 @@ public class SysRole implements BaseBean{
 		}
 	
 		@Override
-		public SysRole update() {
+		public SysAdmin update() {
 			if (StringUtils.isBlank(id)) {
 				throw new RuntimeException("更新Bean时ID不能为空");
 			}
@@ -281,7 +347,7 @@ public class SysRole implements BaseBean{
 			return this;
 		}  
 		
-		public SysRole insertOrUpdate(){
+		public SysAdmin insertOrUpdate(){
 			if (StringUtils.isNotBlank(id)) {
 				return update();
 			} else {
@@ -298,7 +364,7 @@ public class SysRole implements BaseBean{
 				throw new RuntimeException("ID不能为空!");
 			}
 			
-			return dao.queryForMap("select * from sys_role where id=:id",BEAN_VALUES);
+			return dao.queryForMap("select * from sys_admin where id=:id",BEAN_VALUES);
 		}
 
 		@Override
@@ -312,13 +378,13 @@ public class SysRole implements BaseBean{
 			return sb.toString();
 		}
 		
-		public SysRole newInstance(){
-			return new SysRole();
+		public SysAdmin newInstance(){
+			return new SysAdmin();
 		}
 		
-		private static class Mapper implements RowMapper<SysRole> {
-			public SysRole mapRow(ResultSet rs, int rownum) throws SQLException {
-				SysRole bean = new SysRole();
+		private static class Mapper implements RowMapper<SysAdmin> {
+			public SysAdmin mapRow(ResultSet rs, int rownum) throws SQLException {
+				SysAdmin bean = new SysAdmin();
 				Object id = rs.getObject("id");
 				bean.setId(ConvertUtil.obj2Str(id));
 				bean.BEAN_VALUES.put("id",id);
@@ -326,21 +392,27 @@ public class SysRole implements BaseBean{
 					obj = rs.getObject("name");
 					bean.setName(ConvertUtil.obj2Str(obj));
 				bean.BEAN_VALUES.put("name",obj);
-					obj = rs.getObject("code");
-					bean.setCode(ConvertUtil.obj2Str(obj));
-				bean.BEAN_VALUES.put("code",obj);
+					obj = rs.getObject("phone_number");
+					bean.setPhone_number(ConvertUtil.obj2Str(obj));
+				bean.BEAN_VALUES.put("phone_number",obj);
+					obj = rs.getObject("account");
+					bean.setAccount(ConvertUtil.obj2Str(obj));
+				bean.BEAN_VALUES.put("account",obj);
+					obj = rs.getObject("password");
+					bean.setPassword(ConvertUtil.obj2Str(obj));
+				bean.BEAN_VALUES.put("password",obj);
 						obj = rs.getInt("is_activity");
 					bean.setIs_activity(ConvertUtil.obj2Integer(obj));
 				bean.BEAN_VALUES.put("is_activity",obj);
-						obj = rs.getObject("sort");
-					bean.setSort(ConvertUtil.obj2Integer(obj));
-				bean.BEAN_VALUES.put("sort",obj);
+					obj = rs.getObject("add_time");
+					bean.setAdd_time(ConvertUtil.obj2Long(obj));
+				bean.BEAN_VALUES.put("add_time",obj);
 				return bean;
 			}
     	}	
 		
-		public RowMapper<SysRole> newMapper(){
-			return new SysRole.Mapper();
+		public RowMapper<SysAdmin> newMapper(){
+			return new SysAdmin.Mapper();
 		}
 
 }

@@ -16,7 +16,7 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
 
-import com.wubaoguo.springboot.entity.SysUser;
+import com.wubaoguo.springboot.entity.SysAdmin;
 
 /**
  * @author 作者 z77z
@@ -71,8 +71,8 @@ public class KickoutSessionControlFilter extends AccessControlFilter {
         
 
         Session session = subject.getSession();
-        SysUser user = (SysUser) subject.getPrincipal();
-        String username = user.getNickname();
+        SysAdmin user = (SysAdmin) subject.getPrincipal();
+        String username = user.getName();
         Serializable sessionId = session.getId();
 
         //读取缓存   没有就存入

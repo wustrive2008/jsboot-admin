@@ -9,9 +9,8 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.wustrive.java.common.util.ConvertUtil;
+import org.wustrive.java.common.util.StringUtil;
 import org.wustrive.java.dao.jdbc.bean.BaseBean;
-
-import com.wubaoguo.springboot.util.StringUtil;
 
 /**
  * 

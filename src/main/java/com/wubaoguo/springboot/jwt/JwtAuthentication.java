@@ -1,5 +1,10 @@
 package com.wubaoguo.springboot.jwt;
 
+import org.wustrive.java.core.bean.AuthBean;
+
+import com.nimbusds.jose.JWSObject;
+import com.wubaoguo.springboot.util.JWTUtil;
+
 /**
  * jwt 授权信息 
  * @Title: JwtAuthentication.java
@@ -10,50 +15,23 @@ package com.wubaoguo.springboot.jwt;
  * @author wustrive
  * @date 2017年3月10日 下午5:57:56
  */
-public class JwtAuthentication {
-    private String userId;
-    private String username;
-    private String password;
+public class JwtAuthentication extends AuthBean{
     
     private String deviceId;  //设备id
     
     private String authType;  //认证类型
     
-    private boolean isAuth;  //是否已经认证
-    
     private String accessToken;  //jwt授权token
-
-    public String getUserId() {
-        return userId;
+    
+    
+    public JwtAuthentication() {}
+    
+    public JwtAuthentication(JWSObject jwsObject) {
+        //this.userId = null != JWTUtil.getValue(jwsObject, "userId") ? JWTUtil.getValue(jwsObject, "userId").toString() : null;
+        this.deviceId = null != JWTUtil.getValue(jwsObject, "deviceId") ? JWTUtil.getValue(jwsObject, "deviceId").toString() : null;
+        this.authType = null != JWTUtil.getValue(jwsObject, "authType") ? JWTUtil.getValue(jwsObject, "authType").toString() : null;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isAuth() {
-        return isAuth;
-    }
-
-    public void setAuth(boolean isAuth) {
-        this.isAuth = isAuth;
-    }
 
     public String getAccessToken() {
         return accessToken;
@@ -78,6 +56,5 @@ public class JwtAuthentication {
     public void setAuthType(String authType) {
         this.authType = authType;
     }
-    
     
 }

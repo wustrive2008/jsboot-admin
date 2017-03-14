@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.wustrive.java.core.filter.ThreadContentFilter;
 
 import com.nimbusds.jose.JWSObject;
+import com.wubaoguo.springboot.constant.JwtConstants;
 
 public class JwtSubject {
     private JWSObject jwsObject;
@@ -29,13 +30,13 @@ public class JwtSubject {
         this.jwsObject = jwsObject;
     }
     
-    public static JWTUser getJwtUser() {
+    public static JwtAuthentication getJwtUser() {
         return ThreadContentFilter.getData(JwtConstants.THREAD_CURRENT_USER);
     }
     
     public static boolean isLogin() {
         // 直接进行非空验证.后期做修改
-        JWTUser jwtUser = getJwtUser();
+        JwtAuthentication jwtUser = getJwtUser();
         if(jwtUser != null && StringUtils.isNotBlank(jwtUser.getUserId())) {
             return true;
         }

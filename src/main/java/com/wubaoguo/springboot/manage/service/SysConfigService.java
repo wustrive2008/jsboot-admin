@@ -1,0 +1,75 @@
+package com.wubaoguo.springboot.manage.service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.wustrive.java.common.util.ConvertUtil;
+import org.wustrive.java.common.util.StringUtil;
+import org.wustrive.java.dao.jdbc.dao.BaseDao;
+
+import com.wubaoguo.springboot.constant.ShiroConstants;
+import com.wubaoguo.springboot.entity.SysConfig;
+
+/**
+ * @Title: SysConfigService.java
+ * @ClassName: com.vcxx.manage.service.SysConfigService
+ * @Description: 系统配置项服务
+ *
+ * Copyright  2015-2016 维创盈通 - Powered By 研发中心 V1.0.0
+ * @author zhaoqt
+ * @date Apr 12, 2016 8:20:39 PM
+ */
+@Service
+public class SysConfigService {
+
+	@Autowired
+	BaseDao baseDao;
+	
+	public List<Map<String, Object>> findSysConfig(String admin_id) {
+		Map<String,Object> param = new HashMap<String, Object>();
+		param.put("admin_id", admin_id);
+		return baseDao.queryForListMap("select * from sys_config where sys_damin_id=:admin_id", param);
+	}
+	
+	/**
+	 * 读取指定 管理员用户配置项 ，暂不添加缓存处理
+	 * 
+	 * @param admin_id
+	 * @return
+	 */
+	public Map<String, Object> findSysConfigToMap(String admin_id) {
+		Map<String, Object> rMap = null;
+		List<Map<String, Object>> rList = findSysConfig(admin_id);
+		if(rList != null && rList.size() > 0) {
+			rMap = new HashMap<>(rList.size());
+			for(Map<String, Object> map : rList) {
+				rMap.put(ConvertUtil.obj2StrBlank(map.get("item_key")), map.get("item_value"));
+			}
+		}
+		return rMap; 
+	}
+	
+	public void initSysConfigToSession(String userId) {
+		Map<String, Object> rMap = findSysConfigToMap(StringUtil.isBlank(userId) ?
+				ShiroConstants.getCurrentUser().getUserId(): userId);
+		ShiroConstants.getSession().setAttribute(ShiroConstants.SESSION_SYS_CONFIG, rMap);
+	}
+	
+	public boolean save(String item_key, String value) {
+		String admin_id = ShiroConstants.getCurrentUser().getUserId();
+		SysConfig sysConfig = new SysConfig();
+		sysConfig.setSys_damin_id(admin_id);
+		SysConfig dbSysConfig = sysConfig.setItem_key(item_key).queryForBean();
+		if(dbSysConfig != null && StringUtil.isNotBlank(dbSysConfig.getId())) {
+			dbSysConfig.setItem_value(value);
+			dbSysConfig.update();
+		} else {
+			sysConfig.setItem_value(value);
+			sysConfig.insert();
+		}
+		return true;
+	}
+}

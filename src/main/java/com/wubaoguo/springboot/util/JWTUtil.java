@@ -3,9 +3,12 @@ package com.wubaoguo.springboot.util;
 import java.text.ParseException;
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import net.minidev.json.JSONObject;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.wustrive.java.common.util.DateUtil;
+import org.wustrive.java.core.exception.BusinessException;
 
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSAlgorithm;
@@ -113,7 +116,7 @@ public class JWTUtil {
      */
     public synchronized static boolean exp(JWSObject jwsObject) {
         String exp = getValue(jwsObject, "exp").toString();
-        if(StringUtil.isNotBlank(exp)) {
+        if(StringUtils.isNotBlank(exp)) {
             if(Long.valueOf(exp) <= System.currentTimeMillis()) {
                 return false;
             }
@@ -129,7 +132,7 @@ public class JWTUtil {
      * @throws KeyLengthException 
      */
     public synchronized static String reExp(String jwtTemplate) throws KeyLengthException {
-        if(StringUtil.isNotBlank(jwtTemplate)) {
+        if(StringUtils.isNotBlank(jwtTemplate)) {
             return encrypt(decrypt(jwtTemplate).getPayload().toJSONObject());
         } 
         return null;

@@ -16,8 +16,9 @@ import org.wustrive.java.core.request.ViewResult;
 
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSObject;
+import com.wubaoguo.springboot.app.service.JwtAuthService;
+import com.wubaoguo.springboot.constant.JwtConstants;
 import com.wubaoguo.springboot.redis.JwtSubjectCache;
-import com.wubaoguo.springboot.service.JwtAuthService;
 import com.wubaoguo.springboot.util.JWTUtil;
 
 @Component
@@ -44,7 +45,7 @@ public class JwtAuthorizingRealm {
         }
         //调用对应的登录处理方法 进行登录验证
         auth  = jwtAuthService.login(auth);
-        if(auth.isAuth()) {
+        if(auth.getIsAuth()) {
             try {
                 //使用jwt加密得到token格式为A.B.C
                 String accessToken = encrypt(auth);
@@ -101,7 +102,7 @@ public class JwtAuthorizingRealm {
                 }
                 
                 // 添加用户信息到当前线程
-                JWTUser jwtUser = new JWTUser(jwsObject);
+                JwtAuthentication jwtUser = new JwtAuthentication(jwsObject);
                 ThreadContentFilter.addData(JwtConstants.THREAD_CURRENT_USER, jwtUser);
                 return true;
             } 

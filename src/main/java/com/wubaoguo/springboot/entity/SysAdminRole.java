@@ -16,17 +16,19 @@ import org.wustrive.java.dao.jdbc.bean.BaseBean;
  * 管理员角色
  */
 @SuppressWarnings("unchecked")
-public class SysRole implements BaseBean{
+public class SysAdminRole implements BaseBean{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5150042652592955454L;
 	public final static Map<String, String> KEYS = new HashMap<String, String>();
 	private Map<String, Object> BEAN_VALUES = null;
 	
 	static {
 		KEYS.put("id", "String");
-		KEYS.put("name", "String");
+		KEYS.put("admin_id", "String");
 		KEYS.put("code", "String");
-		KEYS.put("is_activity", "Integer");
-		KEYS.put("sort", "Integer");
 	}
 	public Map<String, String> getColumnMap(){
 		return KEYS;
@@ -35,29 +37,23 @@ public class SysRole implements BaseBean{
 	private String id;
 	private Boolean isSetted_id = false;
 	
-	private String name;
-	private Boolean isSetted_name = false;
+	private String admin_id;
+	private Boolean isSetted_admin_id = false;
 	private String code;
 	private Boolean isSetted_code = false;
-	private Integer is_activity;
-	private Boolean isSetted_is_activity = false;
-	private Integer sort;
-	private Boolean isSetted_sort = false;
 
 	private void initBeanValues(){
 		BEAN_VALUES = new HashMap<String, Object>();
 		BEAN_VALUES.put("id",id);
-			BEAN_VALUES.put("name", null);
+			BEAN_VALUES.put("admin_id", null);
 			BEAN_VALUES.put("code", null);
-			BEAN_VALUES.put("is_activity", null);
-			BEAN_VALUES.put("sort", null);
 	}
 	
-	public SysRole() {
+	public SysAdminRole() {
 		initBeanValues();
 	}
 	
-	public SysRole(String id) {
+	public SysAdminRole(String id) {
 		super();
 		this.id = id;
 		isSetted_id=true;
@@ -74,7 +70,7 @@ public class SysRole implements BaseBean{
 	/**
      * 设置ID
      */
-	public SysRole setId(String id) {
+	public SysAdminRole setId(String id) {
 		this.id = id;
 		this.isSetted_id = true;
 		BEAN_VALUES.put("id",id);
@@ -83,18 +79,12 @@ public class SysRole implements BaseBean{
 	
 	@Override
 	public String getUpdateSql() {
-		StringBuffer sBuffer = new StringBuffer("update sys_role set ");
-			if (isSetted_name) {
-				sBuffer.append("name=:name,");
+		StringBuffer sBuffer = new StringBuffer("update sys_admin_role set ");
+			if (isSetted_admin_id) {
+				sBuffer.append("admin_id=:admin_id,");
 			}
 			if (isSetted_code) {
 				sBuffer.append("code=:code,");
-			}
-			if (isSetted_is_activity) {
-				sBuffer.append("is_activity=:is_activity,");
-			}
-			if (isSetted_sort) {
-				sBuffer.append("sort=:sort,");
 			}
 		String sql = sBuffer.toString();
 		return StringUtils.removeEnd(sql, ",") + " where id=:id";
@@ -103,20 +93,14 @@ public class SysRole implements BaseBean{
 	
 	@Override
 	public String getInsertSql() {
-		StringBuffer sBuffer = new StringBuffer("insert into sys_role set ");
+		StringBuffer sBuffer = new StringBuffer("insert into sys_admin_role set ");
 		StringBuffer fileds = new StringBuffer("id=:id,");
 		if(BEAN_VALUES!=null){
-			  	 if(BEAN_VALUES.get("name")!=null){
-					fileds.append("name=:name,");
+			  	 if(BEAN_VALUES.get("admin_id")!=null){
+					fileds.append("admin_id=:admin_id,");
 				  }
 			  	 if(BEAN_VALUES.get("code")!=null){
 					fileds.append("code=:code,");
-				  }
-			  	 if(BEAN_VALUES.get("is_activity")!=null){
-					fileds.append("is_activity=:is_activity,");
-				  }
-			  	 if(BEAN_VALUES.get("sort")!=null){
-					fileds.append("sort=:sort,");
 				  }
 		}
 		sBuffer.append(StringUtils.removeEnd(fileds.toString(), ","));
@@ -125,18 +109,18 @@ public class SysRole implements BaseBean{
 	
 
 		/**
-		 * @return the name 角色名称<BR/>
+		 * @return the admin_id <BR/>
 		 */
-		public String getName() {
-			return name;
+		public String getAdmin_id() {
+			return admin_id;
 		}
 		/**
-		 * @param  the name to name 角色名称 set
+		 * @param  the admin_id to admin_id  set
 		 */
-		public SysRole setName(String name) {
-			this.name = name;
-			this.isSetted_name = true;
-			BEAN_VALUES.put("name",name);
+		public SysAdminRole setAdmin_id(String admin_id) {
+			this.admin_id = admin_id;
+			this.isSetted_admin_id = true;
+			BEAN_VALUES.put("admin_id",admin_id);
 			return this;
 		}
 		/**
@@ -148,40 +132,10 @@ public class SysRole implements BaseBean{
 		/**
 		 * @param  the code to code 角色编码 set
 		 */
-		public SysRole setCode(String code) {
+		public SysAdminRole setCode(String code) {
 			this.code = code;
 			this.isSetted_code = true;
 			BEAN_VALUES.put("code",code);
-			return this;
-		}
-		/**
-		 * @return the is_activity 角色活动状态 1启用2停用<BR/>
-		 */
-		public Integer getIs_activity() {
-			return is_activity;
-		}
-		/**
-		 * @param  the is_activity to is_activity 角色活动状态 1启用2停用 set
-		 */
-		public SysRole setIs_activity(Integer is_activity) {
-			this.is_activity = is_activity;
-			this.isSetted_is_activity = true;
-			BEAN_VALUES.put("is_activity",is_activity);
-			return this;
-		}
-		/**
-		 * @return the sort 排序<BR/>
-		 */
-		public Integer getSort() {
-			return sort;
-		}
-		/**
-		 * @param  the sort to sort 排序 set
-		 */
-		public SysRole setSort(Integer sort) {
-			this.sort = sort;
-			this.isSetted_sort = true;
-			BEAN_VALUES.put("sort",sort);
 			return this;
 		}
 
@@ -196,7 +150,7 @@ public class SysRole implements BaseBean{
 		}
 	
 		@Override
-		public SysRole getInstanceById() {
+		public SysAdminRole getInstanceById() {
 			if (StringUtils.isBlank(id)) {
 				throw new RuntimeException("获取Bean时ID不能为空");
 			}
@@ -206,22 +160,16 @@ public class SysRole implements BaseBean{
 		
 		
 		@Override
-		public SysRole queryForBean() {
-			StringBuffer sBuffer = new StringBuffer("select * from sys_role where ");
+		public SysAdminRole queryForBean() {
+			StringBuffer sBuffer = new StringBuffer("select * from sys_admin_role where ");
 			if(isSetted_id){
 				sBuffer.append("id=:id and ");
 			}
-				if (isSetted_name) {
-					sBuffer.append("name=:name and ");
+				if (isSetted_admin_id) {
+					sBuffer.append("admin_id=:admin_id and ");
 				}
 				if (isSetted_code) {
 					sBuffer.append("code=:code and ");
-				}
-				if (isSetted_is_activity) {
-					sBuffer.append("is_activity=:is_activity and ");
-				}
-				if (isSetted_sort) {
-					sBuffer.append("sort=:sort and ");
 				}
 			String sql = sBuffer.toString();
 			sql = StringUtils.removeEnd(sql, " and ");
@@ -234,17 +182,11 @@ public class SysRole implements BaseBean{
 			if(isSetted_id){
 				sBuffer.append("id=:id and ");
 			}
-				if (isSetted_name) {
-					sBuffer.append("name=:name and ");
+				if (isSetted_admin_id) {
+					sBuffer.append("admin_id=:admin_id and ");
 				}
 				if (isSetted_code) {
 					sBuffer.append("code=:code and ");
-				}
-				if (isSetted_is_activity) {
-					sBuffer.append("is_activity=:is_activity and ");
-				}
-				if (isSetted_sort) {
-					sBuffer.append("sort=:sort and ");
 				}
 			
 			String sql = sBuffer.toString();
@@ -254,7 +196,7 @@ public class SysRole implements BaseBean{
 	
 		@Override
 		public String getTableName() {
-			return "sys_role";
+			return "sys_admin_role";
 		}
 		
 		
@@ -263,7 +205,7 @@ public class SysRole implements BaseBean{
 		}
 	
 		@Override
-		public SysRole insert() {
+		public SysAdminRole insert() {
 			if (StringUtils.isBlank(id)) {
 				this.setId(StringUtil.getUUID());
 			}
@@ -272,7 +214,7 @@ public class SysRole implements BaseBean{
 		}
 	
 		@Override
-		public SysRole update() {
+		public SysAdminRole update() {
 			if (StringUtils.isBlank(id)) {
 				throw new RuntimeException("更新Bean时ID不能为空");
 			}
@@ -280,7 +222,7 @@ public class SysRole implements BaseBean{
 			return this;
 		}  
 		
-		public SysRole insertOrUpdate(){
+		public SysAdminRole insertOrUpdate(){
 			if (StringUtils.isNotBlank(id)) {
 				return update();
 			} else {
@@ -297,7 +239,7 @@ public class SysRole implements BaseBean{
 				throw new RuntimeException("ID不能为空!");
 			}
 			
-			return dao.queryForMap("select * from sys_role where id=:id",BEAN_VALUES);
+			return dao.queryForMap("select * from sys_admin_role where id=:id",BEAN_VALUES);
 		}
 
 		@Override
@@ -311,35 +253,29 @@ public class SysRole implements BaseBean{
 			return sb.toString();
 		}
 		
-		public SysRole newInstance(){
-			return new SysRole();
+		public SysAdminRole newInstance(){
+			return new SysAdminRole();
 		}
 		
-		private static class Mapper implements RowMapper<SysRole> {
-			public SysRole mapRow(ResultSet rs, int rownum) throws SQLException {
-				SysRole bean = new SysRole();
+		private static class Mapper implements RowMapper<SysAdminRole> {
+			public SysAdminRole mapRow(ResultSet rs, int rownum) throws SQLException {
+				SysAdminRole bean = new SysAdminRole();
 				Object id = rs.getObject("id");
 				bean.setId(ConvertUtil.obj2Str(id));
 				bean.BEAN_VALUES.put("id",id);
 				Object obj = null;
-					obj = rs.getObject("name");
-					bean.setName(ConvertUtil.obj2Str(obj));
-				bean.BEAN_VALUES.put("name",obj);
+					obj = rs.getObject("admin_id");
+					bean.setAdmin_id(ConvertUtil.obj2Str(obj));
+				bean.BEAN_VALUES.put("admin_id",obj);
 					obj = rs.getObject("code");
 					bean.setCode(ConvertUtil.obj2Str(obj));
 				bean.BEAN_VALUES.put("code",obj);
-						obj = rs.getInt("is_activity");
-					bean.setIs_activity(ConvertUtil.obj2Integer(obj));
-				bean.BEAN_VALUES.put("is_activity",obj);
-						obj = rs.getObject("sort");
-					bean.setSort(ConvertUtil.obj2Integer(obj));
-				bean.BEAN_VALUES.put("sort",obj);
 				return bean;
 			}
     	}	
 		
-		public RowMapper<SysRole> newMapper(){
-			return new SysRole.Mapper();
+		public RowMapper<SysAdminRole> newMapper(){
+			return new SysAdminRole.Mapper();
 		}
 
 }

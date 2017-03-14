@@ -1,0 +1,25 @@
+<form style="display: none;" action="" method="get" id="history_form">
+	<input type="hidden" value="${commond.pageNumber}" name="pageNumber">
+	<input name="orderBy" value="${commond.orderBy}" type="hidden"/>
+	<input name="orderByClause" value="${commond.orderByClause}" type="hidden" />
+	[#list searchTypeList as s]
+		[#if s.inputType == "TEXT"]
+			<input type="hidden" name="${s.key}" value="${s.value}" />
+		[#elseif s.inputType == "DATE"]
+			<input type="hidden" name="${s.key}" value="${s.value}" />
+		[#elseif s.inputType == "SELECT"]
+			[#assign searchValue="${s.value.searchValue[0]}" /]
+			<input type="hidden" name="${s.key +'.searchValue'}" value="${searchValue}" />
+		[#elseif s.inputType == "RADIO"]
+			[#assign r_searchValue="${s.value.searchValue[0]}" /]
+			<input type="hidden" name="${s.key + '.searchValue'}" value="${r_searchValue}" />
+		[#elseif s.inputType == "CUSTOM"]
+			[#if s.childrens??]
+				[#list s.childrens as c]
+						<input type="hidden" name="${s.key}.${c.key}"  value="${c.value}" />
+				[/#list]
+			[/#if]
+		[/#if]
+	</div>
+	[/#list]
+</form>

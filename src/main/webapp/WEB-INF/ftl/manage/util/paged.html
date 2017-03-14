@@ -1,0 +1,19 @@
+<tfoot>
+       <tr>
+           <td colspan="20" class="footable-visible">
+              	<ul class="pagination pull-right box-page"></ul>
+              	<div class="dataTables_length" >
+              			<select name="pageSize" class="form-control input-sm" onchange="Page.prototype.seturl(0, '${ibox_content_id}');">
+	              			<option value="10" ${(commond.pageSize == 10)?string('selected="selected"', '')}>10</option>
+	              			<option value="20" ${(commond.pageSize == 20)?string('selected="selected"', '')}>20</option>
+	              			<option value="50" ${(commond.pageSize == 50)?string('selected="selected"', '')}>50</option>
+	              			<option value="100" ${(commond.pageSize == 100)?string('selected="selected"', '')}>100</option>
+              			</select>
+              			总页数${commond.totalCount}
+              	</div>
+           </td>
+       </tr>
+</tfoot>
+<script>
+	setpage('${commond.pageNumber!1}', '${commond.pageCount!1}', '${ibox_content_id}');
+</script>

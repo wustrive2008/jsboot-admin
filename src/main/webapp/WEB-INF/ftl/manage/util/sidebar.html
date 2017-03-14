@@ -1,0 +1,159 @@
+<div id="right-sidebar">
+	<div class="sidebar-container">
+		<ul class="nav nav-tabs navs-3">
+			<li >
+				<a>历史</a>
+            </li>
+        	<li>
+        		<a>代办事项</a>
+            </li>
+            <li class="active">
+            	<a data-toggle="tab" href="#tab-3">
+                	<i class="fa fa-gear"></i>
+            	</a>
+           	</li>
+       </ul>
+		<div class="tab-content">
+			<div id="tab-1" class="tab-pane">
+				<div class="sidebar-title">
+                      <h3> <i class="fa fa-comments-o"></i> Latest Notes</h3>
+                      <small><i class="fa fa-tim"></i> You have 10 new message.</small>
+                </div>
+                 <div class="sidebar-message">
+                     <a href="#">
+                         <div class="pull-left text-center">
+                             <img alt="image" class="img-circle message-avatar" src="">
+                             <div class="m-t-xs">
+                                 <i class="fa fa-star text-warning"></i>
+                                 <i class="fa fa-star text-warning"></i>
+                             </div>
+                         </div>
+                         <div class="media-body">
+
+                             There are many variations of passages of Lorem Ipsum available.
+                             <br>
+                             <small class="text-muted">Today 4:21 pm</small>
+                         </div>
+                     </a>
+                 </div>
+             </div>
+           <div id="tab-2" class="tab-pane">
+           		<div class="sidebar-title">
+                   <h3> <i class="fa fa-cube"></i> Latest projects</h3>
+                   <small><i class="fa fa-tim"></i> You have 14 projects. 10 not completed.</small>
+               </div> 
+                <ul class="sidebar-list">
+                 <li>
+                                <a href="#">
+                                    <div class="small pull-right m-t-xs">9 hours ago</div>
+                                    <h4>Business valuation</h4>
+                                    It is a long established fact that a reader will be distracted.
+
+                                    <div class="small">Completion with: 22%</div>
+                                    <div class="progress progress-mini">
+                                        <div style="width: 22%;" class="progress-bar progress-bar-warning"></div>
+                                    </div>
+                                    <div class="small text-muted m-t-xs">Project end: 4:00 pm - 12.06.2014</div>
+                                </a>
+                            </li>
+                </ul>
+              </div>
+          <div id="tab-3" class="active">
+             <div class="sidebar-title">
+                   <h3><i class="fa fa-gears"></i> 设置</h3>
+            </div>
+              <div class="setings-item">
+                    <span>
+                       	 操作历史
+                    </span>
+                            <div class="switch">
+                                <div class="onoffswitch">
+                                    <input type="checkbox" value="Y" name="operation_history" class="onoffswitch-checkbox">
+                                    <label class="onoffswitch-label" for="example">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setings-item">
+                    <span>
+                        	代办事项
+                    </span>
+                            <div class="switch">
+                                <div class="onoffswitch">
+                                    <input type="checkbox" value="Y" name="waiting_events"  class="onoffswitch-checkbox" >
+                                    <label class="onoffswitch-label" for="example2">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setings-item">
+                    <span>
+                        Show toastr
+                    </span>
+                            <div class="switch">
+                                <div class="onoffswitch">
+                                    <input type="checkbox" ${(Session.sys_config.show_toastr == 'Y')?string('checked', '')} value="Y" name="show_toastr" class="onoffswitch-checkbox" id="example3">
+                                    <label class="onoffswitch-label" for="example3">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setings-item">
+                    <span>
+                        Collapse menu 
+                    </span>
+                            <div class="switch">
+                                <div class="onoffswitch">
+                                    <input type="checkbox" ${(Session.sys_config.collapse_menu == 'Y')?string('checked', '')} value="Y" name="collapse_menu" class="onoffswitch-checkbox" id="example4">
+                                    <label class="onoffswitch-label" for="example4">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setings-item">
+                    <span>
+                        Global search
+                    </span>
+                            <div class="switch">
+                                <div class="onoffswitch">
+                                    <input type="checkbox"  ${(Session.sys_config.global_search == 'Y')?string('checked', '')} value="Y"  name="global_search" class="onoffswitch-checkbox" id="example6">
+                                    <label class="onoffswitch-label" for="example6">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+       </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('.onoffswitch-checkbox').bind('click', function() {
+		var value = $(this).val();
+		var item_key = $(this).attr('name');
+		if(value != 'Y') {
+			value = 'N';
+		}
+		if(!$(this).is(":checked")) {
+			value = 'N';
+		}
+		$.post("${request.contextPath}/manage/sysconfig", {item_key:item_key, value:value},
+				function(result){
+		    		
+				}
+		, 'json');
+	});
+});
+</script>
+
+                

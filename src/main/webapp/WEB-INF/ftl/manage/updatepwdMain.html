@@ -1,0 +1,111 @@
+[#import "/manage/util/dash.html" as h/]
+[@h.head title="修改密码" /]
+[@h.fooTableCss /]
+[@h.mainScript /]
+</head>
+[@h.body /]
+	<div id="wrapper">
+		<!-- menu -->
+		[@h.menu menuGroup="userInfo"  menuCode="updatePwd" /]
+		<div id="page-wrapper" class="gray-bg">
+		[#include "/manage/util/search.html" /]
+		[@h.breadcrumb navigation='[{"title":"修改密码", "active":true}]' title="" /]
+	    <div class="wrapper wrapper-content middle-box text-center animated fadeInRight">
+			<form id="defaultForm" class="m-t" role="form" action="${request.contextPath}/manage/updatepwd" method="post">
+                <div class="form-group">
+                     <input name="oldpwd" class="form-control" type="password" placeholder="旧密码"  required="true" />
+                </div>
+                <div class="form-group">
+                    <input name="pwd" type="password" class="form-control" placeholder="新密码" required="true">
+                </div>
+                <div class="form-group">
+                    <input name="pwd2" type="password" class="form-control" placeholder="确认新密码" required="true">
+                </div>
+                <button id="btn_submit_form" type="submit" class="btn btn-primary block full-width m-b">提交</button>
+            </form>
+	    </div>
+		[@h.footer /]
+	</div>
+     
+[@h.footScript /]
+[@h.formValidationScript /]
+</body>
+<script type="text/javascript">
+    $(document).ready(function() {
+    	
+    	$('#defaultForm').formValidation({
+            message: '该值无效',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+            	oldpwd: {
+                    message: '旧密码无效',
+                    validators: {
+                        notEmpty: {
+                            message: '旧密码不能为空'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 32,
+                            message: '旧密码长度在6-32字符之间'
+                        }
+                    }
+                },
+                pwd:{
+                	validators: {
+                		notEmpty: {
+                            message: '密码不能为空'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 32,
+                            message: '密码长度在6-32字符之间'
+                        }
+	                }
+                },
+                pwd2:{
+                	validators: {
+                		notEmpty: {
+                            message: '确认密码不能为空'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 32,
+                            message: '确认密码长度在6-32字符之间'
+                        },
+                        identical: {
+                            field: 'pwd',
+                            message: '确认密码与密码不一致'
+                        }
+	                }
+                }
+                
+            }
+        })
+        .on('success.form.fv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the FormValidation instance
+            //var bv = $form.data('formValidation');
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                //console.log(result);
+                if(result.state==1){
+	    			toastr.success(result.message);
+	    		}else{	    			
+	    			toastr.error(result.message, '操作失败');
+	    		} 
+            }, 'json');
+        });
+    });
+    
+</script>
+</html>

@@ -1,0 +1,94 @@
+<div class="row">
+	<input type="hidden" value="0" name="pageNumber">
+	<input name="orderBy" value="${commond.orderBy}" type="hidden"/>
+	<input name="orderByClause" value="${commond.orderByClause}" type="hidden" />
+	<div class="col-lg-10 form-inline">
+			[#list searchTypeList as s]
+				<div class="input-group m-b">
+					[#if s.inputType == "TEXT"]
+						<span class="input-group-addon">${s.title}</span>
+						<input type="text" name="${s.key}" class="input-sm form-control" placeholder="${s.title}" value="${s.value}" />
+					[#elseif s.inputType == "DATE"]
+						<span class="input-group-addon">${s.title}</span>
+						<input class="input-sm form-control form_datetime" data-link-format="t" data-link-field="${s.key}" type="text" readonly placeholder="${DateUtil.formaterCurrent('yyyy-MM-dd HH:mm')}" value="[#if s.value?? && s.value != '']${s.value?number?number_to_date?string('yyyy-MM-dd HH:mm')}[/#if]" />
+						<input type="hidden" id="${s.key}" name="${s.key}" value="${s.value}" />
+					[#elseif s.inputType == "SELECT"]
+						[#assign searchValue="${s.value.searchValue[0]}" /]
+							<span class="input-group-addon">${s.title}</span>
+								<select name="${s.key + ".searchValue"}">
+								[#list s.value.searchOptions as o]
+									[#if searchValue??&&searchValue != '']
+										<option value ="${o.value}" [#if searchValue == o.value]selected[/#if]>${o.text}</option>
+									[#else]
+										<option value ="${o.value}" [#if o.selected == true]selected[/#if]>${o.text}</option>
+									[/#if]
+								[/#list]
+								</select>
+					[#elseif s.inputType == "RADIO"]
+						[#assign r_searchValue="${s.value.searchValue[0]}" /]
+							<span class="input-group-addon">${s.title}</span>
+							[#list s.value.searchOptions as o]
+								[#if r_searchValue??&&r_searchValue != '']
+									${o.text}: <input type="radio" name="${s.key + '.searchValue'}" [#if r_searchValue == o.value]checked[/#if] value="${o.value}" />&nbsp;&nbsp;
+								[#else]
+									${o.text}: <input type="radio" name="${s.key + '.searchValue'}" [#if o.selected == true]checked[/#if] value="${o.value}" />&nbsp;&nbsp;
+								[/#if]
+							[/#list]
+					[#elseif s.inputType == "CUSTOM"]
+						<span class="input-group-addon">${s.title}</span>
+						[#if s.childrens??]
+							[#list s.childrens as c]
+								[#if c_index == 1]
+									<span class="input-group-addon">至</span>
+								[/#if]
+									<input class="input-sm form-control ${(c_index == 0)?string('form_datetime_start', 'form_datetime_end')}" data-link-format="t" data-link-field="${s.key}_${c.key}"  type="text" placeholder="${DateUtil.formaterCurrent('yyyy-MM-dd HH:mm')}" value="[#if c.value?? && c.value != '']${(c.value?number * 1000)?number_to_date?string('yyyy-MM-dd HH:mm')}[/#if]" />
+									<input type="hidden" id="${s.key}_${c.key}" name="${s.key}.${c.key}"  value="${c.value}" />
+							[/#list]
+						[/#if]
+					[/#if]
+				</div>
+			[/#list]
+			<a href="javascript:void(0);" class="btn btn-sm btn-primary search-btn-type m-b" style="margin-bottom: 15px;">搜索</a>
+		 </div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function () {
+		var ibox_content_obj = $("#${ibox_content_id}");
+		ibox_content_obj.find(".search-btn-type").bind("click", function() {
+			Page.prototype.seturl(0, '${ibox_content_id}');
+		});
+		
+		// 装载时间选择器
+		if($(".form_datetime").length > 0) {
+			$(".form_datetime").datetimepicker({
+				 language : 'zh-CN',
+				 format: "yyyy-mm-dd hh:ii",
+			     autoclose: true,
+			     todayBtn: true,
+			     endDate: "${DateUtil.formaterCurrent('yyyy-MM-dd HH:mm')}"
+		   });
+		}
+		var form_datetime_end_obj = $(".form_datetime_end");
+		var form_datetime_start_obj = $(".form_datetime_start");
+		if(form_datetime_end_obj.length > 0 && form_datetime_start_obj.length > 0) {
+			form_datetime_start_obj.datetimepicker({
+				 language : 'zh-CN',
+				 format: "yyyy-mm-dd hh:ii",
+			     autoclose: true,
+			     todayBtn: true,
+			     endDate: "${DateUtil.formaterCurrent('yyyy-MM-dd HH:mm')}"
+		   	}).on('changeDate', function(ev){
+			   form_datetime_end_obj.datetimepicker('setStartDate', ev.date);
+			});
+			form_datetime_end_obj.datetimepicker({
+				 language : 'zh-CN',
+				 format: "yyyy-mm-dd hh:ii",
+			     autoclose: true,
+			     todayBtn: true,
+			     endDate: "${DateUtil.formaterCurrent('yyyy-MM-dd HH:mm')}"
+		   	}).on('changeDate', function(ev){
+			   form_datetime_start_obj.datetimepicker('setEndDate', ev.date);
+			});
+		}
+	});
+</script>

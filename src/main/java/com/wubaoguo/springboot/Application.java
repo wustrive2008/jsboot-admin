@@ -1,15 +1,15 @@
 package com.wubaoguo.springboot;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.embedded.ErrorPage;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 
-@MapperScan("com.wubaoguo.springboot.dao")
+@ComponentScan(basePackages={"org.wustrive.java.dao.jdbc.dao"})  
 
 @SpringBootApplication 
 @EnableCaching

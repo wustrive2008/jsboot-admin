@@ -1,0 +1,356 @@
+[#macro head title="" ]
+<!DOCTYPE html>
+<html>
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   	<title>${title}</title>
+   	
+	<link rel="shortcut icon" type="image/x-icon" href="/skin/img/favicon.ico" />
+    <link href="/skin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/skin/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+	
+    <!-- Toastr style -->
+    <link href="/skin/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="/skin/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+  	
+    <link href="/skin/css/animate.css" rel="stylesheet">
+    <link href="/skin/css/style.css" rel="stylesheet">
+    <script type="text/javascript">window.contextPath = "${request.contextPath}";</script>
+    <script src="/skin/js/jquery-2.1.1.js"></script>
+[/#macro]
+[#macro dataTableCss ]
+	<!-- Data Tables -->
+	<link href="/skin/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+	<link href="/skin/css/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
+	<link href="/skin/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
+[/#macro]
+[#macro mainScript ]
+    <!-- Mainly scripts -->
+[/#macro]
+[#macro dataTableScript ]
+    <script src="/skin/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="/skin/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="/skin/js/plugins/dataTables/dataTables.responsive.js"></script>
+    <script src="/skin/js/plugins/dataTables/dataTables.tableTools.min.js"></script>
+[/#macro]
+[#macro formValidationScript ]
+	<link href="/skin/css/plugins/validate/formValidation.min.css" rel="stylesheet">
+	<script src="/skin/js/plugins/validate/formValidation.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/skin/js/plugins/validate/framework/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/skin/js/plugins/validate/language/zh_CN.js" type="text/javascript" charset="utf-8"></script>
+[/#macro]
+[#macro datepickerScript ]
+	<link href="/skin/css/plugins/datapicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	<!-- Data picker -->
+   <script src="/skin/js/plugins/datapicker/bootstrap-datetimepicker.js"></script>
+   <script src="/skin/js/plugins/datapicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+   <script src="/skin/js/plugins/datapicker/date-format.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function () {
+		// 装载时间选择器
+		if($(".form_datetime").length > 0) {
+			$(".form_datetime").datetimepicker({
+				 language : 'zh-CN',
+				 format: "yyyy-mm-dd hh:ii",
+			     autoclose: true,
+			     todayBtn: true,
+			     initialDate: "${DateUtil.formaterCurrent('yyyy-MM-dd HH:mm')}"
+		   }).on('changeDate', function(ev){
+			   $(ev.currentTarget).val(ev.date);
+		   });
+		}
+		var form_datetime_end_obj = $(".form_datetime_end");
+		var form_datetime_start_obj = $(".form_datetime_start");
+		if(form_datetime_end_obj.length > 0 && form_datetime_start_obj.length > 0) {
+			form_datetime_start_obj.datetimepicker({
+				 language : 'zh-CN',
+				 format: "yyyy-mm-dd hh:ii",
+			     autoclose: true,
+			     todayBtn: true,
+			     initialDate: "${DateUtil.formaterCurrent('yyyy-MM-dd HH:mm')}"
+		   	}).on('changeDate', function(ev){
+		   		$(ev.currentTarget).val(ev.date);
+			    form_datetime_end_obj.datetimepicker('setStartDate', ev.date);
+			});
+			form_datetime_end_obj.datetimepicker({
+				 language : 'zh-CN',
+				 format: "yyyy-mm-dd hh:ii",
+			     autoclose: true,
+			     todayBtn: true,
+			     initialDate: "${DateUtil.formaterCurrent('yyyy-MM-dd HH:mm')}"
+		   	}).on('changeDate', function(ev){
+		   		$(ev.currentTarget).val(ev.date);
+			   form_datetime_start_obj.datetimepicker('setEndDate', ev.date);
+			});
+		}
+	});
+	</script>
+[/#macro]
+[#macro icheckScript]
+<link href="/skin/css/plugins/iCheck/custom.css" rel="stylesheet">
+<script src="/skin/js/plugins/iCheck/icheck.min.js"></script>
+ <script>
+     $(document).ready(function () {
+         $('.i-checks').iCheck({
+             checkboxClass: 'icheckbox_square-green',
+             radioClass: 'iradio_square-green',
+         });
+     });
+ </script>
+[/#macro]
+[#macro fooTableCss]
+		<link href="/skin/css/plugins/footable/footable.core.css" rel="stylesheet">
+[/#macro]
+[#macro fooTableScript]
+	  <script src="/skin/js/plugins/footable/footable.all.min.js"></script>
+[/#macro]
+[#macro fileinputScript]
+	<link href="/skin/css/plugins/fileinput/fileinput.css" media="all" rel="stylesheet">
+	<script src="/skin/js/plugins/fileinput/fileinput.js" type="text/javascript"></script>
+    <script src="/skin/js/plugins/fileinput/lang/fileinput_locale_zh.js" type="text/javascript"></script>
+[/#macro]
+[#macro footScript]
+<script src="/skin/js/bootstrap.min.js"></script>
+<script src="/skin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/skin/js/plugins/sortable/jquery.sortable.js"></script>
+<script src="/skin/js/jquery-ajax.js"></script>
+ <!-- Toastr -->
+<script src="/skin/js/plugins/toastr/toastr.min.js"></script>
+<script>
+toastr.options = {
+        closeButton: true,
+        progressBar: true,
+        showMethod: 'slideDown',
+        timeOut: 4000
+};
+</script>
+<script src="/skin/js/application.js?v=${.now?long}"></script>
+<script src="/skin/js/inspinia.js?v=${.now?long}"></script>
+<script src="/skin/js/plugins/pace/pace.min.js"></script>
+[/#macro]
+[#macro pageScript]
+<script src="/skin/js/page.js"></script>
+[/#macro]
+[#macro summernoteCss]
+  <link href="/skin/css/plugins/summernote/summernote.css" rel="stylesheet">
+[/#macro]
+[#macro summernoteScript]
+<script src="/skin/js/plugins/summernote/summernote.min.js"></script>
+<script src="/skin/js/plugins/summernote/lang/summernote-zh-CN.js"></script>
+[/#macro]
+[#macro breadcrumb navigation="" title=""]
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2></h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="${request.contextPath}/manage/home">首页</a>
+            </li>
+            [#list navigation?eval as n]
+            	[#if n.active]
+            		<li class="active">
+                		<strong>${n.title}</strong>
+            		</li>
+            	[#else]
+            		<li>
+		                <a data-toggle="button" [#if n.uri??]href="${request.contextPath}${n.uri}"[/#if]>${n.title}</a>
+		            </li>
+            	[/#if]
+            [/#list]
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+[/#macro]
+[#macro menu menuGroup="" menuCode=""]
+	<nav class="navbar-default navbar-static-side" role="navigation" menuGroup="${menuGroup}" menuCode="${menuCode}">
+	</nav>
+	 <script>
+		$(function(){
+			$.get("${request.contextPath}/manage/menu/${Constants.getCurrentRoleCode()}", function(data){
+				$(".navbar-static-side").html(data);
+			});	
+		});
+	</script>
+[/#macro]
+[#macro modalBoxTemplate id="" templateUri=""]
+<div id="${id}" class="modal fade" aria-hidden="true">
+   <div class="modal-dialog">
+   	<div class="modal-content">
+      <div class="modal-body">
+      		[#include templateUri /]
+      </div>
+ 	</div>
+   </div>
+</div>
+[/#macro]
+[#macro modalBox id=""]
+<div id="${id}" class="modal fade" aria-hidden="true">
+   <div class="modal-dialog">
+   	<div class="modal-content">
+      <div class="modal-body"></div>
+ 	</div>
+   </div>
+</div>
+ <script>
+ $(function(){
+	 $('#${id}').on('show.bs.modal', function (e) {
+	    $.get($(e.relatedTarget).attr('data-l-href'), function(data){
+			$("#${id}").find('.modal-body').html(data);
+		});	
+	});
+ });
+ </script>
+[/#macro]
+[#macro tableBox id="" btns="" url="" title=""]
+	<div class="row" id="row_${id}">
+		<div class="col-lg-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					[#if title??]<h5>${title}</h5>[/#if]
+					<div class="ibox-btn">
+						[#if btns??]
+							[#list btns?eval as b]
+								[#if b.modal_target??]
+									<a data-toggle="modal" data-target="#${b.modal_target}" class="btn btn-primary btn-sm">${b.title}</a>
+								[#elseif b.ahtml??]
+									${b.ahtml}
+								[#elseif b.uri??]
+									<a href="${request.contextPath}${b.uri}" data-toggle="button" class="btn btn-primary btn-sm">${b.title}</a>
+								[#elseif b.id??]
+									<a href="javascript:void(0);" class="btn btn-primary btn-sm" id="${b.id}">${b.title}</a>
+								[/#if]
+							[/#list]
+						[/#if]
+	                </div>
+                	<div class="ibox-tools">
+                    	<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                	</div>
+				</div>
+				<div class="ibox-content" id="${id}" url="${url}"></div>
+			</div>
+		</div>
+	<script>
+		$(function(){
+			$.get("${url}", $('#history_form').serialize(), function(data){
+				$("#${id}").html(data);
+			});	
+		});
+	</script>
+</div>
+[/#macro]
+[#macro tableNone id="" url="" ]
+<div class="row">
+     <div class="col-lg-12">
+         <div class="ibox">
+            <div class="ibox-content" id="${id}" url="${url}"></div>
+         </div>
+     </div>
+</div>
+<script>
+	$(function(){
+		$.get("${url}", function(data){
+			$("#${id}").html(data);
+		});	
+	});
+</script>
+[/#macro]
+[#macro formGroup type="" label="" name="" value="" placeholder="" required="" stringlength_max=""]
+<div class="form-group">
+	<label class="col-lg-2 control-label">${label}：</label>
+	[#if type == 'input']	
+		<div class="col-lg-10 ">
+		<input name="${name}" value="${value}" type="text" placeholder="${placeholder}" class="form-control"
+			[#if required??]required[/#if]
+			data-fv-notempty-message="${label}为必填项  *"
+			data-fv-stringlength="true"
+			data-fv-stringlength-max="${stringlength_max}"	
+			data-fv-stringlength-message="${label}最大长度不得超过${stringlength_max}字符  *" />
+		</div>
+	[#elseif type == "date-slot"]
+		<div class="col-lg-10 ">
+        <div class="input-group">
+        	<input value="${(value?substring(0,value?index_of(','))?number * 1000)?number_to_date?string('yyyy-MM-dd HH:mm')}"
+        		 data-link-format="t" data-link-field="date_${name?substring(0,name?index_of(','))}" 
+        		 type="text" placeholder="开始时间" class="form-control form_datetime_start" 
+        		 name="date-${name?substring(0,name?index_of(','))}"
+        		 readonly
+        		 [#if required??]required[/#if]
+        		 data-fv-notempty-message="${label}-开始时间为必填项  *" />
+        	<input value="${value?substring(0,value?index_of(','))}" name="${name?substring(0,name?index_of(','))}" id="date_${name?substring(0,name?index_of(','))}" type="hidden">
+        	<span class="input-group-addon">至</span>
+        	<input value="${(value?substring(value?index_of(',') + 1,value?length)?number * 1000)?number_to_date?string('yyyy-MM-dd HH:mm')}" 
+        		data-link-format="t" data-link-field="date_${name?substring(name?index_of(',') + 1,name?length)}"
+        		type="text" placeholder="结束时间" class="form-control form_datetime_end" 
+        		name="date-${name?substring(name?index_of(',') + 1,name?length)}"
+        		readonly
+        		[#if required??]required[/#if]
+        		data-fv-notempty-message="${label}-结束时间为必填项  *"/>
+        	<input value="${value?substring(value?index_of(',') + 1,value?length)}" name="${name?substring(name?index_of(',') + 1,name?length)}" id="date_${name?substring(name?index_of(',') + 1,name?length)}" type="hidden">
+        </div>
+        </div>
+    [#elseif type == "currency"]
+    	<div class="col-lg-3 ">
+			<div class="input-group">
+	          	<span class="input-group-addon" style="border: 1px solid #E5E6E7;border-right: 0;">￥</span>
+	          	<input value="${value}" name="${name}" type="text" placeholder="${placeholder}" class="form-control" 
+	          				[#if required??]required[/#if]
+	          				data-fv-notempty-message="${label}为必填项  *"
+	          				data-fv-stringlength="true" 
+	          				data-fv-stringlength-max="${stringlength_max}"
+	          				data-fv-stringlength-message="${label}最大长度不得超过${stringlength_max}字符  *" />
+	         </div>
+         </div>
+    [#elseif type == "number"]
+   		 <div class="col-lg-3 ">
+   		 	<input value="${value}"  name="${name}" type="text" placeholder="${placeholder}" class="form-control"
+   		 	[#if required??]required[/#if] 
+   		 	data-fv-notempty-message="${label}为必填项  *" 
+   		 	data-fv-lessthan-inclusive="true"
+   		 	data-fv-lessthan-value="${stringlength_max}"
+   		 	data-fv-lessthan-message="${label}最大长度不得超过${stringlength_max}字符  *"
+   		 	pattern="^-?\d+$" data-fv-regexp-message="${label}必须为数字"
+   		 	/>
+   		 </div>
+    [#elseif type == "textarea"]
+    	<div class="col-lg-10 ">
+    	<textarea value="${value}" name="${name}" type="text" placeholder="${placeholder}" class="form-control"
+			[#if required??]required[/#if]
+			data-fv-notempty-message="${label}为必填项  *"
+			data-fv-stringlength="true"
+			data-fv-stringlength-max="${stringlength_max}"	
+			data-fv-stringlength-message="${label}最大长度不得超过${stringlength_max}字符  *" ></textarea>
+		</div>
+	[#elseif type == "date"]
+		<div class="col-lg-10 ">
+			<input name="date-${name}" type="text" value="${(value?number * 1000)?number_to_date?string('yyyy-MM-dd HH:mm')}" placeholder="${label}" class="form-control form_datetime" 
+		    	data-link-format="t"
+		    	data-link-field="date_${name}"
+		    	readonly
+		    	[#if required??]required[/#if]
+		 		data-fv-notempty-message="${label}为必填项  *"/>
+		   <input type="hidden" name="${name}" id="date_${name}" value="${value}">
+		</div>
+	[/#if]
+</div>
+[/#macro]
+[#macro footer]
+	<div class="footer">
+        <div class="pull-right">
+            	版权所有 © 2017 ruanzongguan.com 
+        </div>
+        <div>
+            
+        </div>
+    </div>
+[/#macro]
+[#macro body]
+<body class="pace-done ${(Session.sys_config.collapse_menu != 'Y')?string('mini-navbar', '')}">
+[/#macro]

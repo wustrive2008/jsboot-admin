@@ -1,0 +1,57 @@
+   <div class="sidebar-collapse">
+       <ul class="nav metismenu" id="side-menu">
+           <li class="nav-header">
+               <div class="dropdown profile-element"> <span>
+                   <img alt="image" class="img-circle" width="64" height="64" src="${request.contextPath}/res/skin/img/mammoth-happy-34622.jpg" />
+                    </span>
+                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                   <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">${Session.currentUser.name}</strong>
+                    </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+                   <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                       <li><a href="updatepwdpage.html">修改密码</a></li>
+                       <li class="divider"></li>
+                       <li><a href="${request.contextPath}/manage/lockscreen">锁定屏幕</a></li>
+                   </ul>
+               </div>
+               <div class="logo-element">
+                   Z+
+               </div>
+           </li>
+		  <li>
+			 <a href="${request.contextPath}/manage/home"><i class="fa fa-th-large"></i><span class="nav-label">首页</span></a>
+		  </li>
+          [#if menus??]
+				[#list menus as m]
+				 	<li menuGroup="${m.code}">
+					[#if m.uri != 'none']
+						<a href="${request.contextPath}${m.uri}"><i class="fa ${m.icon}"></i> <span class="nav-label">${m.menu_name}</span></a>
+					[#else]
+		                <a href="#"><i class="fa ${m.icon}"></i> <span class="nav-label">${m.menu_name}</span> <span class="fa arrow"></span></a>
+					[/#if]
+		              	 [#if m.childrens??&& m.childrens?size > 0]
+		              	 	 <ul class="nav nav-second-level">
+		              	 	 	[#list m.childrens as c]
+		              	 	 		  <li menuCode="${c.code}"><a href="${request.contextPath}${c.uri}">${c.menu_name}</a></li>
+		              	 	 	[/#list]
+				             </ul>
+		              	 [/#if]
+		           	</li>
+				[/#list]
+		  [/#if]
+       </ul>
+   </div>
+<script src="${request.contextPath}/res/skin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script type="text/javascript">
+$(function(){
+	var navbar_static_side  = $(".navbar-static-side");
+	var menuGroup = navbar_static_side.attr("menuGroup");
+	var menuCode = navbar_static_side.attr("menuCode");
+	if(menuGroup && menuCode) {
+		$("li[menuGroup='"+menuGroup+"']").addClass("active");
+		$("li[menuCode='"+menuCode+"']").addClass("active");
+	}
+	[#if Session.sys_config.collapse_menu != 'Y']
+	 	$('#side-menu').metisMenu();
+	[/#if]
+});
+</script>

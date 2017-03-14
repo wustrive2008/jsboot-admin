@@ -15,9 +15,9 @@
         "blockWhenExhausted": true, 
         "jmxEnabled": true
     }, 
-    "host": "localhost",
+    "host": "192.168.1.8",
     "host_produce": "",
     "port": 6379,
     "timeout": 2000,
-    "password2":"vc5988"
+    "password":"vc5988"
 }

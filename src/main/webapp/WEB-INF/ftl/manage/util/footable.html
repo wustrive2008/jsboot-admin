@@ -1,0 +1,42 @@
+[#macro sort commond={} selector=""]
+	data-sort-selector=${selector}
+	[#if commond.orderBy?index_of(selector) != -1]
+		data-sort-initial=${(commond.orderByClause == 'ASC')?string('true', 'descending')}
+	[/#if]
+[/#macro]
+[#macro searchType commond={} ibox_content_id=""]
+	<script type="text/javascript">
+		$(function(){
+			$('#row_${ibox_content_id}').find('a[data-toggle="button"]').on('click', function() {
+				var $form = $('#${ibox_content_id}').find('form:first');
+				$form.attr('action', $(this).attr("href"));
+				$form.submit();
+			});
+		});
+	</script>
+	[#include "/manage/util/searchType2.html" /]
+[/#macro]
+[#macro paged commond={} ibox_content_id=""]
+<tfoot>
+       <tr>
+           <td colspan="20" class="footable-visible">
+              	<ul class="pagination pull-right box-page"></ul>
+              	<div class="dataTables_length input-group" >
+              		<span class="input-group-addon">每页显示</span>
+            		<select name="pageSize" class="form-control input-sm" onchange="Page.prototype.seturl(0, '${ibox_content_id}');">
+             			<option value="10" ${(commond.pageSize == 10)?string('selected="selected"', '')}>10</option>
+             			<option value="20" ${(commond.pageSize == 20)?string('selected="selected"', '')}>20</option>
+             			<option value="50" ${(commond.pageSize == 50)?string('selected="selected"', '')}>50</option>
+             			<option value="100" ${(commond.pageSize == 100)?string('selected="selected"', '')}>100</option>
+            		</select>
+              		<span class="input-group-addon">条&nbsp;&nbsp;共&nbsp;${commond.totalCount}&nbsp;条记录&nbsp;&nbsp;[#if commond.pageCount == 0]0[#else]${commond.pageNumber!1}[/#if]/${commond.pageCount!1}&nbsp;页</span>
+              	</div>
+           </td>
+       </tr>
+</tfoot>
+<script type="text/javascript">
+$(document).ready(function() {
+	setpage('${commond.pageNumber!1}', '${commond.pageCount!1}', '${ibox_content_id}');
+});
+</script>
+[/#macro]

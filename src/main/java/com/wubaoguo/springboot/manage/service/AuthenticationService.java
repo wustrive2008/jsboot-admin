@@ -12,6 +12,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.wustrive.java.common.secret.MD5Encrypt;
 import org.wustrive.java.common.util.ConvertUtil;
 import org.wustrive.java.common.util.StringUtil;
@@ -26,7 +27,7 @@ import com.wubaoguo.springboot.constant.ShiroConstants;
 import com.wubaoguo.springboot.entity.SysAdmin;
 import com.wubaoguo.springboot.entity.SysRole;
 
-
+@Service
 public class AuthenticationService {
 
 	@Autowired

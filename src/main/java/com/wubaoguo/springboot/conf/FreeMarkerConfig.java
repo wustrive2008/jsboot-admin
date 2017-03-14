@@ -46,11 +46,11 @@ public class FreeMarkerConfig {
 		BeansWrapper wrapper = new DefaultObjectWrapperBuilder(version).build();
 		TemplateHashModel staticModels = wrapper.getStaticModels();
 		configuration.setSharedVariable("StringUtil",
-				(TemplateHashModel) staticModels.get("com.wubaoguo.springboot.util.StringUtil"));
+				(TemplateHashModel) staticModels.get("org.wustrive.java.common.util.StringUtil"));
 		configuration.setSharedVariable("DateUtil",
-				(TemplateHashModel) staticModels.get("com.wubaoguo.springboot.util.DateUtil"));
+				(TemplateHashModel) staticModels.get("org.wustrive.java.common.util.DateUtil"));
 		configuration.setSharedVariable("ConvertUtil",
-				(TemplateHashModel) staticModels.get("com.wubaoguo.springboot.util.ConvertUtil"));
+				(TemplateHashModel) staticModels.get("org.wustrive.java.common.util.ConvertUtil"));
 		
 		configuration.setSetting("template_update_delay", "1");  
         configuration.setSetting("default_encoding", "UTF-8");  
@@ -70,6 +70,13 @@ public class FreeMarkerConfig {
 	}
 	
 	public freemarker.template.Configuration getConfiguration(){
-		return configuration;
+        //禁止本地化寻找
+	    configuration.setLocalizedLookup(false);
+	    configuration.setDefaultEncoding("utf-8");
+	    configuration.setClassicCompatible(true);
+        //使用[#]替代<#ftl>
+	    configuration.setTagSyntax(freemarker.template.Configuration.SQUARE_BRACKET_TAG_SYNTAX);
+        
+        return configuration;
 	}
 }

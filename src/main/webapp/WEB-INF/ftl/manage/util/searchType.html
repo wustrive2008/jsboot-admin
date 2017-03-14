@@ -1,0 +1,200 @@
+<div class="row">
+<input type="hidden" value="0" name="pageNumber">
+		<div class="col-sm-2 m-b-xs">
+       	[#if searchTypeList??]
+       		[#list searchTypeList as s]
+       			[#if s.inputType == "HIDDEN"]
+       	 			<input name='${s.key}' value="${s.value}" hidden="hidden"/>
+       	 		[/#if]
+       		[/#list]
+	     <select id="searchType" name="selector" class="form-control input-sm input-s-sm inline">
+	        <option value="def" selected="selected">---条件查询---</option>
+			[#list searchTypeList as s]
+       	 		[#if s.inputType != "HIDDEN"]
+					<option value="${s.key}">${s.title}</option>
+	     		[/#if]
+			[/#list]
+			<option value="all">自定义查询</option>
+	     </select>
+		[/#if]
+		</div>
+		<div class="col-sm-4">
+			 <div class="input-group" id="search_label">
+			 </div>
+		 </div>
+    <div class="clear"></div>
+</div>
+<script type="text/javascript">
+document.onkeydown=function(event){ 
+    e = event ? event :(window.event ? window.event : null); 
+    if(e.keyCode==13){
+    	return false;
+    }
+} 
+var def = "${commond.selector}";
+if(def != "def" && def){
+	$("#searchType").val(def);
+	saech(def);
+	var ibox_content_obj = $("#${ibox_content_id}");
+	ibox_content_obj.find(".search-btn-type").bind("click", function() {
+		Page.prototype.seturl(0, '${ibox_content_id}');
+	});
+}
+$("#searchType").change( function() {
+	var st = $("#searchType").val();
+	saech(st);
+	var ibox_content_obj = $("#${ibox_content_id}");
+	ibox_content_obj.find(".search-btn-type").bind("click", function() {
+		Page.prototype.seturl(0, '${ibox_content_id}');
+	});
+});
+function saech(st){
+	var divHTML = '';
+	var divHTMLWidth_30 = '<div class="input-group-addon">';
+	var search_btn = '<span class="input-group-btn"><button type="button" class="btn btn-sm btn-primary search-btn-type">搜索</button></span>';
+	var search_label_obj = $("#search_label");
+	switch (st) {
+		[#list searchTypeList as s]
+			case "${s.key}":
+				[#if s.inputType == "TEXT"] 
+					search_label_obj.html('<input type="text" class="input-sm form-control" name="${s.key}"  placeholder="${s.title}" value="${s.value}" />' + search_btn);
+				[#elseif s.inputType == "DATE"]
+					search_label_obj.html( 
+							'</span><input class="input-sm form-control form_datetime" data-link-format="t" data-link-field="${s.key}" readonly type="text"value="[#if s.value?? && s.value != '']${(s.value?number * 1000)?number_to_date?string("yyyy-MM-dd HH:mm")}[/#if]" placeholder="${DateUtil.formaterCurrent("yyyy-MM-dd HH:mm")}" />' +
+							'<input type="hidden" id="${s.key}" name="${s.key}" value="${s.value}" />' + search_btn);
+				[#elseif s.inputType == "SELECT"]
+					[#assign searchValue="${s.value.searchValue[0]}" /]
+					search_label_obj.html(divHTML + 
+							'<select name="${s.key + ".searchValue"}">' +
+								[#list s.value.searchOptions as o]
+									[#if searchValue??&&searchValue != '']
+										'<option value ="${o.value}" [#if searchValue == o.value]selected[/#if]>${o.text}</option>' + 
+									[#else]
+										'<option value ="${o.value}" [#if o.selected == true]selected[/#if]>${o.text}</option>' + 
+									[/#if]
+								[/#list]
+							'</select>' +
+							'</div>');
+				[#elseif s.inputType == "RADIO"]
+					[#assign r_searchValue="${s.value.searchValue[0]}" /]
+					search_label_obj.html(divHTML + 
+							[#list s.value.searchOptions as o]
+								[#if r_searchValue??&&r_searchValue != '']
+									'${o.text}: <input type="radio" name="${s.key + ".searchValue"}" [#if r_searchValue == o.value]checked[/#if] value="${o.value}" />&nbsp;&nbsp;' + 
+								[#else]
+									'${o.text}: <input type="radio" name="${s.key + ".searchValue"}" [#if o.selected == true]checked[/#if] value="${o.value}" />&nbsp;&nbsp;' + 
+								[/#if]
+							[/#list]
+						'</div>');
+				[#elseif s.inputType == "CUSTOM"]
+					var searchHTML = [];
+					[#if s.childrens??]
+						[#list s.childrens as c]
+							[#if c_index == 1]
+								searchHTML.push(divHTMLWidth_30 + '至</div>')
+							[/#if]
+							 	searchHTML.push(
+									'<input class="input-sm form-control ${(c_index == 0)?string("form_datetime_start", "form_datetime_end")}" data-link-format="t" data-link-field="${s.key}_${c.key}"  type="text" placeholder="${DateUtil.formaterCurrent("yyyy-MM-dd HH:mm")}" value="[#if c.value?? && c.value != '']${(c.value?number * 1000)?number_to_date?string("yyyy-MM-dd HH:mm")}[/#if]" />' +
+									'<input type="hidden" id="${s.key}_${c.key}" name="${s.key}.${c.key}"  value="${c.value}" />');
+						[/#list]
+					[/#if]
+					 searchHTML.push(search_btn);
+					 search_label_obj.html(searchHTML.join(''));
+				[/#if]
+				 search_label_obj.parent().removeClass("col-sm-7");
+				 search_label_obj.parent().addClass("col-sm-4");
+		 		break;
+		[/#list]
+			case 'all' :
+				var searchHTML = [];
+				[#list searchTypeList as s]
+					[#if s.inputType == "TEXT"]
+						searchHTML.push(divHTMLWidth_30 + '${s.title}</div>' + divHTML + '<input type="text" name="${s.key}" class="input-sm form-control" placeholder="${s.title}" value="${s.value}" />');
+					[#elseif s.inputType == "DATE"]
+						searchHTML.push(divHTMLWidth_30 + 
+								'${s.title}</div>' + divHTML + 
+								'<input class="input-sm form-control form_datetime" data-link-format="t" data-link-field="${s.key}" type="text" readonly placeholder="${DateUtil.formaterCurrent("yyyy-MM-dd HH:mm")}" value="[#if s.value?? && s.value != '']${s.value?number?number_to_date?string("yyyy-MM-dd HH:mm")}[/#if]" />' +
+								'<input type="hidden" id="${s.key}" name="${s.key}" value="${s.value}" />' +
+								'</div>');
+					[#elseif s.inputType == "SELECT"]
+						[#assign searchValue="${s.value.searchValue[0]}" /]
+							searchHTML.push(divHTMLWidth_30 + 
+								'${s.title}</div>' + divHTML + 
+								'<select name="${s.key + ".searchValue"}">' +
+								[#list s.value.searchOptions as o]
+									[#if searchValue??&&searchValue != '']
+										'<option value ="${o.value}" [#if searchValue == o.value]selected[/#if]>${o.text}</option>' + 
+									[#else]
+										'<option value ="${o.value}" [#if o.selected == true]selected[/#if]>${o.text}</option>' + 
+									[/#if]
+								[/#list]
+							'</select>' +
+							'</div>');
+					[#elseif s.inputType == "RADIO"]
+						[#assign r_searchValue="${s.value.searchValue[0]}" /]
+							searchHTML.push(divHTMLWidth_30 + 
+							'${s.title}</div>' + divHTML + 
+							[#list s.value.searchOptions as o]
+								[#if r_searchValue??&&r_searchValue != '']
+									'${o.text}: <input type="radio" name="${s.key + ".searchValue"}" [#if r_searchValue == o.value]checked[/#if] value="${o.value}" />&nbsp;&nbsp;' + 
+								[#else]
+									'${o.text}: <input type="radio" name="${s.key + ".searchValue"}" [#if o.selected == true]checked[/#if] value="${o.value}" />&nbsp;&nbsp;' + 
+								[/#if]
+							[/#list]
+						'</div>');
+					[#elseif s.inputType == "CUSTOM"]
+						searchHTML.push(divHTMLWidth_30 + '${s.title}</div>');
+						[#if s.childrens??]
+							[#list s.childrens as c]
+								[#if c_index == 1]
+									searchHTML.push(divHTMLWidth_30 + '至</div>')
+								[/#if]
+							 	searchHTML.push(
+									'<input class="input-sm form-control ${(c_index == 0)?string("form_datetime_start", "form_datetime_end")}" data-link-format="t" data-link-field="${s.key}_${c.key}"  type="text" placeholder="${DateUtil.formaterCurrent("yyyy-MM-dd HH:mm")}" value="[#if c.value?? && c.value != '']${(c.value?number * 1000)?number_to_date?string("yyyy-MM-dd HH:mm")}[/#if]" />' +
+									'<input type="hidden" id="${s.key}_${c.key}" name="${s.key}.${c.key}"  value="${c.value}" />');
+							[/#list]
+						[/#if]
+					[/#if]
+				[/#list]
+				 search_label_obj.parent().removeClass("col-sm-4");
+				 search_label_obj.parent().addClass("col-sm-7");
+				 search_label_obj.html(searchHTML.join('') + search_btn);
+				break;
+	 	default:
+	 		search_label_obj.empty();
+	 		break;
+	}
+	if($(".form_datetime").length > 0) {
+		$(".form_datetime").datetimepicker({
+			 language : 'zh-CN',
+			 format: "yyyy-mm-dd hh:ii",
+		     autoclose: true,
+		     todayBtn: true,
+		     endDate: "${DateUtil.formaterCurrent('yyyy-MM-dd HH:mm')}"
+	   });
+	}
+	
+	var form_datetime_end_obj = $(".form_datetime_end");
+	var form_datetime_start_obj = $(".form_datetime_start");
+	if(form_datetime_end_obj.length > 0 && form_datetime_start_obj.length > 0) {
+		form_datetime_start_obj.datetimepicker({
+			 language : 'zh-CN',
+			 format: "yyyy-mm-dd hh:ii",
+		     autoclose: true,
+		     todayBtn: true,
+		     endDate: "${DateUtil.formaterCurrent('yyyy-MM-dd HH:mm')}"
+	   }).on('changeDate', function(ev){
+		   form_datetime_end_obj.datetimepicker('setStartDate', ev.date);
+		});
+		form_datetime_end_obj.datetimepicker({
+			 language : 'zh-CN',
+			 format: "yyyy-mm-dd hh:ii",
+		     autoclose: true,
+		     todayBtn: true,
+		     endDate: "${DateUtil.formaterCurrent('yyyy-MM-dd HH:mm')}"
+	   }).on('changeDate', function(ev){
+		   form_datetime_start_obj.datetimepicker('setEndDate', ev.date);
+		});
+	}
+}
+</script>

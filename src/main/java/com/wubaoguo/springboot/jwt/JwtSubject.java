@@ -1,9 +1,9 @@
 package com.wubaoguo.springboot.jwt;
 
 import org.apache.commons.lang3.StringUtils;
+import org.wustrive.java.core.filter.ThreadContentFilter;
 
 import com.nimbusds.jose.JWSObject;
-import com.wubaoguo.springboot.filter.ThreadContent;
 
 public class JwtSubject {
     private JWSObject jwsObject;
@@ -30,7 +30,7 @@ public class JwtSubject {
     }
     
     public static JWTUser getJwtUser() {
-        return ThreadContent.getData(JwtConstants.THREAD_CURRENT_USER);
+        return ThreadContentFilter.getData(JwtConstants.THREAD_CURRENT_USER);
     }
     
     public static boolean isLogin() {

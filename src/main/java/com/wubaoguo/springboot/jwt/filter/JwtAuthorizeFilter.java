@@ -13,14 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.wustrive.java.common.util.WebUtil;
+import org.wustrive.java.core.exception.LoginSecurityException;
+import org.wustrive.java.core.request.StateMap;
+import org.wustrive.java.core.request.ViewResult;
 
 import com.wubaoguo.springboot.conf.JwtConfig;
-import com.wubaoguo.springboot.exception.LoginSecurityException;
 import com.wubaoguo.springboot.jwt.JwtAuthentication;
 import com.wubaoguo.springboot.jwt.JwtAuthorizingRealm;
-import com.wubaoguo.springboot.response.StateMap;
-import com.wubaoguo.springboot.response.ViewResult;
-import com.wubaoguo.springboot.util.WebUtil;
 
 public class JwtAuthorizeFilter implements Filter{
 
@@ -84,7 +84,7 @@ public class JwtAuthorizeFilter implements Filter{
                 if(jwtAuthorizingRealm.isAuthentication(auth)){
                     chain.doFilter(httpRequest, httpResponse);
                 }else{
-                    WebUtil.write(viewResult.state(StateMap.S_403,"认证失败，请重新登录").json(), httpResponse);
+                    WebUtil.write(viewResult.state(StateMap.S_AUTH_ERROR,"认证失败，请重新登录").json(), httpResponse);
                 }
             }
         } catch (LoginSecurityException e) {

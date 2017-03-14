@@ -8,15 +8,15 @@ import net.minidev.json.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.wustrive.java.core.exception.BusinessException;
+import org.wustrive.java.core.exception.LoginSecurityException;
+import org.wustrive.java.core.filter.ThreadContentFilter;
+import org.wustrive.java.core.request.StateMap;
+import org.wustrive.java.core.request.ViewResult;
 
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSObject;
-import com.wubaoguo.springboot.exception.BusinessException;
-import com.wubaoguo.springboot.exception.LoginSecurityException;
-import com.wubaoguo.springboot.filter.ThreadContent;
 import com.wubaoguo.springboot.redis.JwtSubjectCache;
-import com.wubaoguo.springboot.response.StateMap;
-import com.wubaoguo.springboot.response.ViewResult;
 import com.wubaoguo.springboot.service.JwtAuthService;
 import com.wubaoguo.springboot.util.JWTUtil;
 
@@ -40,7 +40,7 @@ public class JwtAuthorizingRealm {
         ViewResult viewResult = ViewResult.newInstance();
         String authType = auth.getAuthType();
         if(StringUtils.isBlank(authType)) {
-            throw new LoginSecurityException(StateMap.S_IS_NULL, "http Header中authType不存在");
+            throw new LoginSecurityException(StateMap.S_CLIENT_PARAM_NULL, "http Header中authType不存在");
         }
         //调用对应的登录处理方法 进行登录验证
         auth  = jwtAuthService.login(auth);
@@ -54,10 +54,10 @@ public class JwtAuthorizingRealm {
                 jwtSubjectCache.put(auth.getUserId() + auth.getAuthType(), auth.getDeviceId());
                 return viewResult.setData(res).success();
             } catch(BusinessException e) {
-                throw new LoginSecurityException(StateMap.S_ERROR, "未知错误,请联系管理员");
+                throw new LoginSecurityException(StateMap.S_SERVER_EXCEPTION, "未知错误,请联系管理员");
             }
         }
-        return viewResult.state(StateMap.S_200,"登录失败,请稍后重试");
+        return viewResult.state(StateMap.S_AUTH_ERROR,"登录失败,请稍后重试");
     }
     
     /**
@@ -92,17 +92,17 @@ public class JwtAuthorizingRealm {
                 
                 if(!JWTUtil.exp(jwsObject)) {
                     // token 信息过期，需客户端重新获取
-                    throw new LoginSecurityException(StateMap.S_403, "登录已过期，请重新登录");
+                    throw new LoginSecurityException(StateMap.S_AUTH_TIMEOUT, "登录已过期，请重新登录");
                 }
                 
                  //判断用户是否已换设备登录
                 if(!isAuthOfDevice(auth)){
-                    throw new LoginSecurityException(StateMap.S_403, "该账号已在其他设备登录,请重新登录");
+                    throw new LoginSecurityException(StateMap.S_AUTH_REPET_LOGIN, "该账号已在其他设备登录,请重新登录");
                 }
                 
                 // 添加用户信息到当前线程
                 JWTUser jwtUser = new JWTUser(jwsObject);
-                ThreadContent.addData(JwtConstants.THREAD_CURRENT_USER, jwtUser);
+                ThreadContentFilter.addData(JwtConstants.THREAD_CURRENT_USER, jwtUser);
                 return true;
             } 
         } catch (BusinessException e) {
@@ -141,7 +141,7 @@ public class JwtAuthorizingRealm {
         try {
             return JWTUtil.encrypt(jsonObject);
         } catch (JOSEException e) {
-            throw new LoginSecurityException(StateMap.S_IS_FORMAT, "authentication fail");
+            throw new LoginSecurityException(StateMap.S_AUTH_ERROR, "authentication fail");
         }
     }
     

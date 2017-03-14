@@ -24,6 +24,12 @@
 	<dependencies>
 	
 		<dependency>
+			<groupId>com.wustrive.core</groupId>
+			<artifactId>wustrive-java-core</artifactId>
+			<version>${base.version}</version>
+		</dependency>
+		
+		<dependency>
 			<groupId>com.wustrive.common</groupId>
 			<artifactId>wustrive-java-common</artifactId>
 			<version>${base.version}</version>

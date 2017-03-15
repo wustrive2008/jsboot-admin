@@ -19,6 +19,7 @@ import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.wustrive.java.common.util.StringUtil;
 
 import com.wubaoguo.springboot.shiro.MyShiroRealm;
 import com.wubaoguo.springboot.shiro.filter.KickoutSessionControlFilter;
@@ -34,6 +35,12 @@ public class ShiroConfig {
 	
 	@Value("${spring.redis.port}")
 	private int port;
+	
+	@Value("${spring.redis.password}")
+    private String password;
+	
+	@Value("${spring.redis.timeout}")
+    private int timeout;
 	
 	/**
 	 * ShiroFilterFactoryBean 处理拦截资源文件问题。
@@ -52,9 +59,9 @@ public class ShiroConfig {
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 
 		// 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-		shiroFilterFactoryBean.setLoginUrl("/login");
+		shiroFilterFactoryBean.setLoginUrl("/manage/login");
 		// 登录成功后要跳转的链接
-		shiroFilterFactoryBean.setSuccessUrl("/index");
+		shiroFilterFactoryBean.setSuccessUrl("manage/home");
 		// 未授权界面;
 		shiroFilterFactoryBean.setUnauthorizedUrl("/403");
 		
@@ -66,6 +73,8 @@ public class ShiroConfig {
 		
 		// 权限控制map.
 		Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
+		
+		filterChainDefinitionMap.put("/manager/**", "user,perms,roles");
 		// 配置不会被拦截的链接 顺序判断
 		// 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
 		// 从数据库获取动态的权限
@@ -123,7 +132,9 @@ public class ShiroConfig {
 		redisManager.setPort(port);
 		redisManager.setExpire(1800);// 配置缓存过期时间
 		// redisManager.setTimeout(timeout);
-		// redisManager.setPassword(password);
+		if(StringUtil.isNotBlank(password)){
+		    redisManager.setPassword(password);
+		}
 		return redisManager;
 	}
 	

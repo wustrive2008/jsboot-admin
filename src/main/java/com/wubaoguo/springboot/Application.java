@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 
-@ComponentScan(basePackages={"org.wustrive.java.dao.jdbc.dao"})  
+@ComponentScan(basePackages={"com.wubaoguo.springboot","org.wustrive.java.dao.jdbc.dao"})  
 
 @SpringBootApplication 
 @EnableCaching

@@ -1,0 +1,88 @@
+<table class="footable table table-stripped table-bordered table-hover toggle-arrow-tiny" data-page-size="20" data-filter=#filter>
+  <thead>
+    	<tr>
+              <th width="30%">标题</th>
+              <th width="15%">编码</th>
+              <th width="35%" data-hide="phone,tablet">描述简介</th>
+              <th width="15%" data-toggle="true" >归属资源</th>
+              <th data-hide="all">字典内容</th>
+   		</tr>
+  </thead>
+	            	<tbody>
+	            	[#list entitys as entity]
+	            		 <tr id="${entity.id}">
+			                <td>${entity.title}</td>
+			                <td class="readonly-code">${entity.tag_code}</td>
+			                <td>${entity.description}</td>
+			                <td class="readonly-code">${entity.res_code}</td>
+			                <td class="readonly-code">
+			                	<div class="form-inline">
+			                		<textarea id="${entity.id}_content" rows="" cols="" class="form-control" style="width: 600px;">${entity.content}</textarea>
+			                		<a data-vcxx-name="save_content" data-vcxx-id="${entity.id}" class="btn btn-white btn-sm" href="javascript:void(0);">保存</a>
+			                	</div>
+			                </td>
+	            		</tr>
+	            	[/#list]
+	            	</tbody>
+	            	<tfoot>
+	            		 <tr>
+                                <td colspan="5" class="readonly-code">
+                                    <ul class="pagination pull-right"></ul>
+                                    <div class="dataTables_length" >
+			              			<select class="form-control input-sm" id="change-page-size">
+				              			<option value="20" selected="selected">20</option>
+				              			<option value="50">50</option>
+				              			<option value="100">100</option>
+			              			</select>
+				              	</div>
+                                </td>
+                            </tr>
+	            	</tfoot>
+</table>
+ <script type="text/javascript">
+ $(document).ready(function() {
+	$('.footable').footable({});
+	var oTable = $('.footable');
+	oTable.trigger('footable_filter', {filter: $('#filter').val()});
+		
+	oTable.find('a[data-vcxx-name="save_content"]').on('click', function(e) {
+			var $this = $(this);
+			var data_id = $this.data('vcxx-id');
+			var contentVal = $("#"+data_id+"_content").val();
+			$this.text('Saving...');
+			$.post("${request.contextPath}/manage/sysdictionary/inline",
+				{id:data_id,column:'content',value:contentVal},
+				function(result){
+					$("#"+data_id+"_content").val(result);
+					$this.text('保存');
+				});			
+		});
+		
+     oTable.find('td').not('.readonly-code').editable('${request.contextPath}/manage/sysdictionary/inline', {
+     	"callback": function( sValue, y ) {
+            
+         },
+         "submitdata": function ( value, settings ) {
+         	function positionToColumn(position) {
+             	if(position == 0) {
+             		return "title";
+             	}
+             	if(position == 2) {
+             		return "description";
+             	}
+             	if(position == 4) {
+             		return "content";
+             	}
+             }
+             return {
+                 "id": this.parentNode.getAttribute('id'),
+                 "column": positionToColumn($(this).index())
+             };
+         },
+         "width": "90%",
+         "height": "100%",
+         "submit": 'OK',
+         "indicator" : 'Saving...'
+     });
+ });
+ </script>

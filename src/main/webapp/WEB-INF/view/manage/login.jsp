@@ -11,7 +11,7 @@
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
             <div>
-                <h1 class="logo-name">Z+</h1>
+                <h1 class="logo-name">R+</h1>
             </div>
             <form class="m-t" role="form" action="${pageContext.request.contextPath}/manage/login" method="post">
                 <div class="form-group">

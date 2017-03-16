@@ -1,0 +1,82 @@
+<div class="row">
+<section>
+<form class="form-horizontal" id="add_sysdictionary" action="${request.contextPath}/manage/sysdictionary"
+	data-fv-message="This value is not valid"
+	data-fv-icon-valid="glyphicon glyphicon-ok"
+	data-fv-icon-invalid="glyphicon glyphicon-remove"
+	data-fv-icon-validating="glyphicon glyphicon-refresh">
+  <h3 class="m-t-none m-b">添加数据词典</h3>
+    	<div class="form-group">
+    		<label class="col-lg-2 control-label">标题</label>
+          <div class="col-lg-10">
+          	<input name="title" type="text" placeholder="标题" class="form-control" 
+          	required data-fv-notempty-message="词典标题不可为空"
+          	data-fv-stringlength="true" data-fv-stringlength-max="20" data-fv-stringlength-message="词典标题长度不得超过20个字符"/>
+          </div>
+       </div>
+       <div class="form-group"><label class="col-lg-2 control-label">编码</label>
+           <div class="col-lg-10">
+           		<input name="tag_code" type="text" placeholder="编码" class="form-control" 
+           		required data-fv-notempty-message="词典标题不可为空"
+           		pattern="^[a-zA-Z_]+$" data-fv-regexp-message="词典编码必须为英文字母不区分大小写"
+           		data-fv-stringlength="true" data-fv-stringlength-max="20" data-fv-stringlength-message="词典编码长度不得超过10个字符"
+           		/>
+           </div>
+       </div>
+       <div class="form-group"><label class="col-lg-2 control-label">资源编码</label>
+           <div class="col-lg-10">
+           		<input name="res_code" type="text" placeholder="编码" class="form-control" 
+           		required data-fv-notempty-message="资源编码为必填项" pattern="^[a-zA-Z]+$" data-fv-regexp-message="词典资源编码必须为英文字母不区分大小写"
+           		data-fv-stringlength="true" data-fv-stringlength-max="10" data-fv-stringlength-message="词典资源编码长度不得超过10个字符"
+           		/>
+           </div>
+       </div>
+       <div class="form-group"><label class="col-lg-2 control-label">描述简介</label>
+           <div class="col-lg-10">
+           	<input name="description" type="text" placeholder="描述简介" class="form-control" 
+           		required data-fv-notempty-message="词典描述简介不可为空"
+           		data-fv-stringlength="true" data-fv-stringlength-max="50" data-fv-stringlength-message="词典描述简介长度不得超过50个字符"
+           		/>
+           </div>
+       </div>
+       <div class="form-group"><label class="col-lg-2 control-label">内容</label>
+           <div class="col-lg-10">
+           		<textarea style="resize:none;" name="content" type="text" placeholder="字典内容" class="form-control" 
+           		required data-fv-notempty-message="词典内容不可为空"
+           		data-fv-stringlength="true" data-fv-stringlength-max="500" data-fv-stringlength-message="词典内容长度不得超过500个字符"></textarea>
+           </div>
+       </div>
+       <div class="form-group">
+          <div class="col-sm-offset-9 col-lg-10">
+              <a href="javascript:void(0);" class="btn btn-white" data-dismiss="modal" aria-hidden="true">取消</a>
+              <a href="javascript:void(0);" class="btn btn-primary" onclick="$('#add_sysdictionary').submit();" >保存</a>
+          </div>
+      </div>
+</form>
+</section>
+</div>
+[@h.formValidationScript /]
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#add_sysdictionary')
+	.formValidation()
+	.on('success.form.fv', function(e){
+		// Prevent form submission
+        e.preventDefault();
+     // Get the form instance
+        var $form = $(e.target);
+        // Use Ajax to submit form data
+        $.post($form.attr('action'), $form.serialize(), function(result) {
+           if(result.state == 1){
+        	   $('#add_sysdictionary').formValidation('resetForm', true);
+        	   $('#modal-form').modal('hide')
+        	   $.get("${request.contextPath}/manage/sysdictionary/table.html", function(data){
+       				$("#div_table_container").html(data);
+       		  });	
+           } else if(result.state == 304) {
+        	   toastr.warning('保存失败，编码重复！');
+           } 
+        }, 'json');
+	});
+});
+</script>

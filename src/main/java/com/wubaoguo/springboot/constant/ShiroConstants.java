@@ -27,6 +27,8 @@ public class ShiroConstants {
     
     public static final String SESSION_SYS_CONFIG = "sys_config";
     
+    public static final String SHIRO_UNAUTH_URL = "/manage/login";
+    
     public static Long currentTimeSecond() {
         return  System.currentTimeMillis() / 1000;
     }
@@ -42,5 +44,9 @@ public class ShiroConstants {
     
     public static Session getSession() {
         return SecurityUtils.getSubject().getSession();
+    }
+    
+    public static String getCurrentRoleCode() {
+        return (String)getSession().getAttribute(SESSION_CURRENT_ROLE);
     }
 }

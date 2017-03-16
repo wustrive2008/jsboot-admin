@@ -1,4 +1,4 @@
-package com.wubaoguo.springboot.controller;
+package com.wubaoguo.springboot.manage.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;

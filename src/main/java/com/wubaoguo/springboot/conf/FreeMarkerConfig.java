@@ -39,6 +39,7 @@ public class FreeMarkerConfig {
 	
 	@PostConstruct
 	public void setSharedVariable() throws TemplateException, IOException {
+	    configuration = getConfiguration();
 		configuration.setDateFormat("yyyy/MM/dd");
 		configuration.setDateTimeFormat("yyyy-MM-dd HH:mm:ss");
 		
@@ -51,6 +52,9 @@ public class FreeMarkerConfig {
 				(TemplateHashModel) staticModels.get("org.wustrive.java.common.util.DateUtil"));
 		configuration.setSharedVariable("ConvertUtil",
 				(TemplateHashModel) staticModels.get("org.wustrive.java.common.util.ConvertUtil"));
+		
+		configuration.setSharedVariable("Constants",
+                (TemplateHashModel) staticModels.get("com.wubaoguo.springboot.constant.ShiroConstants"));
 		
 		configuration.setSetting("template_update_delay", "1");  
         configuration.setSetting("default_encoding", "UTF-8");  

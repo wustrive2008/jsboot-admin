@@ -122,7 +122,7 @@ function setpage(num, maxpage, ibox_content_id){
         var setpageobj = obj.find("a[href!='javascript:void(0);']");
         if (setpageobj.length) {
             setpageobj.bind("click", function () {
-                var path = window.contextPath + '/res/skin/img/spinner.gif';
+                var path = window.contextPath + '/skin/img/spinner.gif';
                 $(this).html("<img src='"+path+"'>");
             });
         }

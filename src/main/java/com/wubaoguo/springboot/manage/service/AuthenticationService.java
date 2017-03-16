@@ -54,7 +54,7 @@ public class AuthenticationService {
 					CurrentUser currentUser = new CurrentUser();
 					BeanUtils.copyProperties(baseUser, currentUser);
 					// 初始化 系统配置到当前 用户session
-					sysConfigService.initSysConfigToSession(currentUser.getUserId());
+					sysConfigService.initSysConfigToSession(currentUser.getId());
 					return auth.copy(currentUser);
 				} else {
 					throw new IncorrectCredentialsException("密码错误");

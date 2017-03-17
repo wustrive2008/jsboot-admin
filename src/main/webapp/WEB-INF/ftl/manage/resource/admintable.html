@@ -1,0 +1,77 @@
+[#macro activity data={}]
+		[#if data.is_activity == 1 || data.is_activity]
+          		<i title="启用" class="fa fa-check text-navy"></i>
+        [#else]
+        		<i title="作废" class="fa fa-times text-danger"></i>
+        [/#if]
+[/#macro]
+<table class="footable table table-stripped table-bordered table-hover toggle-arrow-tiny"  data-filter=#filter>
+	<thead>
+		<tr>
+               <th width="15%" data-sort-ignore="true">名称</th>
+               <th width="15%" data-sort-ignore="true">帐号</th>
+               <th width="15%" data-sort-ignore="true">手机号</th>
+               <th width="15%" data-sort-ignore="true">角色</th>
+               <th data-sort-ignore="true" width="10%" >操作</th>
+       </tr>
+   </thead>
+    <tbody>
+    	[#list datas as data]
+    	<tr>
+          <td>${data.name}[@activity data=data/]</td>
+          <td>${data.account}[@activity data=data/]</td>
+          <td>${data.phone_number}[@activity data=data/]</td>
+          <td>[#list data.roles as role]${role.name +'/'}[/#list]</td>
+    	  <td>
+    	  	<a class="btn  btn-link" title="编辑" data-toggle="modal" data-l-href="${request.contextPath}/manage/resource/adminform/${data.id}.html" data-target="#modal-adminmain-form"><i class="fa fa-pencil"></i></a>
+    	  	<a class="btn btn-link adminreset"  title="重置密码"  data-vcxx-id="${data.id}" ><i class="fa fa-unlock-alt" ></i></a>
+    	  </td>
+    	</tr>
+    	[/#list]
+    </tbody>
+    <tfoot>
+    	
+	</tfoot>
+</table>
+<script type="text/javascript">
+    $(document).ready(function() {
+    	$('.footable').footable({});
+    	$('.footable').trigger('footable_filter', {filter: $('#filter').val()});
+    });
+</script>
+<script type="text/javascript">
+   $(".adminreset").click(function(){
+	var id = $(this).data("vcxx-id");
+	swal({
+			title : "重置密码",
+			text : "请输入新密码",
+			type : "input",
+			showCancelButton : true,
+			closeOnConfirm : false,
+			animation : "slide-from-top",
+			inputPlaceholder : "请输入新密码",
+			confirmButtonText:"确定",
+			cancelButtonText: "取消"
+		}, function(inputValue) {
+			if (inputValue === false)
+				return false;
+			if (inputValue === "") {
+				swal.showInputError("密码不能为空");
+				return false
+			}
+			 $.ajax({
+				url:"${request.contextPath}/manage/resource/adminreset/"+id,
+		    	type:"post",
+		    	data:{
+		    		password:inputValue
+		    	},
+		    	dataType:"json",
+		    	success:function(d){
+		    		if(d.state=="1"){
+						swal("密码重置成功", "您的密码是: " + inputValue, "success");
+		    		}
+		    	}
+			}); 
+		});
+	});
+</script>

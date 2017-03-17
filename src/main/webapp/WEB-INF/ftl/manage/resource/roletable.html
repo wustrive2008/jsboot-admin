@@ -1,0 +1,55 @@
+[#macro activity data={}]
+		[#if data.is_activity == 1 || data.is_activity]
+          		<i title="启用" class="fa fa-check text-navy"></i>
+        [#else]
+        		<i title="作废" class="fa fa-times text-danger"></i>
+        [/#if]
+[/#macro]
+<table class="footable table table-stripped table-bordered table-hover toggle-arrow-tiny"  data-filter=#filter>
+	<thead>
+		<tr>
+               <th width="15%" data-sort-ignore="true">角色名称</th>
+               <th width="15%" data-sort-ignore="true">角色编码</th>
+               <th width="15%"  data-hide="phone,tablet">排序</th>
+               <th data-sort-ignore="true" width="5%" >操作</th>
+       </tr>
+   </thead>
+    <tbody>
+    	[#list datas as data]
+    	<tr id="${data.id}">
+          <td>${data.name}[@activity data=data/]</td>
+          <td>${data.code}[@activity data=data/]</td>
+          <td data-value="${data.sort}"><input data-vcxx-oldval="${data.sort}" data-vcxx-id="${data.id}" data-vcxx-name="sort" class="form-control input-sm" value="${data.sort}" /></td>
+    	  <td><a class="btn  btn-link" title="编辑" data-toggle="modal" data-l-href="${request.contextPath}/manage/resource/roleform/${data.id}.html" data-target="#modal-rolemain-form"><i class="fa fa-pencil"></i></a></td>
+    	</tr>
+    	[/#list]
+    </tbody>
+    <tfoot>
+    	
+	</tfoot>
+</table>
+<script type="text/javascript">
+    $(document).ready(function() {
+    	$('.footable').footable({});
+    	
+		var oTable = $('.footable');
+		oTable.trigger('footable_filter', {filter: $('#filter').val()});
+		
+		oTable.find('input[data-vcxx-name="sort"]').on('blur', function(e) {
+			var $this = $(this);
+			var data_id = $this.data('vcxx-id');
+			var data_oldval = $this.data('vcxx-oldval');
+			if(data_oldval == $this.val()) {
+				return;
+			}
+			
+			$.post("${request.contextPath}/manage/resource/roleinline",
+				{id:data_id,column:'sort',value:$this.val()},
+				function(result){
+					$this.parent().data('value', result);
+					var footableSort = $('.footable').data('footable-sort');
+					footableSort.doSort(2, 'ascending');
+				});			
+		});
+    });
+</script>

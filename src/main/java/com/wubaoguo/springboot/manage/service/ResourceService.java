@@ -19,15 +19,7 @@ import com.wubaoguo.springboot.entity.SysAdminRole;
 import com.wubaoguo.springboot.entity.SysResources;
 import com.wubaoguo.springboot.entity.SysRole;
 import com.wubaoguo.springboot.entity.SysRoleResources;
-/**
- * @Title: ResourceService.java
- * @ClassName: com.vcxx.manage.service.ResourceService
- * @Description: 资源服务层
- *
- * Copyright  2015-2016 维创盈通 - Powered By 研发中心 V1.0.0
- * @author zhaoqt
- * @date Jul 26, 2016 4:47:28 PM
- */
+
 @Service
 public class ResourceService {
 

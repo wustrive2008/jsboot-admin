@@ -1,0 +1,131 @@
+<div class="row">
+<section>
+<form class="form-horizontal" id="form_rolemain" action="${request.contextPath}/manage/resource/rolemain"
+	data-fv-message="This value is not valid"
+	data-fv-icon-valid="glyphicon glyphicon-ok"
+	data-fv-icon-invalid="glyphicon glyphicon-remove"
+	data-fv-icon-validating="glyphicon glyphicon-refresh">
+  <h3 class="m-t-none m-b">系统角色</h3>
+    	<div class="form-group">
+    		<label class="col-lg-2 control-label">角色名称</label>
+          <div class="col-lg-10">
+          	<input name="name" type="text" placeholder="角色名称" class="form-control" value="${data.name}"
+          	required data-fv-notempty-message="角色名称不可为空"
+          	data-fv-stringlength="true" data-fv-stringlength-max="20" data-fv-stringlength-message="角色名称长度不得超过20个字符"/>
+          </div>
+       </div>
+       <div class="form-group"><label class="col-lg-2 control-label">角色编码</label>
+           <div class="col-lg-10">
+           		<input ${(data.id??)?string('readonly', '')} name="code" type="text" placeholder="角色编码" class="form-control" value="${data.code}"
+           		required data-fv-notempty-message="角色编码不可为空"
+           		pattern="^[a-zA-Z-]+$" data-fv-regexp-message="角色编码必须为英文字母不区分大小写"
+           		data-fv-stringlength="true" data-fv-stringlength-max="20" data-fv-stringlength-message="角色编码长度不得超过20个字符"
+           		/>
+           </div>
+       </div>
+      <div class="form-group"><label class="col-lg-2 control-label">排序号</label>
+           <div class="col-lg-10">
+           		<input name="sort" type="text" placeholder="排序号" class="form-control" value="${data.sort!1}"
+           		required data-fv-notempty-message="排序号不可为空"
+           		pattern="^[0-9]*$" data-fv-regexp-message="排序号必须为数字"
+           		data-fv-stringlength="true" data-fv-stringlength-max="4" data-fv-stringlength-message="排序号长度不得超过4个字符"
+           		/>
+           </div>
+       </div>
+       <div class="form-group"><label class="col-lg-2 control-label">启用状态</label>
+           <div class="col-lg-10">
+           		<label class="checkbox-inline i-checks"><input type="radio" [#if data.is_activity != 2]checked[/#if]  value="1" name="is_activity"/> 启用</label>
+           		<label class="checkbox-inline i-checks"><input type="radio" [#if data.is_activity == 2]checked[/#if]  value="2" name="is_activity" /> 作废</label>
+           </div>
+       </div>
+       <div class="form-group">
+       		<label class="col-lg-2 control-label">选择资源</label>
+       	 <div class="col-lg-10">
+       		<ul id="ztree_container" class="ztree" style="width:260px; overflow:auto;"></ul>
+       	 </div>
+       </div>
+       <div class="form-group">
+          <div class="col-sm-offset-9 col-lg-10">
+          	  <input value="${data.id}" name="id" type="hidden" />
+              <a href="javascript:void(0);" class="btn btn-white" data-dismiss="modal" aria-hidden="true">取消</a>
+              <a href="javascript:void(0);" class="btn btn-primary" onclick="$('#form_rolemain').submit();" >保存</a>
+          </div>
+      </div>
+</form>
+</section>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	var setting = {
+			check: {
+				enable: true,
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			}
+		};
+	//	
+	var zNodes =[
+			[#if sysResourcesList??]
+			[#list sysResourcesList as resources]
+				[#assign b=false/]
+				[#if selectList??]
+					[#list selectList as se]
+						[#if se.resources_id == resources.id]
+							[#assign b=true/]
+						[/#if]
+					[/#list]
+				[/#if]
+				[#if b]
+					{ id:'${resources.id}',pId:'${resources.group_id}', name:"${resources.menu_name}", checked:true, open:true},
+				[#else]
+					{ id:'${resources.id}',pId:'${resources.group_id}', name:"${resources.menu_name}", checked:false, open:true},
+				[/#if]
+			[/#list]
+	    [/#if]
+	];
+	var treeObj = $.fn.zTree.init($("#ztree_container"), setting, zNodes);
+	
+$('#form_rolemain')
+	.formValidation()
+	.on('success.form.fv', function(e){
+		// Prevent form submission
+        e.preventDefault();
+     // Get the fom instance
+        var $form = $(e.target);
+     
+        var nodes = treeObj.getCheckedNodes();
+		var resourcesIds = [];
+		$.each(nodes,function(i,item){
+			resourcesIds.push("resourceIds=" + item.id);
+		});
+		
+		if(resourcesIds.length ==  0) {
+			swal('角色资源必须绑定', '若该角色暂不使用，请作废。', 'warning');
+			return;
+		}
+	var param = $form.serialize() + "&" + resourcesIds.join("&");
+        // Use Ajax to submit form data
+      $.post($form.attr('action'), param, function(result) {
+           if(result.state == 1){
+        	  $.get("${request.contextPath}/manage/resource/roletable.html", function(data){
+       				$("#div_table_container").html(data);
+       		  });	
+        	  $('#form_rolemain').formValidation('resetForm', true);
+        	  $('#modal-rolemain-form').modal('hide');
+           } else {
+        	   toastr.warning(result.message);
+           } 
+        }, 'json'); 
+	});
+	
+	$('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+    });
+	
+	
+});
+</script>

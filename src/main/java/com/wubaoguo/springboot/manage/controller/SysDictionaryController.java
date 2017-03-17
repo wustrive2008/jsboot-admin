@@ -13,15 +13,6 @@ import org.wustrive.java.core.request.ViewResult;
 import com.wubaoguo.springboot.entity.SysDictionary;
 import com.wubaoguo.springboot.manage.service.SysDictionaryService;
 
-/**
- * @Title: SysDictionaryController.java
- * @ClassName: com.vcxx.manage.controller.SysDictionaryController
- * @Description: 系统数据字典
- *
- * Copyright  2015-2016 维创盈通 - Powered By 研发中心 V1.0.0
- * @author zhaoqt
- * @date Apr 7, 2016 7:05:01 PM
- */
 @Controller
 @RequestMapping("/manage/sysdictionary")
 public class SysDictionaryController {

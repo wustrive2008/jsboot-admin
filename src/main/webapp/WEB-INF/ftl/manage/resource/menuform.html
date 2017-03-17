@@ -1,0 +1,114 @@
+<div class="row">
+<section>
+<form class="form-horizontal" id="form_menumain" action="${request.contextPath}/manage/resource/menumain"
+	data-fv-message="This value is not valid"
+	data-fv-icon-valid="glyphicon glyphicon-ok"
+	data-fv-icon-invalid="glyphicon glyphicon-remove"
+	data-fv-icon-validating="glyphicon glyphicon-refresh">
+  <h3 class="m-t-none m-b">系统资源菜单</h3>
+    	<div class="form-group">
+    		<label class="col-lg-2 control-label">菜单标题</label>
+          <div class="col-lg-10">
+          	<input name="menu_name" type="text" placeholder="菜单显示标题" class="form-control" value="${data.menu_name}"
+          	required data-fv-notempty-message="菜单标题不可为空"
+          	data-fv-stringlength="true" data-fv-stringlength-max="20" data-fv-stringlength-message="菜单标题长度不得超过20个字符"/>
+          </div>
+       </div>
+       <div class="form-group"><label class="col-lg-2 control-label">菜单图标</label>
+           <div class="col-lg-10">
+           		<input name="icon" type="text" placeholder="不使用图标填写none" class="form-control" value="${data.icon}"
+           		required data-fv-notempty-message="菜单图标不可为空"
+           		pattern="^[a-zA-Z-]+$" data-fv-regexp-message="菜单图标必须为英文字母不区分大小写"
+           		data-fv-stringlength="true" data-fv-stringlength-max="20" data-fv-stringlength-message="菜单图标长度不得超过20个字符"
+           		/>
+           </div>
+       </div>
+       <div class="form-group"><label class="col-lg-2 control-label">编码</label>
+           <div class="col-lg-10">
+           		<input name="code" type="text" placeholder="编码用于选中高亮使用" class="form-control" value="${data.code}"
+           		required data-fv-notempty-message="编码不可为空"
+           		pattern="^[a-zA-Z_-]+$" data-fv-regexp-message="编码必须为英文字母不区分大小写"
+           		data-fv-stringlength="true" data-fv-stringlength-max="20" data-fv-stringlength-message="编码长度不得超过10个字符"
+           		/>
+           </div>
+       </div>
+       <div class="form-group"><label class="col-lg-2 control-label">归属组</label>
+           <div class="col-lg-10">
+           		<select class="form-control" name="group_id">
+	           		[#if data.group_id == 'root']
+		           		<option value="root" selected="selected">root</option>
+	           		[#else]
+		           		<option value="root">root</option>
+	           		[/#if]
+	           		[#list one_level_menus as ol]
+	           			[#if data.group_id == ol.id]
+			           		<option value="${ol.id}" selected="selected">${ol.menu_name}</option>
+		           		[#else]
+			           		<option value="${ol.id}">${ol.menu_name}</option>
+		           		[/#if]
+	           		[/#list]
+	           	</select>
+           </div>
+       </div>
+       <div class="form-group"><label class="col-lg-2 control-label">uri</label>
+           <div class="col-lg-10">
+           	<input name="uri" type="text" placeholder="一级菜单若无uri跳转填写none" class="form-control" value="${data.uri}"
+           		required data-fv-notempty-message="uri不可为空"
+           		data-fv-stringlength="true" data-fv-stringlength-max="100" data-fv-stringlength-message="uri长度不得超过100个字符"
+           		/>
+           </div>
+       </div>
+      <div class="form-group"><label class="col-lg-2 control-label">排序号</label>
+           <div class="col-lg-10">
+           		<input name="sort" type="text" placeholder="排序号" class="form-control" value="${data.sort}"
+           		required data-fv-notempty-message="排序号不可为空"
+           		pattern="^[0-9]*$" data-fv-regexp-message="排序号必须为数字"
+           		data-fv-stringlength="true" data-fv-stringlength-max="4" data-fv-stringlength-message="排序号长度不得超过4个字符"
+           		/>
+           </div>
+       </div>
+       <div class="form-group"><label class="col-lg-2 control-label">启用状态</label>
+           <div class="col-lg-10">
+           		<label class="checkbox-inline i-checks"><input type="radio" [#if data.is_activity != 2]checked[/#if]  value="1" name="is_activity"/> 启用</label>
+           		<label class="checkbox-inline i-checks"><input type="radio" [#if data.is_activity == 2]checked[/#if]  value="2" name="is_activity" /> 作废</label>
+           </div>
+       </div>
+       <div class="form-group">
+          <div class="col-sm-offset-9 col-lg-10">
+          	  <input value="${data.id}" name="id" type="hidden" />
+              <a href="javascript:void(0);" class="btn btn-white" data-dismiss="modal" aria-hidden="true">取消</a>
+              <a href="javascript:void(0);" class="btn btn-primary" onclick="$('#form_menumain').submit();" >保存</a>
+          </div>
+      </div>
+</form>
+</section>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#form_menumain')
+	.formValidation()
+	.on('success.form.fv', function(e){
+		// Prevent form submission
+        e.preventDefault();
+     // Get the form instance
+        var $form = $(e.target);
+        // Use Ajax to submit form data
+        $.post($form.attr('action'), $form.serialize(), function(result) {
+           if(result.state == 1){
+        	  $.get("${request.contextPath}/manage/resource/menutable.html", function(data){
+       				$("#div_table_container").html(data);
+       		  });	
+        	  $('#form_menumain').formValidation('resetForm', true);
+        	  $('#modal-menumain-form').modal('hide');
+           } else {
+        	   toastr.warning('保存失败，编码重复！');
+           } 
+        }, 'json');
+	});
+	
+	$('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+    });
+});
+</script>

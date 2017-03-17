@@ -85,19 +85,26 @@ public class ShiroConfig {
 		Map<String, Filter> filtersMap = new LinkedHashMap<String, Filter>();
 		//限制同一帐号同时在线的个数。
 		filtersMap.put("authc", getAjaxFormAuthenticationFilter());
-		filtersMap.put("logout", new LogoutFilter());
+		filtersMap.put("loginout", getLogoutFilter());
 		shiroFilterFactoryBean.setFilters(filtersMap);
 		
 		// 权限控制map.
 		Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 		filterChainDefinitionMap.put("/manage/login", "authc");
-		filterChainDefinitionMap.put("/manage/loginout", "logout");
+		filterChainDefinitionMap.put("/manage/loginout", "loginout");
 		filterChainDefinitionMap.put("/manage/**", "user,perms,roles");
 
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		log.info("Shiro拦截器工厂类注入成功");
 		return shiroFilterFactoryBean;
 	}
+
+	//退出登录
+    private Filter getLogoutFilter() {
+        LogoutFilter loginFilter = new LogoutFilter();
+        loginFilter.setRedirectUrl("/manage/login");
+        return loginFilter;
+    }
 
     private Filter getAjaxFormAuthenticationFilter() {
         AjaxFormAuthenticationFilter ajaxFilter = new AjaxFormAuthenticationFilter();

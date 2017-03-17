@@ -17,15 +17,6 @@ import com.wubaoguo.springboot.entity.SysDictionary;
 import com.wubaoguo.springboot.redis.SysDictionaryCache;
 import com.wubaoguo.springboot.util.BeanUtil;
 
-/**
- * @Title: SysDictionaryService.java
- * @ClassName: com.vcxx.manage.service.SysDictionaryService
- * @Description: 数据词典服务层支持
- *
- * Copyright  2015-2016 维创盈通 - Powered By 研发中心 V1.0.0
- * @author zhaoqt
- * @date Apr 20, 2016 8:11:01 PM
- */
 @Service
 public class SysDictionaryService {
 

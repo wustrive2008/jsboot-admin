@@ -24,13 +24,13 @@ public class ManageController {
 	//首页
 	@RequestMapping(value="index")
 	public String index() {
-		return "/manage/login";
+		return "redirect:/manage/login";
 	}
 	
 	//默认首页
     @RequestMapping(value="")
     public String index2() {
-        return "/manage/login";
+        return "redirect:/manage/login";
     }
 	
 	//登录页
@@ -71,7 +71,7 @@ public class ManageController {
      * 
      * @return
      */
-    @RequestMapping(value = "/logout", method=RequestMethod.GET)
+    @RequestMapping(value = "/loginout", method=RequestMethod.GET)
     public String logout() {
         return "/manage/login";
     }

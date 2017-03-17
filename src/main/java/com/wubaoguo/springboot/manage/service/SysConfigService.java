@@ -13,15 +13,6 @@ import org.wustrive.java.dao.jdbc.dao.BaseDao;
 import com.wubaoguo.springboot.constant.ShiroConstants;
 import com.wubaoguo.springboot.entity.SysConfig;
 
-/**
- * @Title: SysConfigService.java
- * @ClassName: com.vcxx.manage.service.SysConfigService
- * @Description: 系统配置项服务
- *
- * Copyright  2015-2016 维创盈通 - Powered By 研发中心 V1.0.0
- * @author zhaoqt
- * @date Apr 12, 2016 8:20:39 PM
- */
 @Service
 public class SysConfigService {
 

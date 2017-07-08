@@ -8,8 +8,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.wustrive.java.core.bean.CurrentUser;
 import org.wustrive.java.core.exception.BusinessException;
+import org.wustrive.java.core.request.ViewResult;
 
 import com.wubaoguo.springboot.constant.ShiroConstants;
 import com.wubaoguo.springboot.manage.service.ManageService;
@@ -74,5 +76,28 @@ public class ManageController {
     @RequestMapping(value = "/loginout", method=RequestMethod.GET)
     public String logout() {
         return "/manage/login";
+    }
+    
+    /**
+     * 密码更新页面
+     * @return
+     */
+    @RequestMapping(value = "/updatepwdMain", method=RequestMethod.GET)
+    public String updatepwdPage() {
+        return "/manage/updatepwdMain";
+    }
+    
+    /**
+     * 修改用户自己的密码
+     * @param pwd
+     * @param oldpwd
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="/updatepwd", method = RequestMethod.POST)
+    public String updateUserPwd(String pwd, String oldpwd){
+        return ViewResult.newInstance()
+        .state(manageService.updateUserPwd(ShiroConstants.getCurrentUser().getAccount(), pwd, oldpwd))
+        .json();
     }
 }

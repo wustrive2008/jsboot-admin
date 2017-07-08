@@ -9,4 +9,4 @@ java项目基础框架 ，基于spring-boot框架
 - freemarker
 - shiro + redis
 - jwt
-- mybatis
+- mybatis/jdbcTemplate

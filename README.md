@@ -10,3 +10,4 @@ java项目基础框架 ，基于spring-boot框架
 - shiro + redis
 - jwt
 - mybatis/jdbcTemplate
+- 定时任务

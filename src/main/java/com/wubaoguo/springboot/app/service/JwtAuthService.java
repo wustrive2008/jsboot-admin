@@ -4,6 +4,6 @@ import com.wubaoguo.springboot.jwt.JwtAuthentication;
 
 public interface JwtAuthService {
 
-    public JwtAuthentication login(JwtAuthentication auth);
+    JwtAuthentication login(JwtAuthentication auth);
 
 }

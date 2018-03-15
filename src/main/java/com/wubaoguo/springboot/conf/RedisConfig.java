@@ -17,10 +17,8 @@ public class RedisConfig {
 	/**
 	 * 当 redis 与shiro redis共存时
 	* @Title: cacheManager 
-	* @Description: TODO(这里用一句话描述这个方法的作用) 
 	* @param  redisTemplate
-	* @param  参数说明 
-	* @return CacheManager    返回类型 
+	* @return CacheManager    返回类型
 	* @throws
 	 */
 	@Bean

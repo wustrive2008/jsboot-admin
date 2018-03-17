@@ -14,9 +14,8 @@ import freemarker.template.TemplateHashModel;
 import freemarker.template.Version;
 
 /**
- * freemarker配置
-* @ClassName: FreeMarkerConfig 
-* @Description: TODO(这里用一句话描述这个类的作用) 
+* @ClassName: FreeMarkerConfig
+* @Description: freemarker配置
 * @author wustrive
 * @date 2017年3月9日 下午9:19:06 
 *
@@ -42,8 +41,7 @@ public class FreeMarkerConfig {
 	    configuration = getConfiguration();
 		configuration.setDateFormat("yyyy/MM/dd");
 		configuration.setDateTimeFormat("yyyy-MM-dd HH:mm:ss");
-		
-		
+
 		BeansWrapper wrapper = new DefaultObjectWrapperBuilder(version).build();
 		TemplateHashModel staticModels = wrapper.getStaticModels();
 		configuration.setSharedVariable("StringUtil",
@@ -59,10 +57,8 @@ public class FreeMarkerConfig {
 		configuration.setSetting("template_update_delay", "1");  
         configuration.setSetting("default_encoding", "UTF-8");  
         
-        //configuration.setServletContextForTemplateLoading(servletContext, "/WEB-INF/ftl/");
-        
-        //解析前缀后XXX路径下的jsp文件 
-        springResolver.setPrefix("/WEB-INF/view/");  
+        //解析jsp文件
+        springResolver.setPrefix("/WEB-INF/view/");
         springResolver.setSuffix(".jsp");  
         springResolver.setOrder(1);  
         

@@ -28,12 +28,14 @@ import com.wubaoguo.springboot.constant.ShiroConstants;
 import com.wubaoguo.springboot.manage.service.AuthenticationService;
 
 /**
- * shiro身份校验核心类
+ *
+ * Description: 
  * 
- * @author 作者: z77z
- * @date 创建时间：2017年2月10日 下午3:19:48
+ * @author: wubaoguo
+ * @email: wustrive2008@gmail.com
+ * @date: 2018/3/19 15:54
+ * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
-
 public class MyShiroRealm extends AuthorizingRealm {
 
     @Autowired
@@ -42,7 +44,7 @@ public class MyShiroRealm extends AuthorizingRealm {
     /**
      * 认证信息.(身份验证) : Authentication 是用来验证用户身份
      * 
-     * @param token
+     * @param authcToken
      * @return
      * @throws AuthenticationException
      */

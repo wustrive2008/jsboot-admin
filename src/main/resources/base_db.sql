@@ -149,17 +149,3 @@ INSERT INTO `sys_role_resources` VALUES ('638ddad65bc0479581695b67d081d4ac', 'ad
 INSERT INTO `sys_role_resources` VALUES ('9df086b566c24fa5ae2e9ae389726989', 'admin', '0312043b388e4767b0a820754036b6ab');
 INSERT INTO `sys_role_resources` VALUES ('d8f32323c7c74ba4af0f3e5142cd938d', 'admin', 'ad11b7f2cefe402890d38b7ea2d767da');
 
--- ----------------------------
--- Table structure for user
--- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `age` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- ----------------------------
--- Records of user
--- ----------------------------

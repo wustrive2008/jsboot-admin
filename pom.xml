@@ -197,18 +197,18 @@
 		    <version>4.23</version>
 		</dependency>
 		
-		<!-- 使用Jasper引擎解析JSP -->
+		<!--&lt;!&ndash; 使用Jasper引擎解析JSP &ndash;&gt;
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
-		<!-- jstl标签 -->
+
+		&lt;!&ndash; jstl标签 &ndash;&gt;
 		<dependency>
            <groupId>javax.servlet</groupId>
            <artifactId>jstl</artifactId>
-        </dependency>
+        </dependency>-->
 		
 	</dependencies>
 	<build>

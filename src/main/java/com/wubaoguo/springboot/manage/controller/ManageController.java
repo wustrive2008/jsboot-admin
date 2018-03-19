@@ -57,7 +57,6 @@ public class ManageController {
      * 
      * @param roleCode
      * @param map
-     * @param request
      * @return
      * @throws BusinessException
      */
@@ -99,5 +98,16 @@ public class ManageController {
         return ViewResult.newInstance()
         .state(manageService.updateUserPwd(ShiroConstants.getCurrentUser().getAccount(), pwd, oldpwd))
         .json();
+    }
+
+    /**
+     * 锁屏页面
+     *
+     * @return
+     */
+    @RequestMapping(value = "/lockscreen", method = RequestMethod.GET)
+    public String lockscreen(ModelMap map) {
+        map.addAttribute("username", ShiroConstants.getCurrentUser().getAccount());
+        return "/manage/lockscreen";
     }
 }

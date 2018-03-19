@@ -30,8 +30,8 @@ public class FreeMarkerConfig {
     protected org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver resolver;  
 	
 	//jsp渲染视图
-	@Autowired  
-    protected org.springframework.web.servlet.view.InternalResourceViewResolver springResolver;  
+	//@Autowired
+    //protected org.springframework.web.servlet.view.InternalResourceViewResolver springResolver;
 	
 	public static Version version = new Version("2.3.21"); //FreeMarker版本号  
 	
@@ -58,9 +58,9 @@ public class FreeMarkerConfig {
         configuration.setSetting("default_encoding", "UTF-8");  
         
         //解析jsp文件
-        springResolver.setPrefix("/WEB-INF/view/");
+      /*  springResolver.setPrefix("/WEB-INF/view/");
         springResolver.setSuffix(".jsp");  
-        springResolver.setOrder(1);  
+        springResolver.setOrder(1); */
         
         //解析后缀为html的
         resolver.setSuffix(".html"); 

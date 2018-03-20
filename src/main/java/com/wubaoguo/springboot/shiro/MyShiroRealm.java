@@ -33,7 +33,7 @@ import com.wubaoguo.springboot.manage.service.AuthenticationService;
  * 
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
- * @date: 2018/3/19 15:54
+ * @date: 2018/3/19 16:01
  * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
 public class MyShiroRealm extends AuthorizingRealm {

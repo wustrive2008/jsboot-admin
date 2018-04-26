@@ -17,34 +17,16 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<tomcat.version>8.0.28</tomcat.version>
-		<base.version>0.0.1-SNAPSHOT</base.version>
+		<base.version>1.0-SNAPSHOT</base.version>
 	</properties>
 	<dependencies>
 	
 		<dependency>
-			<groupId>org.wustrive.core</groupId>
-			<artifactId>wustrive-java-core</artifactId>
+			<groupId>com.wustrive.lib</groupId>
+			<artifactId>base-classlib</artifactId>
 			<version>${base.version}</version>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.wustrive.common</groupId>
-			<artifactId>wustrive-java-common</artifactId>
-			<version>${base.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.wustrive.dao</groupId>
-			<artifactId>wustrive-java-dao</artifactId>
-			<version>${base.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.wustrive.redis</groupId>
-			<artifactId>wustrive-java-redis</artifactId>
-			<version>${base.version}</version>
-		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>

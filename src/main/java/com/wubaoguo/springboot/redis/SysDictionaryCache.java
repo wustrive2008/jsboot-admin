@@ -9,11 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.wustrive.java.common.util.ConvertUtil;
+import org.wustrive.java.common.redis.support.RedisCacheSupport;
 import org.wustrive.java.common.util.StringUtil;
-import org.wustrive.java.dao.jdbc.BaseCommond;
 import org.wustrive.java.dao.jdbc.dao.QuerySupport;
-import org.wustrive.java.redis.support.RedisCacheSupport;
 
 import redis.clients.jedis.Jedis;
 
@@ -21,7 +19,7 @@ import com.google.common.collect.ImmutableMap;
 import com.wubaoguo.springboot.entity.SysDictionary;
 
 @Component
-public class SysDictionaryCache extends RedisCacheSupport{
+public class SysDictionaryCache extends RedisCacheSupport {
 
 	private static Logger logger = LoggerFactory.getLogger(SysDictionaryCache.class);
 	

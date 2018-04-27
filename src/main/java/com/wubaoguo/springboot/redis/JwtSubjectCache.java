@@ -2,10 +2,10 @@ package com.wubaoguo.springboot.redis;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.wustrive.java.redis.util.AbstractRedisManagerSupport;
+import org.wustrive.java.common.redis.util.AbstractRedisManagerSupport;
 
 @Component
-public class JwtSubjectCache extends AbstractRedisManagerSupport{
+public class JwtSubjectCache extends AbstractRedisManagerSupport {
 
     @Value("${jwt.exp}")
     private int jwtExp;

@@ -1,16 +1,17 @@
 <div id="right-sidebar">
 	<div class="sidebar-container">
 		<ul class="nav nav-tabs navs-3">
-			<li >
+			<!-- <li >
 				<a>历史</a>
             </li>
         	<li>
         		<a>代办事项</a>
-            </li>
+            </li> -->
             <li class="active">
-            	<a data-toggle="tab" href="#tab-3">
+            	<!-- <a data-toggle="tab" href="#tab-3">
                 	<i class="fa fa-gear"></i>
-            	</a>
+            	</a> -->
+            	<a>设置</a>
            	</li>
        </ul>
 		<div class="tab-content">
@@ -59,11 +60,11 @@
                 </ul>
               </div>
           <div id="tab-3" class="active">
-             <div class="sidebar-title">
+            <!--  <div class="sidebar-title">
                    <h3><i class="fa fa-gears"></i> 设置</h3>
-            </div>
+            </div> -->
               <div class="setings-item">
-                    <span>
+                    <!-- <span>
                        	 操作历史
                     </span>
                             <div class="switch">
@@ -90,8 +91,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="setings-item">
-                    <span>
+                        <div class="setings-item"> -->
+                  <!--   <span>
                         Show toastr
                     </span>
                             <div class="switch">
@@ -104,13 +105,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="setings-item">
+                        <div class="setings-item"> -->
                     <span>
-                        Collapse menu 
+                        	是否默认展开菜单
                     </span>
                             <div class="switch">
                                 <div class="onoffswitch">
-                                    <input type="checkbox" ${(Session.sys_config.collapse_menu == 'Y')?string('checked', '')} value="Y" name="collapse_menu" class="onoffswitch-checkbox" id="example4">
+                                    <input type="checkbox" ${(Session.sys_config.collapse_menu != 'N')?string('checked', '')} value="Y" name="collapse_menu" class="onoffswitch-checkbox" id="example4">
                                     <label class="onoffswitch-label" for="example4">
                                         <span class="onoffswitch-inner"></span>
                                         <span class="onoffswitch-switch"></span>
@@ -119,19 +120,19 @@
                             </div>
                         </div>
                         <div class="setings-item">
-                    <span>
+                    <!-- <span>
                         Global search
                     </span>
-                            <div class="switch">
-                                <div class="onoffswitch">
-                                    <input type="checkbox"  ${(Session.sys_config.global_search == 'Y')?string('checked', '')} value="Y"  name="global_search" class="onoffswitch-checkbox" id="example6">
-                                    <label class="onoffswitch-label" for="example6">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-                            </div>
+                    <div class="switch">
+                        <div class="onoffswitch">
+                            <input type="checkbox"  ${(Session.sys_config.global_search == 'Y')?string('checked', '')} value="Y"  name="global_search" class="onoffswitch-checkbox" id="example6">
+                            <label class="onoffswitch-label" for="example6">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
                         </div>
+                    </div> -->
+                  </div>
                 </div>
             </div>
        </div>

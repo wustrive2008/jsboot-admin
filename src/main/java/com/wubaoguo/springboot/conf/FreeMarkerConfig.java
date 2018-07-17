@@ -44,23 +44,21 @@ public class FreeMarkerConfig {
 
 		BeansWrapper wrapper = new DefaultObjectWrapperBuilder(version).build();
 		TemplateHashModel staticModels = wrapper.getStaticModels();
-		configuration.setSharedVariable("StringUtil",
-				(TemplateHashModel) staticModels.get("org.wustrive.java.common.util.StringUtil"));
-		configuration.setSharedVariable("DateUtil",
-				(TemplateHashModel) staticModels.get("org.wustrive.java.common.util.DateUtil"));
-		configuration.setSharedVariable("ConvertUtil",
-				(TemplateHashModel) staticModels.get("org.wustrive.java.common.util.ConvertUtil"));
+		configuration.setSharedVariable("StringUtil",staticModels.get("org.wustrive.java.common.util.StringUtil"));
+		configuration.setSharedVariable("DateUtil",staticModels.get("org.wustrive.java.common.util.DateUtil"));
+		configuration.setSharedVariable("ConvertUtil",staticModels.get("org.wustrive.java.common.util.ConvertUtil"));
 		
-		configuration.setSharedVariable("Constants",
-                (TemplateHashModel) staticModels.get("com.wubaoguo.springboot.constant.ShiroConstants"));
+		configuration.setSharedVariable("Constants",staticModels.get("com.wubaoguo.springboot.constant.ShiroConstants"));
 		
 		configuration.setSetting("template_update_delay", "1");  
         configuration.setSetting("default_encoding", "UTF-8");  
         
         //解析jsp文件
-      /*  springResolver.setPrefix("/WEB-INF/view/");
+		/*
+        springResolver.setPrefix("/WEB-INF/view/");
         springResolver.setSuffix(".jsp");  
-        springResolver.setOrder(1); */
+        springResolver.setOrder(1);
+        */
         
         //解析后缀为html的
         resolver.setSuffix(".html"); 

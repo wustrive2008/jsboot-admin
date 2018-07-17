@@ -13,27 +13,29 @@ import com.wubaoguo.springboot.redis.RedisObjectSerializer;
 
 @Configuration
 public class RedisConfig {
-	
-	/**
-	 * 当 redis 与shiro redis共存时
-	* @Title: cacheManager 
-	* @param  redisTemplate
-	* @return CacheManager    返回类型
-	* @throws
-	 */
-	@Bean
-	public CacheManager cacheManager(RedisTemplate<String, Object> redisTemplate) {
-		CacheManager cacheManager = new RedisCacheManager(redisTemplate);
-		return cacheManager;
-	}
-	 
-	@Bean
+
+    /**
+     * 当 redis 与shiro redis共存时
+     *
+     * @param redisTemplate
+     * @return CacheManager    返回类型
+     * @throws
+     * @Title: cacheManager
+     */
+    @Bean
+    public CacheManager cacheManager(RedisTemplate<String, Object> redisTemplate) {
+        CacheManager cacheManager = new RedisCacheManager(redisTemplate);
+        return cacheManager;
+    }
+
+    @Bean
     JedisConnectionFactory jedisConnectionFactory() {
         return new JedisConnectionFactory();
     }
+
     @Bean
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
-        RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
+    public RedisTemplate<String, Object> redisTemplate() {
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(jedisConnectionFactory());
         template.setKeySerializer(new StringRedisSerializer());
         template.setValueSerializer(new RedisObjectSerializer());

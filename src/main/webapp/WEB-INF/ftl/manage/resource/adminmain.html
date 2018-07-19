@@ -1,7 +1,7 @@
 [#import "/manage/util/dash.html" as h/]
 [@h.head title="管理员" /]
 [@h.fooTableCss /]
-<link href="${request.contextPath}/skin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link href="${request.contextPath}/static/skin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 [@h.mainScript /]
 </head>
 [@h.body /]
@@ -39,7 +39,7 @@
     [@h.fooTableScript /]
     [@h.icheckScript /]
     [@h.formValidationScript /]
-<script src="${request.contextPath}/skin/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="${request.contextPath}/static/skin/js/plugins/sweetalert/sweetalert.min.js"></script>
  <script>
 	$(function(){
 		$.get("${request.contextPath}/manage/resource/admintable.html", function(data){

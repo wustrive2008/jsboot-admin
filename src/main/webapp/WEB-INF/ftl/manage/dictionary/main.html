@@ -1,51 +1,44 @@
 [#import "/manage/util/dash.html" as h/]
-[@h.head title="数据词典" /]
+[@h.head/]
+[@h.maincss /]
 [@h.fooTableCss /]
-[@h.mainScript /]
 </head>
-[@h.body /]
-	<div id="wrapper">
-		<!-- menu -->
-		[@h.menu menuGroup="sysdictionary"  menuCode="sysdictionary" /]
-		<div id="page-wrapper" class="gray-bg">
-		[#include "/manage/util/search.html" /]
-		[@h.breadcrumb navigation='{"title":"数据词典", "active":true}' title="数据词典" /]
-		<div class="wrapper wrapper-content animated fadeInRight">
-		<div class="row">
-            <div class="col-lg-12">
-            	<div class="ibox float-e-margins">
-		            <div class="ibox-title">
-		                <div class="ibox-btn">
-		                	<a data-toggle="modal" data-target="#modal-form" class="btn btn-primary btn-sm">添加</a>
-		                </div>
-		                <div class="ibox-tools">
-		                    <a class="collapse-link">
-		                        <i class="fa fa-chevron-up"></i>
-		                    </a>
-		                </div>
-		            </div>
-		            <div class="ibox-content">
-		             	<input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="查询表格">
-		 				 <div id="div_table_container"></div>
-		           </div>
-         		</div>
-           	</div>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    [@h.breadcrumb navigation='{"title":"数据词典", "active":true}' title="数据词典" /]
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <input class="form-control input-sm m-b-xs" id="filter" style="width:70%; display: inline-block;margin-right: 20px;" placeholder="查询表格">
+                    <a data-toggle="modal" data-target="#modal-form" class="btn btn-primary btn-sm">添加</a>
+                    <div id="div_table_container" url="${request.contextPath}/manage/sysdictionary/table.html"></div>
+                </div>
+            </div>
         </div>
-	</div>
-		[@h.footer /]
-	</div>
-	<!-- Modal -->
-	[@h.modalBoxTemplate id='modal-form' templateUri="/manage/dictionary/form.html" /]
-     <!-- Custom and plugin javascript -->
-    <script type="text/javascript">
-    $(document).ready(function() {
-    	$.get("${request.contextPath}/manage/sysdictionary/table.html", function(data){
-			$("#div_table_container").html(data);
-		});	
+    </div>
+</div>
+[@h.mainjs /]
+[@h.fooTableScript /]
+[@h.icheckScript /]
+[@h.modalBoxTemplate id='modal-form' templateUri="/manage/dictionary/form.html" /]
+[@h.formValidationScript /]
+[@h.pageScript /]
+[@h.ladda /]
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.get("${request.contextPath}/manage/sysdictionary/table.html", function (data) {
+            $("#div_table_container").html(data);
+        });
     });
-    </script>
-    <script src="${request.contextPath}/skin/js/plugins/jeditable/jquery.jeditable.js"></script>
-    [@h.fooTableScript /]
-[@h.footScript /]
+</script>
+<script src="${request.contextPath}/static/skin/js/plugins/jeditable/jquery.jeditable.js"></script>
 </body>
 </html>

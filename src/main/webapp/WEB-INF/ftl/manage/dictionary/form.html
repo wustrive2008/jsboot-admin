@@ -70,7 +70,7 @@ $(document).ready(function() {
            if(result.state == 1){
         	   $('#add_sysdictionary').formValidation('resetForm', true);
         	   $('#modal-form').modal('hide')
-        	   $.get("${request.contextPath}/manage/sysdictionary/table.html", function(data){
+        	   $.get("${request.contextPath}/manage/sysdictionary/table", function(data){
        				$("#div_table_container").html(data);
        		  });	
            } else if(result.state == 304) {

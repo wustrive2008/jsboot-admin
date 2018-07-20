@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="renderer" content="webkit">
-	<title>VC - 主页</title>
-	<link rel="shortcut icon" href="${request.contextPath}/static/skin/img/favicon.ico">
-	<link href="${request.contextPath}/static/skin/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-	<link href="${request.contextPath}/static/skin/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-	<link href="${request.contextPath}/static/skin/css/animate.min.css" rel="stylesheet">
-	<link href="${request.contextPath}/static/skin/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <title>VC - 主页</title>
+    <link rel="shortcut icon" href="${request.contextPath}/static/skin/img/favicon.ico">
+    <link href="${request.contextPath}/static/skin/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="${request.contextPath}/static/skin/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="${request.contextPath}/static/skin/css/animate.min.css" rel="stylesheet">
+    <link href="${request.contextPath}/static/skin/css/style.min862f.css?v=4.1.0" rel="stylesheet">
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div id="wrapper">
 
-	<!--左侧导航开始-->
-	[#include "/manage/common/_tab.html" /]
-	<!--左侧导航结束-->
+    <!--左侧导航开始-->
+    [#include "/manage/common/_tab.html" /]
+    <!--左侧导航结束-->
 
-	<!--右侧部分开始-->
-	[#include "/manage/common/_right.html" /]
-	<!--右侧部分结束-->
+    <!--右侧部分开始-->
+    [#include "/manage/common/_right.html" /]
+    <!--右侧部分结束-->
 
-	<!--右侧边栏开始-->
-	[#include "/manage/common/_theme.html" /]
-	<!--右侧边栏结束-->
+    <!--右侧边栏开始-->
+    [#include "/manage/common/_theme.html" /]
+    <!--右侧边栏结束-->
 
 </div>
 
@@ -43,23 +43,29 @@
 
 <!-- 第三方插件 -->
 <script src="${request.contextPath}/static/skin/js/plugins/pace/pace.min.js"></script>
+
 <script type="text/javascript">
-$(function(){
-	$('.onoffswitch-checkbox').bind('click', function() {
-		var value = $(this).val();
-		var item_key = $(this).attr('name');
-		if(value != 'Y') {
-			value = 'N';
-		}
-		if(!$(this).is(":checked")) {
-			value = 'N';
-		}
-		$.post("${request.contextPath}/manage/sysconfig", {item_key:item_key, value:value},
-			function(result){
-			}
-			, 'json');
-	});
-});
+    $(function () {
+        $('.onoffswitch-checkbox').bind('click', function () {
+            var value = $(this).val();
+            var item_key = $(this).attr('name');
+            if (value != 'Y') {
+                value = 'N';
+            }
+            if (!$(this).is(":checked")) {
+                value = 'N';
+            }
+            $.post("${request.contextPath}/manage/sysconfig", {item_key: item_key, value: value}, function (result) {
+            }, 'json');
+        });
+    });
+
+    /**
+     * 多角色切换
+     */
+    $('#admin_role_select').on('change', function () {
+        window.location.href = '${request.contextPath}/manage/resource/rolechange/' + $(this).children('option:selected').val();
+    });
 </script>
 </body>
 

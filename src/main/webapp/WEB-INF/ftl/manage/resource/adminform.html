@@ -80,7 +80,7 @@ $('#form_adminmain')
         // Use Ajax to submit form data
       $.post($form.attr('action'), $form.serialize(), function(result) {
            if(result.state == 1){
-        	  $.get("${request.contextPath}/manage/resource/admintable.html", function(data){
+        	  $.get("${request.contextPath}/manage/resource/admintable", function(data){
        				$("#div_table_container").html(data);
        		  });	
         	  $('#form_adminmain').formValidation('resetForm', true);

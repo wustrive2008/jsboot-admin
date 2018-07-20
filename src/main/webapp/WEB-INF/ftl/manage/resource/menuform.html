@@ -95,7 +95,7 @@ $(document).ready(function() {
         // Use Ajax to submit form data
         $.post($form.attr('action'), $form.serialize(), function(result) {
            if(result.state == 1){
-        	  $.get("${request.contextPath}/manage/resource/menutable.html", function(data){
+        	  $.get("${request.contextPath}/manage/resource/menutable", function(data){
        				$("#div_table_container").html(data);
        		  });	
         	  $('#form_menumain').formValidation('resetForm', true);

@@ -1,3 +1,4 @@
+[#import "/manage/util/footable.html" as t/]
 [#macro activity data={}]
 		[#if data.is_activity == 1 || data.is_activity]
           		<i title="启用" class="fa fa-check text-navy"></i>
@@ -29,9 +30,7 @@
     	</tr>
     	[/#list]
     </tbody>
-    <tfoot>
-    	
-	</tfoot>
+    [@t.paged commond=commond ibox_content_id="div_table_container"/]
 </table>
 <script type="text/javascript">
     $(document).ready(function() {

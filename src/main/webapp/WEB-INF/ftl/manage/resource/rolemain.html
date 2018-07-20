@@ -1,55 +1,44 @@
 [#import "/manage/util/dash.html" as h/]
-[@h.head title="角色" /]
+[@h.head/]
+[@h.maincss /]
 [@h.fooTableCss /]
-<link href="${request.contextPath}/static/skin/css/plugins/zTree_v3/zTreeStyle.css" rel="stylesheet">
-<link href="${request.contextPath}/static/skin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-[@h.mainScript /]
-</head>
 [@h.body /]
-	<div id="wrapper">
-		<!-- menu -->
-		[@h.menu menuGroup="sys"  menuCode="sys-rolemain" /]
-		<div id="page-wrapper" class="gray-bg">
-		[#include "/manage/util/search.html" /]
-		[@h.breadcrumb navigation='{"title":"角色", "active":true}' title="角色" /]
-		<div class="wrapper wrapper-content animated fadeInRight">
-		<div class="row">
-            <div class="col-lg-12">
-            	<div class="ibox float-e-margins">
-		            <div class="ibox-title">
-		                <div class="ibox-btn">
-		                	<a data-toggle="modal" data-l-href="${request.contextPath}/manage/resource/roleform.html" data-target="#modal-rolemain-form" class="btn btn-primary btn-sm">添加</a>
-		                </div>
-		                <div class="ibox-tools">
-		                    <a class="collapse-link">
-		                        <i class="fa fa-chevron-up"></i>
-		                    </a>
-		                </div>
-		            </div>
-		            <div class="ibox-content">
-		             	<input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="查询表格">
-		             	<div id="div_table_container"></div>
-		           </div>
-         		</div>
-           	</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    [@h.breadcrumb navigation='{"title":"角色管理", "active":true}' title="角色管理" /]
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <input class="form-control input-sm m-b-xs" id="filter" placeholder="查询表格">
+                    <a data-toggle="modal" data-l-href="${request.contextPath}/manage/resource/roleform.html"
+                       data-target="#modal-rolemain-form" class="btn btn-primary btn-sm">添加</a>
+                    <div id="div_table_container" url="${request.contextPath}/manage/resource/roletable.html"></div>
+                </div>
+            </div>
         </div>
-	</div>
-		[@h.footer /]
-	</div>
-	<!-- Modal -->
-	[@h.modalBox id='modal-rolemain-form' /]
-    [@h.fooTableScript /]
-    [@h.icheckScript /]
-    [@h.formValidationScript /]
-<script src="${request.contextPath}/static/skin/js/plugins/zTree_v3/jquery.ztree.all-3.5.min.js"></script>
-<script src="${request.contextPath}/static/skin/js/plugins/sweetalert/sweetalert.min.js"></script>
- <script>
-	$(function(){
-		$.get("${request.contextPath}/manage/resource/roletable.html", function(data){
-			$("#div_table_container").html(data);
-		});	
-	});
+    </div>
+</div>
+[@h.mainjs /]
+[@h.fooTableScript /]
+[@h.icheckScript /]
+[@h.modalBox id='modal-rolemain-form' /]
+[@h.formValidationScript /]
+[@h.pageScript /]
+[@h.ztree /]
+[@h.sweetalert /]
+<script>
+    $(function () {
+        $.get("${request.contextPath}/manage/resource/roletable.html", function (data) {
+            $("#div_table_container").html(data);
+        });
+    });
 </script>
-[@h.footScript /]
 </body>
 </html>

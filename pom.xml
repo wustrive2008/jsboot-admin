@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.wubaoguo.springboot</groupId>
-    <artifactId>base-framework</artifactId>
-    <packaging>war</packaging>
+    <artifactId>jsboot-admin</artifactId>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>base-framework Maven Webapp</name>
+    <name>jsboot-admin Sprint Boot 开发脚手架</name>
     <url>http://maven.apache.org</url>
 
     <parent>
@@ -201,7 +201,7 @@
 
     </dependencies>
     <build>
-        <finalName>base-framework</finalName>
+        <finalName>jsboot-admin</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

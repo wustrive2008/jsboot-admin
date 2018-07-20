@@ -19,7 +19,7 @@
                 <div class="ibox-content">
                     <input class="form-control input-sm m-b-xs" id="filter" style="width:70%; display: inline-block;margin-right: 20px;" placeholder="查询表格">
                     <a data-toggle="modal" data-target="#modal-form" class="btn btn-primary btn-sm">添加</a>
-                    <div id="div_table_container" url="${request.contextPath}/manage/sysdictionary/table.html"></div>
+                    <div id="div_table_container" url="${request.contextPath}/manage/sysdictionary/table"></div>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
 [@h.ladda /]
 <script type="text/javascript">
     $(document).ready(function () {
-        $.get("${request.contextPath}/manage/sysdictionary/table.html", function (data) {
+        $.get("${request.contextPath}/manage/sysdictionary/table", function (data) {
             $("#div_table_container").html(data);
         });
     });

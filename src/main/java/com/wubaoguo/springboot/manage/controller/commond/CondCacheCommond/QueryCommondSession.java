@@ -1,4 +1,4 @@
-package com.wubaoguo.springboot.manage.controller.commond;
+package com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -14,11 +14,11 @@ import org.apache.shiro.session.Session;
 public class QueryCommondSession {
 
 
-    public static DgztcBaseCommond getQueryCommond(String key) {
-        return (DgztcBaseCommond) getSession().getAttribute(key);
+    public static CondCacheCommond getQueryCommond(String key) {
+        return (CondCacheCommond) getSession().getAttribute(key);
     }
 
-    public static void putQueryCommond(String key,DgztcBaseCommond commond){
+    public static void putQueryCommond(String key,CondCacheCommond commond){
         getSession().setAttribute(key,commond);
     }
 
@@ -36,9 +36,9 @@ public class QueryCommondSession {
      * @param commond
      * @return
      */
-    public static DgztcBaseCommond validateCommond(String key,DgztcBaseCommond commond){
+    public static CondCacheCommond validateCommond(String key,CondCacheCommond commond){
         if(null == commond.getNewQuery() && commond.isNull() && commond.getPageNumber() < 2){
-            DgztcBaseCommond cacheCommond = QueryCommondSession.getQueryCommond(key);
+            CondCacheCommond cacheCommond = QueryCommondSession.getQueryCommond(key);
             if(null != cacheCommond){
                 commond = cacheCommond;
             }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
-import com.wubaoguo.springboot.manage.controller.commond.DgztcBaseCommond;
+import com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond.CondCacheCommond;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.wustrive.java.common.util.StringUtil;
@@ -43,7 +43,7 @@ public class SysDictionaryService {
         return null;
     }
 
-    public List<Map<String, Object>> findSysDictionaryByComond(DgztcBaseCommond commond) {
+    public List<Map<String, Object>> findSysDictionaryByComond(CondCacheCommond commond) {
         commond.setPager(true);
         return querySupport.find("select * from sys_dictionary where 0=0 ", Maps.newHashMap(), commond);
     }

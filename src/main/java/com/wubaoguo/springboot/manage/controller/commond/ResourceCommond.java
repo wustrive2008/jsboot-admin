@@ -1,6 +1,7 @@
 package com.wubaoguo.springboot.manage.controller.commond;
 
 
+import com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond.CondCacheCommond;
 import lombok.Data;
 
 /**
@@ -12,7 +13,7 @@ import lombok.Data;
  * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
 @Data
-public class ResourceCommond extends DgztcBaseCommond {
+public class ResourceCommond extends CondCacheCommond {
 
     //菜单
 

@@ -19,7 +19,7 @@
                     <input class="form-control input-sm m-b-xs" id="filter" placeholder="查询表格">
                     <a data-toggle="modal" data-l-href="${request.contextPath}/manage/resource/roleform.html"
                        data-target="#modal-rolemain-form" class="btn btn-primary btn-sm">添加</a>
-                    <div id="div_table_container" url="${request.contextPath}/manage/resource/roletable.html"></div>
+                    <div id="div_table_container" url="${request.contextPath}/manage/resource/roletable"></div>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
 [@h.sweetalert /]
 <script>
     $(function () {
-        $.get("${request.contextPath}/manage/resource/roletable.html", function (data) {
+        $.get("${request.contextPath}/manage/resource/roletable", function (data) {
             $("#div_table_container").html(data);
         });
     });

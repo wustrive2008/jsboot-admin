@@ -83,7 +83,7 @@
 [@h.ladda /]
 <script>
     $(function () {
-        $.get("${request.contextPath}/manage/resource/admintable.html", function (data) {
+        $.get("${request.contextPath}/manage/resource/admintable", function (data) {
             $("#div_table_container").html(data);
         });
     });

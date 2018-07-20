@@ -4,7 +4,7 @@ package com.wubaoguo.springboot.manage.controller;
 import java.util.Map;
 
 import com.wubaoguo.springboot.manage.controller.commond.ResourceCommond;
-import com.wubaoguo.springboot.manage.controller.commond.QueryCommondSession;
+import com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond.QueryCommondSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

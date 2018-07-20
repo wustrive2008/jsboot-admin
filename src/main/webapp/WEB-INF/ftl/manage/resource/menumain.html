@@ -17,7 +17,7 @@
                 </div>
                 <div class="ibox-content">
 
-                    <div id="div_table_container" url="${request.contextPath}/manage/resource/menutable.html"></div>
+                    <div id="div_table_container" url="${request.contextPath}/manage/resource/menutable"></div>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
 [@h.ladda /]
 <script>
     $(function () {
-        $.get("${request.contextPath}/manage/resource/menutable.html", function (data) {
+        $.get("${request.contextPath}/manage/resource/menutable", function (data) {
             $("#div_table_container").html(data);
         });
     });

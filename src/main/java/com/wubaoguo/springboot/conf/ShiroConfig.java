@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 
+import com.wubaoguo.springboot.filter.PermissionFilter;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -29,7 +30,14 @@ import org.wustrive.java.common.util.StringUtil;
 import com.wubaoguo.springboot.filter.AjaxFormAuthenticationFilter;
 import com.wubaoguo.springboot.shiro.MyShiroRealm;
 
-
+/**
+ * Description: shiro配置
+ *
+ * @author: wubaoguo
+ * @email: wustrive2008@gmail.com
+ * @date: 2018/7/20 15:10
+ * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
+ */
 @Configuration
 public class ShiroConfig {
     private static final Logger log = LoggerFactory.getLogger(ShiroConfig.class);
@@ -53,8 +61,6 @@ public class ShiroConfig {
         filterRegistration.setFilter(new DelegatingFilterProxy("shiroFilter"));
         filterRegistration.setEnabled(true);
         filterRegistration.addUrlPatterns("/manage/*");
-
-
         filterRegistration.setDispatcherTypes(DispatcherType.REQUEST);
         return filterRegistration;
     }
@@ -74,25 +80,26 @@ public class ShiroConfig {
         // 必须设置 SecurityManager
         shiroFilterFactoryBean.setSecurityManager(securityManager());
 
-        // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-        shiroFilterFactoryBean.setLoginUrl("/manage/login");
+        // 如果不设置默认会自动寻找Web工程根目录下的"/login.html"页面
+        shiroFilterFactoryBean.setLoginUrl("/manage/login.html");
         // 登录成功后要跳转的链接
         shiroFilterFactoryBean.setSuccessUrl("/manage/home.html");
         // 未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/error/403");
 
         //自定义拦截器
-        Map<String, Filter> filtersMap = new LinkedHashMap<String, Filter>();
+        Map<String, Filter> filtersMap = new LinkedHashMap<>();
         //限制同一帐号同时在线的个数。
         filtersMap.put("authc", getAjaxFormAuthenticationFilter());
         filtersMap.put("loginout", getLogoutFilter());
+        filtersMap.put("permission", getPermissionFilter());
         shiroFilterFactoryBean.setFilters(filtersMap);
 
         // 权限控制map.
-        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
+        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/manage/login", "authc");
         filterChainDefinitionMap.put("/manage/loginout", "loginout");
-        filterChainDefinitionMap.put("/manage/**", "user,perms,roles");
+        filterChainDefinitionMap.put("/manage/**", "user,perms,roles,permission");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         log.info("Shiro拦截器工厂类注入成功");
@@ -208,5 +215,17 @@ public class ShiroConfig {
         //rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度(128 256 512 位)
         cookieRememberMeManager.setCipherKey(Base64.decode("3AvVhmFLUs0KTA3Kprsdag=="));
         return cookieRememberMeManager;
+    }
+
+    /**
+     * 模块访问权限验证
+     *
+     * @return
+     */
+    @Bean
+    public Filter getPermissionFilter() {
+        PermissionFilter permissionFilter = new PermissionFilter();
+        permissionFilter.setRedirectUrl("/manage/loginout");
+        return permissionFilter;
     }
 }

@@ -17,36 +17,38 @@ import com.google.common.collect.ImmutableSet;
 
 public class SubThreadContent extends ThreadContentFilter {
 
-	/** 静态文件后缀名 */
-	ImmutableSet<String> ignoreSuffix = new ImmutableSet.Builder<String>().add("jpg", "jpeg", "ico", "txt", "doc", "ppt", "xls", "pdf", "gif", "png",
-			"bmp", "css", "js", "swf", "flv", "mp3", "htc").build();
-	
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain filterChain) throws IOException, ServletException {
-		if (isStaticFile(request, response)) {
-			filterChain.doFilter(request, response);
-		} else {
-			SubThreadContent.setThreadObject(new ThreadObject((HttpServletRequest) request, (HttpServletResponse) response));
-			filterChain.doFilter(request, response);
-			SubThreadContent.setThreadObject(null);
-		}
-	}
-	
-	/**
-	 * 判断请求的是否是静态文件
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	private boolean isStaticFile(ServletRequest request, ServletResponse response) {
-		if (request instanceof HttpServletRequest) {
-			String uri = ((HttpServletRequest) request).getRequestURI();
-			String suffix = StringUtils.substringAfterLast(uri, ".").toLowerCase();
-			return ignoreSuffix.contains(suffix);
-		}
-		// request 无法解析时 暂时定为静态文件处理
-		return true;
-	}
+    /**
+     * 静态文件后缀名
+     */
+    public static ImmutableSet<String> ignoreSuffix = new ImmutableSet.Builder<String>().add("jpg", "jpeg", "ico", "txt", "doc", "ppt", "xls", "pdf", "gif", "png",
+            "bmp", "css", "js", "swf", "flv", "mp3", "htc", "woff", "woff2", "ttf").build();
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response,
+                         FilterChain filterChain) throws IOException, ServletException {
+        if (isStaticFile(request)) {
+            filterChain.doFilter(request, response);
+        } else {
+            SubThreadContent.setThreadObject(new ThreadObject((HttpServletRequest) request, (HttpServletResponse) response));
+            filterChain.doFilter(request, response);
+            SubThreadContent.setThreadObject(null);
+        }
+    }
+
+    /**
+     * 判断请求的是否是静态文件
+     *
+     * @param request
+     * @return
+     */
+    private boolean isStaticFile(ServletRequest request) {
+        if (request instanceof HttpServletRequest) {
+            String uri = ((HttpServletRequest) request).getRequestURI();
+            String suffix = StringUtils.substringAfterLast(uri, ".").toLowerCase();
+            return ignoreSuffix.contains(suffix);
+        }
+        // request 无法解析时 暂时定为静态文件处理
+        return true;
+    }
 
 }

@@ -1,9 +1,8 @@
 package com.wubaoguo.springboot.manage.controller;
 
 
-import com.wubaoguo.springboot.manage.controller.commond.DgztcBaseCommond;
-import com.wubaoguo.springboot.manage.controller.commond.QueryCommondSession;
-import com.wubaoguo.springboot.manage.controller.commond.ResourceCommond;
+import com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond.CondCacheCommond;
+import com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond.QueryCommondSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +21,7 @@ public class SysDictionaryController {
     private SysDictionaryService sysDictionaryService;
 
     @ModelAttribute
-    public void populateModel(DgztcBaseCommond commond, Model model) {
+    public void populateModel(CondCacheCommond commond, Model model) {
         commond = QueryCommondSession.validateCommond(this.getClass().getName(), commond);
         model.addAttribute("commond", commond);
         QueryCommondSession.putQueryCommond(this.getClass().getName(), commond);
@@ -45,7 +44,7 @@ public class SysDictionaryController {
 
 
     @RequestMapping(value = "/table", method = RequestMethod.GET)
-    public String findSysDictionary(DgztcBaseCommond commond, ModelMap map) {
+    public String findSysDictionary(CondCacheCommond commond, ModelMap map) {
         commond = QueryCommondSession.validateCommond(this.getClass().getName(), commond);
         map.put("entitys", sysDictionaryService.findSysDictionaryByComond(commond));
         QueryCommondSession.putQueryCommond(this.getClass().getName(), commond);

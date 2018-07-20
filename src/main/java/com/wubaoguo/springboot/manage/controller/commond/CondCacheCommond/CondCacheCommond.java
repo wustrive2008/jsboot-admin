@@ -1,8 +1,8 @@
-package com.wubaoguo.springboot.manage.controller.commond;
+package com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond;
 
 import org.wustrive.java.dao.jdbc.BaseCommond;
 
-public class DgztcBaseCommond extends BaseCommond {
+public class CondCacheCommond extends BaseCommond {
     private static final long serialVersionUID = 1L;
 
     private Integer newQuery;

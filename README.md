@@ -24,3 +24,9 @@ jsboot-admin一个更简洁、更灵活的Spring Boot项目脚手架，致力于
 - 模块标签页切换免刷新
 
 
+## 运行截图
+
+![登录页面](http://7vzshu.com1.z0.glb.clouddn.com/jsboot-admin0.png)
+![主页](http://7vzshu.com1.z0.glb.clouddn.com/jsboot-admin1.png)
+![列表](http://7vzshu.com1.z0.glb.clouddn.com/jsboot-admin2.png)
+![添加](http://7vzshu.com1.z0.glb.clouddn.com/jsboot-admin3.png)

@@ -37,13 +37,14 @@ public class PermissionFilter implements Filter {
         String uri = httpRequest.getRequestURI();
         if (isStaticFile(uri)) {
             chain.doFilter(request, response);
+            return;
         }
         String roleCode = ShiroConstants.getCurrentRoleCode();
         if (uri.lastIndexOf("home.html") > 0 || (uri.lastIndexOf("main.html") < 0 && uri.lastIndexOf("table") < 0) || manageService.hasPermission(roleCode, uri)) {
             chain.doFilter(request, response);
         } else {
-            //WebUtils.issueRedirect(request, response, redirectUrl);
             String loginoutUrl = ((HttpServletRequest) request).getContextPath() + this.redirectUrl;
+            System.out.println(uri);
             PrintWriter out = response.getWriter();
             out.println("<html>");
             out.println("<script>");

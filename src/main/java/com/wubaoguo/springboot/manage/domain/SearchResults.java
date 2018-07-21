@@ -6,7 +6,7 @@ package com.wubaoguo.springboot.manage.domain;
  * 
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
- * @date: 2018/7/21 9:01
+ * @date: 2018/7/21 9:06
  * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
 public class SearchResults {

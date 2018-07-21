@@ -6,14 +6,13 @@ import com.nimbusds.jose.JWSObject;
 import com.wubaoguo.springboot.util.JWTUtil;
 
 /**
- * jwt 授权信息 
- * @Title: JwtAuthentication.java
- * @ClassName: com.wubaoguo.springboot.jwt.JwtAuthentication
- * @Description: TODO
  *
- * Copyright  2015-2017 维创盈通 - Powered By 研发中心 V1.0.0
- * @author wustrive
- * @date 2017年3月10日 下午5:57:56
+ * Description: jwt 授权信息
+ * 
+ * @author: wubaoguo
+ * @email: wustrive2008@gmail.com
+ * @date: 2018/7/21 9:01
+ * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
 public class JwtAuthentication extends AuthBean{
     

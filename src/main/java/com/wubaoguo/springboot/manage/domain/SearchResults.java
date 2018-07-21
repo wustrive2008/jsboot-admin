@@ -1,12 +1,13 @@
 package com.wubaoguo.springboot.manage.domain;
+
 /**
- * @Title: SearchResults.java
- * @ClassName: com.vcxx.manage.vo.SearchResults
- * @Description: 搜索结果对象
  *
- * Copyright  2015-2016 维创盈通 - Powered By 研发中心 V1.0.0
- * @author zhaoqt
- * @date May 3, 2016 5:06:01 AM
+ * Description: 
+ * 
+ * @author: wubaoguo
+ * @email: wustrive2008@gmail.com
+ * @date: 2018/7/21 9:01
+ * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
 public class SearchResults {
 

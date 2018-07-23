@@ -1,27 +1,34 @@
 package com.wubaoguo.springboot.rest.service;
 
+import com.wubaoguo.springboot.dao.MyBatisTestDao;
 import com.wubaoguo.springboot.entity.SysAdmin;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.wustrive.java.common.util.StringUtil;
 
 /**
- * Description:mybatis示例-注解
+ * Description:
  *
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
  * @date: 2018/7/23 11:52
  * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
-@Mapper
-@Component
-public interface MyBatisTestService {
+@Service
+public class MyBatisTestService {
 
-    @Select("SELECT * FROM sys_admin WHERE id = #{id}")
-    SysAdmin getUserById(@Param("id") String id);
+    @Autowired
+    MyBatisTestDao myBatisTestDao;
 
-    @Select("SELECT c.name FROM sys_admin a,sys_admin_role b,sys_role c where a.id =b.admin_id and b.code = c.code and a.id = #{id}")
-    String getRoleNameById(String id);
+    public SysAdmin getUserById(String id) {
+        return myBatisTestDao.getUserById(id);
+    }
 
+    public String getRoleNameById(String id) {
+        return myBatisTestDao.getRoleNameById(id);
+    }
+
+    public Integer addSysAdmin(com.wubaoguo.springboot.model.SysAdmin admin) {
+        return myBatisTestDao.addSysAdmin(StringUtil.getUUID(), admin.getName(), admin.getPhoneNumber());
+    }
 }

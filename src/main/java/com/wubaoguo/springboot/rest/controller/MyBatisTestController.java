@@ -50,4 +50,12 @@ public class MyBatisTestController {
         com.wubaoguo.springboot.model.SysAdmin admin = sysAdminMapper.selectByPrimaryKey(id);
         return ViewResult.newInstance().setData(ImmutableMap.of("name", admin.getName())).json();
     }
+
+
+    @ApiOperation(value = "mybatis-多数据源测试-添加数据", notes = "mybatis-多数据源测试-添加数据")
+    @RequestMapping(value = {"add"}, method = RequestMethod.GET)
+    public String addSysAdmin(com.wubaoguo.springboot.model.SysAdmin admin) {
+        Integer res = myBatisTestService.addSysAdmin(admin);
+        return ViewResult.newInstance().setData(ImmutableMap.of("res", res)).json();
+    }
 }

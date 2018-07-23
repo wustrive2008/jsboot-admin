@@ -23,4 +23,5 @@ public interface MyBatisTestService {
 
     @Select("SELECT c.name FROM sys_admin a,sys_admin_role b,sys_role c where a.id =b.admin_id and b.code = c.code and a.id = #{id}")
     String getRoleNameById(String id);
+
 }

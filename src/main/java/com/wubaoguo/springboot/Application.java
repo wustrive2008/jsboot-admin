@@ -7,7 +7,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan(basePackages = {"com.wubaoguo.springboot", "org.wustrive.java.dao.jdbc.dao"})
-@MapperScan("com.wubaoguo.springboot.rest.service")
+@MapperScan(basePackages = {"com.wubaoguo.springboot.rest.service", "com.wubaoguo.springboot.dao"})
 @SpringBootApplication
 @EnableCaching
 public class Application {

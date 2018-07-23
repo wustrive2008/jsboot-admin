@@ -1,6 +1,7 @@
 package com.wubaoguo.springboot.rest.controller;
 
 import com.google.common.collect.ImmutableMap;
+import com.wubaoguo.springboot.dao.SysAdminMapper;
 import com.wubaoguo.springboot.entity.SysAdmin;
 import com.wubaoguo.springboot.rest.service.MyBatisTestService;
 import io.swagger.annotations.ApiOperation;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.wustrive.java.core.request.ViewResult;
 
 /**
- * Description:
+ * Description:mybatis示例
  *
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
@@ -26,6 +27,9 @@ public class MyBatisTestController {
     @Autowired
     MyBatisTestService myBatisTestService;
 
+    @Autowired
+    SysAdminMapper sysAdminMapper;
+
     @ApiOperation(value = "mybatis简单操作示例-根据id获取用户信息", notes = "mybatis简单操作示例-根据id获取用户信息")
     @RequestMapping(value = {"getUserById/{id}"}, method = RequestMethod.GET)
     public String getUserById(@PathVariable String id) {
@@ -38,5 +42,12 @@ public class MyBatisTestController {
     public String getRoleNameById(@PathVariable String id) {
         String roleName = myBatisTestService.getRoleNameById(id);
         return ViewResult.newInstance().setData(ImmutableMap.of("roleName", roleName)).json();
+    }
+
+    @ApiOperation(value = "mybatis-Mapper示例-根据id查询实体", notes = "mybatis-Mapper示例-根据id查询实体")
+    @RequestMapping(value = {"selectByPrimaryKey/{id}"}, method = RequestMethod.GET)
+    public String selectByPrimaryKey(@PathVariable String id) {
+        com.wubaoguo.springboot.model.SysAdmin admin = sysAdminMapper.selectByPrimaryKey(id);
+        return ViewResult.newInstance().setData(ImmutableMap.of("name", admin.getName())).json();
     }
 }

@@ -1,10 +1,9 @@
 package com.wubaoguo.springboot.manage.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.wubaoguo.springboot.constant.ShiroConstants;
+import com.wubaoguo.springboot.manage.service.ManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,12 +13,14 @@ import org.wustrive.java.core.bean.CurrentUser;
 import org.wustrive.java.core.exception.BusinessException;
 import org.wustrive.java.core.request.ViewResult;
 
-import com.wubaoguo.springboot.constant.ShiroConstants;
-import com.wubaoguo.springboot.manage.service.ManageService;
-
-import java.util.List;
-import java.util.Map;
-
+/**
+ * Description: 主页功能controller
+ *
+ * @author: wubaoguo
+ * @email: wustrive2008@gmail.com
+ * @date: 2018/7/23 11:07
+ * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
+ */
 @Controller
 @RequestMapping("/manage")
 public class ManageController {
@@ -52,7 +53,7 @@ public class ManageController {
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String home(HttpServletRequest request, ModelMap map) {
+    public String home(ModelMap map) {
         CurrentUser currentUser = ShiroConstants.getCurrentUser();
         map.addAttribute("menus", manageService.findSysResourcesByRole(ShiroConstants.getCurrentRoleCode(), currentUser.getId()));
         return "/manage/home";
@@ -62,7 +63,7 @@ public class ManageController {
      * 跳转到黑板
      */
     @RequestMapping("/blackboard")
-    public String blackboard(Model model) {
+    public String blackboard() {
         return "/manage/blackboard";
     }
 

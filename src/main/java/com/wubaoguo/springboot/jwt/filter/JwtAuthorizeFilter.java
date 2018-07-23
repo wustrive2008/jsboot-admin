@@ -22,11 +22,19 @@ import com.wubaoguo.springboot.conf.JwtConfig;
 import com.wubaoguo.springboot.jwt.JwtAuthentication;
 import com.wubaoguo.springboot.jwt.JwtAuthorizingRealm;
 
-public class JwtAuthorizeFilter implements Filter{
+/**
+ * Description: jwt过滤器
+ *
+ * @author: wubaoguo
+ * @email: wustrive2008@gmail.com
+ * @date: 2018/7/23 11:14
+ * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
+ */
+public class JwtAuthorizeFilter implements Filter {
 
     @Autowired
     private JwtAuthorizingRealm jwtAuthorizingRealm;
-    
+
     @Override
     public void destroy() {
     }
@@ -43,65 +51,66 @@ public class JwtAuthorizeFilter implements Filter{
             String deviceId = httpRequest.getHeader("deviceId");
             //认证类型 用以扩展多终端认证
             String authType = httpRequest.getHeader("authType");
-            
-            if(StringUtils.isBlank(deviceId) || StringUtils.isBlank(authType)){
+
+            if (StringUtils.isBlank(deviceId) || StringUtils.isBlank(authType)) {
                 WebUtil.write(viewResult.fail("请求头信息不全").json(), httpResponse);
                 return;
             }
-            
+
             //登录请求，进行登录验证
             if (uri.contains(JwtConfig.LOGIN_URL)) {
                 String username = httpRequest.getParameter("username");
                 String password = httpRequest.getParameter("password");
-                if(StringUtils.isBlank(username) || StringUtils.isBlank(password)){
+                if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
                     WebUtil.write(viewResult.fail("登录参数错误").json(), httpResponse);
                     return;
                 }
                 JwtAuthentication jwtAuth = new JwtAuthentication();
                 jwtAuth.setUsername(username);
                 jwtAuth.setPassword(password);
-                
+
                 // 执行底层认证
                 viewResult = jwtAuthorizingRealm.doAuthentication(jwtAuth);
-                
+
                 // 登录状态返回
                 WebUtil.write(viewResult.json(), httpResponse);
             } else {
                 // 请求地址 非登录地址 进行 hander token 验证
                 String accessToken = httpRequest.getHeader("Authorization");
-                
+
                 //不强制登录接口
-                if(StringUtils.isBlank(accessToken) && isOpenUri(uri)){
+                if (StringUtils.isBlank(accessToken) && isOpenUri(uri)) {
                     chain.doFilter(httpRequest, httpResponse);
                     return;
                 }
-                
+
                 // 授权验证
                 JwtAuthentication auth = new JwtAuthentication();
                 auth.setAccessToken(accessToken);
                 auth.setDeviceId(deviceId);
                 auth.setAuthType(authType);
-                if(jwtAuthorizingRealm.isAuthentication(auth)){
+                if (jwtAuthorizingRealm.isAuthentication(auth)) {
                     chain.doFilter(httpRequest, httpResponse);
-                }else{
-                    WebUtil.write(viewResult.state(StateMap.S_AUTH_ERROR,"认证失败，请重新登录").json(), httpResponse);
+                } else {
+                    WebUtil.write(viewResult.state(StateMap.S_AUTH_ERROR, "认证失败，请重新登录").json(), httpResponse);
                 }
             }
         } catch (LoginSecurityException e) {
             e.printStackTrace();
-            WebUtil.write(viewResult.state(e.getState(),e.getMessage()).json(), httpResponse);
+            WebUtil.write(viewResult.state(e.getState(), e.getMessage()).json(), httpResponse);
         }
-        
+
     }
 
     /**
      * 是否是开放url
+     *
      * @param uri
      * @return
      */
     private boolean isOpenUri(String uri) {
         for (String str : JwtConfig.OPEN_URL) {
-            if(uri.contains(str)){
+            if (uri.contains(str)) {
                 return true;
             }
         }

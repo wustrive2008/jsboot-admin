@@ -1,15 +1,15 @@
-package com.wubaoguo.springboot.manage.controller;
-
-import com.wubaoguo.springboot.manage.service.RedisTestService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.web.bind.annotation.*;
+package com.wubaoguo.springboot.rest.controller;
 
 import com.wubaoguo.springboot.redis.StringRedisCache;
-
+import com.wubaoguo.springboot.rest.service.RedisTestService;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.wustrive.java.core.request.ViewResult;
 
 @CacheConfig(cacheNames = "user")

@@ -13,6 +13,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.wubaoguo.springboot.filter.SubThreadContent;
 
+/**
+ * Description: 过滤器配置
+ *
+ * @author: wubaoguo
+ * @email: wustrive2008@gmail.com
+ * @date: 2018/7/23 11:10
+ * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
+ */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 

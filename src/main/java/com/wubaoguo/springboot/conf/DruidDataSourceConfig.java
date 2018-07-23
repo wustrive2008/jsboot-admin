@@ -9,9 +9,8 @@ import javax.sql.DataSource;
 
 
 /**
+ * Description: druid连接池配置
  *
- * Description: 
- * 
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
  * @date: 2018/7/18 21:04
@@ -22,7 +21,7 @@ public class DruidDataSourceConfig {
 
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
-    public DataSource druid(){
+    public DataSource druid() {
         return new DruidDataSource();
     }
 }

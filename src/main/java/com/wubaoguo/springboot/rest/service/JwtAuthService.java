@@ -1,4 +1,4 @@
-package com.wubaoguo.springboot.app.service;
+package com.wubaoguo.springboot.rest.service;
 
 import com.wubaoguo.springboot.jwt.JwtAuthentication;
 

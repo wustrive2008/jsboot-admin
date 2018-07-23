@@ -7,6 +7,14 @@ import org.apache.shiro.session.Session;
 import org.wustrive.java.core.bean.CurrentRole;
 import org.wustrive.java.core.bean.CurrentUser;
 
+/**
+ * Description: shiro相关常量
+ * 
+ * @author: wubaoguo
+ * @email: wustrive2008@gmail.com
+ * @date: 2018/7/23 11:11
+ * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
+ */
 public class ShiroConstants {
     
     public static final String SESSION_CURRENT_RESOURCE = "current_esource";

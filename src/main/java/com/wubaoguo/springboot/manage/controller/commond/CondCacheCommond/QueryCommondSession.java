@@ -13,8 +13,7 @@ import org.apache.shiro.session.Session;
  */
 public class QueryCommondSession {
 
-
-    public static CondCacheCommond getQueryCommond(String key) {
+    private static CondCacheCommond getQueryCommond(String key) {
         return (CondCacheCommond) getSession().getAttribute(key);
     }
 

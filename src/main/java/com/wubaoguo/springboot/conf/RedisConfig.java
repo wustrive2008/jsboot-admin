@@ -22,6 +22,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Description: redis配置
+ * 
+ * @author: wubaoguo
+ * @email: wustrive2008@gmail.com
+ * @date: 2018/7/23 11:10
+ * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
+ */
 @Configuration
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {

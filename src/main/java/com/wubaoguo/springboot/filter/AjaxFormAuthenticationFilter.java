@@ -17,6 +17,14 @@ import org.wustrive.java.core.request.ViewResult;
 
 import com.wubaoguo.springboot.constant.ShiroConstants;
 
+/**
+ * Description: 管理后台表单提交请求拦截
+ * 
+ * @author: wubaoguo
+ * @email: wustrive2008@gmail.com
+ * @date: 2018/7/23 11:11
+ * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
+ */
 public class AjaxFormAuthenticationFilter extends FormAuthenticationFilter {
 
     @Override

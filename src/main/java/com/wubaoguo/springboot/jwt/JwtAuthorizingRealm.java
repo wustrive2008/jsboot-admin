@@ -16,7 +16,7 @@ import org.wustrive.java.core.request.ViewResult;
 
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSObject;
-import com.wubaoguo.springboot.app.service.JwtAuthService;
+import com.wubaoguo.springboot.rest.service.JwtAuthService;
 import com.wubaoguo.springboot.constant.JwtConstants;
 import com.wubaoguo.springboot.redis.JwtSubjectCache;
 import com.wubaoguo.springboot.util.JWTUtil;

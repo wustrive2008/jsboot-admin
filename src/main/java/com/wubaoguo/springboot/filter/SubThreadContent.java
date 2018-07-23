@@ -15,6 +15,14 @@ import org.wustrive.java.core.filter.ThreadContentFilter;
 
 import com.google.common.collect.ImmutableSet;
 
+/**
+ * Description: ThreadLocal 解决线程变量副本问题
+ *
+ * @author: wubaoguo
+ * @email: wustrive2008@gmail.com
+ * @date: 2018/7/23 11:12
+ * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
+ */
 public class SubThreadContent extends ThreadContentFilter {
 
     /**

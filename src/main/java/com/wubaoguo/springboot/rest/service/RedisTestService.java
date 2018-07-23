@@ -1,4 +1,4 @@
-package com.wubaoguo.springboot.manage.service;
+package com.wubaoguo.springboot.rest.service;
 
 import com.wubaoguo.springboot.entity.SysAdmin;
 import org.springframework.beans.factory.annotation.Autowired;

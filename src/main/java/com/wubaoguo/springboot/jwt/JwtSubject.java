@@ -6,7 +6,16 @@ import org.wustrive.java.core.filter.ThreadContentFilter;
 import com.nimbusds.jose.JWSObject;
 import com.wubaoguo.springboot.constant.JwtConstants;
 
+/**
+ * Description: jwt对象
+ * 
+ * @author: wubaoguo
+ * @email: wustrive2008@gmail.com
+ * @date: 2018/7/23 11:15
+ * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
+ */
 public class JwtSubject {
+
     private JWSObject jwsObject;
 
     public JwtSubject() {}

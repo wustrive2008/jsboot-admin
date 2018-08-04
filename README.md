@@ -13,7 +13,7 @@ jsboot-admin一个更简洁、更灵活的Spring Boot项目脚手架，致力于
 - 附带基础数据结构sql
 - swagger2 api文档
 - redis
-- mail
+- aop实现redis分布式锁
 - freemarker
 - shiro + redis
 - jwt

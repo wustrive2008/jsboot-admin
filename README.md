@@ -4,6 +4,11 @@
 
 jsboot-admin一个更简洁、更灵活的Spring Boot项目脚手架，致力于帮助开发者快速的搭建项目，让大家更专注于业务实现而非框架问题。
 
+## 注意事项
+
+1. 项目中使用的一个基础类库[base-classlib](https://github.com/wustrive2008/base-classlib)
+2. 项目中使用到Lombok，请先安装对应ide插件
+
 ## 特点
 
 集成框架(特色功能)：

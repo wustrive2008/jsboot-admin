@@ -127,7 +127,7 @@ public class JWTUtil {
     /**
      * 重置jwt 过期时间返回新的 jwt encrypt
      * 
-     * @param jwsObject
+     * @param jwtTemplate
      * @return
      * @throws KeyLengthException 
      */

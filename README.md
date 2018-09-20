@@ -35,3 +35,7 @@ jsboot-admin一个更简洁、更灵活的Spring Boot项目脚手架，致力于
 ![主页](http://7vzshu.com1.z0.glb.clouddn.com/jsboot-admin1.png)
 ![列表](http://7vzshu.com1.z0.glb.clouddn.com/jsboot-admin2.png)
 ![添加](http://7vzshu.com1.z0.glb.clouddn.com/jsboot-admin3.png)
+
+## 说明
+
+如有任何问题欢迎在issues中讨论

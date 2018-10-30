@@ -113,7 +113,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.13</version>
+            <version>1.2.31</version>
         </dependency>
 
         <!-- java HTML解析器，获取document对象 -->

@@ -193,6 +193,13 @@
             <version>4.23</version>
         </dependency>
 
+        <!-- redis分布式锁 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-klock-starter</artifactId>
+            <version>1.1-SNAPSHOT</version>
+        </dependency>
+
         <!--&lt;!&ndash; 使用Jasper引擎解析JSP &ndash;&gt;
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>

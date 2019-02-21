@@ -1,9 +1,8 @@
 package com.wubaoguo.springboot.rest.service;
 
 import com.wubaoguo.springboot.entity.SysAdmin;
-import com.wubaoguo.springboot.redis.lock.DistributedLock;
-import com.wubaoguo.springboot.redis.lock.RedisLock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.klock.annotation.Klock;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -34,7 +33,7 @@ public class RedisTestService {
     BaseDao baseDao;
 
 
-    @RedisLock
+    @Klock
     @Cacheable(cacheNames = {"userList3"}, keyGenerator = "wiselyKeyGenerator")
     public String getUsers() {
         String sql = "select * from sys_admin";

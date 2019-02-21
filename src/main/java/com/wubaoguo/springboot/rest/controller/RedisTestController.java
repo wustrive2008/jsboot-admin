@@ -14,7 +14,7 @@ import org.wustrive.java.core.request.ViewResult;
 
 @CacheConfig(cacheNames = "user")
 @RestController
-@RequestMapping("/redis")
+@RequestMapping("/open/redis")
 public class RedisTestController {
 
     @Autowired
@@ -46,7 +46,6 @@ public class RedisTestController {
         return ViewResult.newInstance().setData(redisTestService.getUser(id).getBeanValues()).json();
     }
 
-    @ApiOperation(value = "redis数据库缓存", notes = "缓存数据")
     @RequestMapping(value = {"getUsers"}, method = RequestMethod.GET)
     public String cacheSql() {
         return redisTestService.getUsers();

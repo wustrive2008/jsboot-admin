@@ -1,11 +1,18 @@
 package com.wubaoguo.springboot.manage.service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import cn.hutool.core.convert.Convert;
+import cn.hutool.crypto.digest.DigestUtil;
+import com.google.common.collect.ImmutableMap;
+import com.wubaoguo.springboot.constant.ShiroConstants;
+import com.wubaoguo.springboot.core.bean.AuthBean;
+import com.wubaoguo.springboot.core.bean.CurrentRole;
+import com.wubaoguo.springboot.core.bean.CurrentUser;
+import com.wubaoguo.springboot.core.exception.LoginSecurityException;
+import com.wubaoguo.springboot.dao.jdbc.dao.BaseDao;
+import com.wubaoguo.springboot.entity.SysAdmin;
+import com.wubaoguo.springboot.entity.SysRole;
+import jodd.util.StringUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -13,19 +20,8 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.wustrive.java.common.secret.MD5Encrypt;
-import org.wustrive.java.common.util.ConvertUtil;
-import org.wustrive.java.common.util.StringUtil;
-import org.wustrive.java.core.bean.AuthBean;
-import org.wustrive.java.core.bean.CurrentRole;
-import org.wustrive.java.core.bean.CurrentUser;
-import org.wustrive.java.core.exception.LoginSecurityException;
-import org.wustrive.java.dao.jdbc.dao.BaseDao;
 
-import com.google.common.collect.ImmutableMap;
-import com.wubaoguo.springboot.constant.ShiroConstants;
-import com.wubaoguo.springboot.entity.SysAdmin;
-import com.wubaoguo.springboot.entity.SysRole;
+import java.util.*;
 
 /**
  * Description: 管理后台登录验证
@@ -53,8 +49,8 @@ public class AuthenticationService {
             if (ShiroConstants.IS_ACTIVITY_NO.equals(baseUser.getIs_activity())) {
                 throw new DisabledAccountException("当前登录账号已被禁用");
             }
-            if (StringUtil.isNoneBlank(auth.getPassword())) {
-                String passwordMD5 = MD5Encrypt.MD5Encode(auth.getPassword());
+            if (StringUtils.isNoneBlank(auth.getPassword())) {
+                String passwordMD5 = DigestUtil.md5Hex(auth.getPassword());
                 // 验证密码是否正确
                 if (baseUser.getPassword().equals(passwordMD5)) {
                     // 验证成功登录返回员工信息
@@ -79,7 +75,7 @@ public class AuthenticationService {
         List<Map<String, Object>> rolesListMap = baseDao.queryForList("SELECT r.`code` FROM sys_admin a LEFT JOIN sys_admin_role r ON a.id = r.admin_id where a.account = ?", currentUsername);
         Set<String> rolesSet = new HashSet<String>(rolesListMap.size());
         for (Map<String, Object> rolesMap : rolesListMap) {
-            rolesSet.add(ConvertUtil.obj2Str(rolesMap.get("code")));
+            rolesSet.add(Convert.toStr(rolesMap.get("code")));
         }
         return rolesSet;
     }

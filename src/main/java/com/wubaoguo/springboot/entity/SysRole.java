@@ -1,22 +1,22 @@
 package com.wubaoguo.springboot.entity;
 
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.IdUtil;
+import com.wubaoguo.springboot.dao.jdbc.bean.BaseBean;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.jdbc.core.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-import org.springframework.jdbc.core.RowMapper;
-import org.wustrive.java.common.util.ConvertUtil;
-import org.wustrive.java.common.util.StringUtil;
-import org.wustrive.java.dao.jdbc.bean.BaseBean;
-
 /**
  * 管理员角色
  */
 @SuppressWarnings("unchecked")
-public class SysRole implements BaseBean{
+public class SysRole implements BaseBean {
 
 	public final static Map<String, String> KEYS = new HashMap<String, String>();
 	private Map<String, Object> BEAN_VALUES = null;
@@ -131,7 +131,7 @@ public class SysRole implements BaseBean{
 			return name;
 		}
 		/**
-		 * @param  the name to name 角色名称 set
+		 * @param  name to name 角色名称 set
 		 */
 		public SysRole setName(String name) {
 			this.name = name;
@@ -146,7 +146,7 @@ public class SysRole implements BaseBean{
 			return code;
 		}
 		/**
-		 * @param  the code to code 角色编码 set
+		 * @param  code to code 角色编码 set
 		 */
 		public SysRole setCode(String code) {
 			this.code = code;
@@ -161,7 +161,7 @@ public class SysRole implements BaseBean{
 			return is_activity;
 		}
 		/**
-		 * @param  the is_activity to is_activity 角色活动状态 1启用2停用 set
+		 * @param  is_activity to is_activity 角色活动状态 1启用2停用 set
 		 */
 		public SysRole setIs_activity(Integer is_activity) {
 			this.is_activity = is_activity;
@@ -176,7 +176,7 @@ public class SysRole implements BaseBean{
 			return sort;
 		}
 		/**
-		 * @param  the sort to sort 排序 set
+		 * @param  sort to sort 排序 set
 		 */
 		public SysRole setSort(Integer sort) {
 			this.sort = sort;
@@ -265,7 +265,7 @@ public class SysRole implements BaseBean{
 		@Override
 		public SysRole insert() {
 			if (StringUtils.isBlank(id)) {
-				this.setId(StringUtil.getUUID());
+				this.setId(IdUtil.randomUUID());
 			}
 			dao.execute(getInsertSql(),BEAN_VALUES);
 			return this;
@@ -319,20 +319,20 @@ public class SysRole implements BaseBean{
 			public SysRole mapRow(ResultSet rs, int rownum) throws SQLException {
 				SysRole bean = new SysRole();
 				Object id = rs.getObject("id");
-				bean.setId(ConvertUtil.obj2Str(id));
+				bean.setId(Convert.toStr(id));
 				bean.BEAN_VALUES.put("id",id);
 				Object obj = null;
 					obj = rs.getObject("name");
-					bean.setName(ConvertUtil.obj2Str(obj));
+					bean.setName(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("name",obj);
 					obj = rs.getObject("code");
-					bean.setCode(ConvertUtil.obj2Str(obj));
+					bean.setCode(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("code",obj);
 						obj = rs.getInt("is_activity");
-					bean.setIs_activity(ConvertUtil.obj2Integer(obj));
+					bean.setIs_activity(Convert.toInt(obj));
 				bean.BEAN_VALUES.put("is_activity",obj);
 						obj = rs.getObject("sort");
-					bean.setSort(ConvertUtil.obj2Integer(obj));
+					bean.setSort(Convert.toInt(obj));
 				bean.BEAN_VALUES.put("sort",obj);
 				return bean;
 			}

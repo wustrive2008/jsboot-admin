@@ -1,22 +1,22 @@
 package com.wubaoguo.springboot.entity;
 
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.IdUtil;
+import com.wubaoguo.springboot.dao.jdbc.bean.BaseBean;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.jdbc.core.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-import org.springframework.jdbc.core.RowMapper;
-import org.wustrive.java.common.util.ConvertUtil;
-import org.wustrive.java.common.util.StringUtil;
-import org.wustrive.java.dao.jdbc.bean.BaseBean;
-
 /**
  * 
  */
 @SuppressWarnings("unchecked")
-public class SysConfig implements BaseBean{
+public class SysConfig implements BaseBean {
 
 	/**
 	 * 
@@ -125,7 +125,7 @@ public class SysConfig implements BaseBean{
 			return item_key;
 		}
 		/**
-		 * @param  the item_key to item_key 系统配置项key值 set
+		 * @param  item_key to item_key 系统配置项key值 set
 		 */
 		public SysConfig setItem_key(String item_key) {
 			this.item_key = item_key;
@@ -140,7 +140,7 @@ public class SysConfig implements BaseBean{
 			return item_value;
 		}
 		/**
-		 * @param  the item_value to item_value 配置开启值 Y开启 N关闭 set
+		 * @param  item_value to item_value 配置开启值 Y开启 N关闭 set
 		 */
 		public SysConfig setItem_value(String item_value) {
 			this.item_value = item_value;
@@ -155,7 +155,7 @@ public class SysConfig implements BaseBean{
 			return sys_damin_id;
 		}
 		/**
-		 * @param  the sys_damin_id to sys_damin_id 管理员主键 set
+		 * @param  sys_damin_id to sys_damin_id 管理员主键 set
 		 */
 		public SysConfig setSys_damin_id(String sys_damin_id) {
 			this.sys_damin_id = sys_damin_id;
@@ -238,7 +238,7 @@ public class SysConfig implements BaseBean{
 		@Override
 		public SysConfig insert() {
 			if (StringUtils.isBlank(id)) {
-				this.setId(StringUtil.getUUID());
+				this.setId(IdUtil.randomUUID());
 			}
 			dao.execute(getInsertSql(),BEAN_VALUES);
 			return this;
@@ -292,17 +292,17 @@ public class SysConfig implements BaseBean{
 			public SysConfig mapRow(ResultSet rs, int rownum) throws SQLException {
 				SysConfig bean = new SysConfig();
 				Object id = rs.getObject("id");
-				bean.setId(ConvertUtil.obj2Str(id));
+				bean.setId(Convert.toStr(id));
 				bean.BEAN_VALUES.put("id",id);
 				Object obj = null;
 					obj = rs.getObject("item_key");
-					bean.setItem_key(ConvertUtil.obj2Str(obj));
+					bean.setItem_key(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("item_key",obj);
 					obj = rs.getObject("item_value");
-					bean.setItem_value(ConvertUtil.obj2Str(obj));
+					bean.setItem_value(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("item_value",obj);
 					obj = rs.getObject("sys_damin_id");
-					bean.setSys_damin_id(ConvertUtil.obj2Str(obj));
+					bean.setSys_damin_id(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("sys_damin_id",obj);
 				return bean;
 			}

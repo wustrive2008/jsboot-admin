@@ -1,22 +1,22 @@
 package com.wubaoguo.springboot.entity;
 
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.IdUtil;
+import com.wubaoguo.springboot.dao.jdbc.bean.BaseBean;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.jdbc.core.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-import org.springframework.jdbc.core.RowMapper;
-import org.wustrive.java.common.util.ConvertUtil;
-import org.wustrive.java.common.util.StringUtil;
-import org.wustrive.java.dao.jdbc.bean.BaseBean;
-
 /**
  * 管理员角色
  */
 @SuppressWarnings("unchecked")
-public class SysAdminRole implements BaseBean{
+public class SysAdminRole implements BaseBean {
 
 	/**
 	 * 
@@ -115,7 +115,7 @@ public class SysAdminRole implements BaseBean{
 			return admin_id;
 		}
 		/**
-		 * @param  the admin_id to admin_id  set
+		 * @param  admin_id to admin_id  set
 		 */
 		public SysAdminRole setAdmin_id(String admin_id) {
 			this.admin_id = admin_id;
@@ -130,7 +130,7 @@ public class SysAdminRole implements BaseBean{
 			return code;
 		}
 		/**
-		 * @param  the code to code 角色编码 set
+		 * @param  code to code 角色编码 set
 		 */
 		public SysAdminRole setCode(String code) {
 			this.code = code;
@@ -207,7 +207,7 @@ public class SysAdminRole implements BaseBean{
 		@Override
 		public SysAdminRole insert() {
 			if (StringUtils.isBlank(id)) {
-				this.setId(StringUtil.getUUID());
+				this.setId(IdUtil.randomUUID());
 			}
 			dao.execute(getInsertSql(),BEAN_VALUES);
 			return this;
@@ -261,14 +261,14 @@ public class SysAdminRole implements BaseBean{
 			public SysAdminRole mapRow(ResultSet rs, int rownum) throws SQLException {
 				SysAdminRole bean = new SysAdminRole();
 				Object id = rs.getObject("id");
-				bean.setId(ConvertUtil.obj2Str(id));
+				bean.setId(Convert.toStr(id));
 				bean.BEAN_VALUES.put("id",id);
 				Object obj = null;
 					obj = rs.getObject("admin_id");
-					bean.setAdmin_id(ConvertUtil.obj2Str(obj));
+					bean.setAdmin_id(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("admin_id",obj);
 					obj = rs.getObject("code");
-					bean.setCode(ConvertUtil.obj2Str(obj));
+					bean.setCode(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("code",obj);
 				return bean;
 			}

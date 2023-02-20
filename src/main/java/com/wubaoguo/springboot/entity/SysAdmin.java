@@ -1,22 +1,22 @@
 package com.wubaoguo.springboot.entity;
 
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.IdUtil;
+import com.wubaoguo.springboot.dao.jdbc.bean.BaseBean;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.jdbc.core.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-import org.springframework.jdbc.core.RowMapper;
-import org.wustrive.java.common.util.ConvertUtil;
-import org.wustrive.java.common.util.StringUtil;
-import org.wustrive.java.dao.jdbc.bean.BaseBean;
-
 /**
  * 后台管理员表
  */
 @SuppressWarnings("unchecked")
-public class SysAdmin implements BaseBean{
+public class SysAdmin implements BaseBean {
 
 	/**
 	 * 
@@ -155,7 +155,7 @@ public class SysAdmin implements BaseBean{
 			return name;
 		}
 		/**
-		 * @param  the name to name 管理员名称 set
+		 * @param  name to name 管理员名称 set
 		 */
 		public SysAdmin setName(String name) {
 			this.name = name;
@@ -170,7 +170,7 @@ public class SysAdmin implements BaseBean{
 			return phone_number;
 		}
 		/**
-		 * @param  the phone_number to phone_number 手机号码 set
+		 * @param  phone_number to phone_number 手机号码 set
 		 */
 		public SysAdmin setPhone_number(String phone_number) {
 			this.phone_number = phone_number;
@@ -185,7 +185,7 @@ public class SysAdmin implements BaseBean{
 			return account;
 		}
 		/**
-		 * @param  the account to account 管理员帐号 set
+		 * @param  account to account 管理员帐号 set
 		 */
 		public SysAdmin setAccount(String account) {
 			this.account = account;
@@ -200,7 +200,7 @@ public class SysAdmin implements BaseBean{
 			return password;
 		}
 		/**
-		 * @param  the password to password 管理员登录密码，MD5加密串 set
+		 * @param  password to password 管理员登录密码，MD5加密串 set
 		 */
 		public SysAdmin setPassword(String password) {
 			this.password = password;
@@ -215,7 +215,7 @@ public class SysAdmin implements BaseBean{
 			return is_activity;
 		}
 		/**
-		 * @param  the is_activity to is_activity 1启用，2作废 set
+		 * @param  is_activity to is_activity 1启用，2作废 set
 		 */
 		public SysAdmin setIs_activity(Integer is_activity) {
 			this.is_activity = is_activity;
@@ -230,7 +230,7 @@ public class SysAdmin implements BaseBean{
 			return add_time;
 		}
 		/**
-		 * @param  the add_time to add_time 添加时间 set
+		 * @param  add_time to add_time 添加时间 set
 		 */
 		public SysAdmin setAdd_time(Long add_time) {
 			this.add_time = add_time;
@@ -331,7 +331,7 @@ public class SysAdmin implements BaseBean{
 		@Override
 		public SysAdmin insert() {
 			if (StringUtils.isBlank(id)) {
-				this.setId(StringUtil.getUUID());
+				this.setId(IdUtil.randomUUID());
 			}
 			dao.execute(getInsertSql(),BEAN_VALUES);
 			return this;
@@ -385,26 +385,26 @@ public class SysAdmin implements BaseBean{
 			public SysAdmin mapRow(ResultSet rs, int rownum) throws SQLException {
 				SysAdmin bean = new SysAdmin();
 				Object id = rs.getObject("id");
-				bean.setId(ConvertUtil.obj2Str(id));
+				bean.setId(Convert.toStr(id));
 				bean.BEAN_VALUES.put("id",id);
 				Object obj = null;
 					obj = rs.getObject("name");
-					bean.setName(ConvertUtil.obj2Str(obj));
+					bean.setName(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("name",obj);
 					obj = rs.getObject("phone_number");
-					bean.setPhone_number(ConvertUtil.obj2Str(obj));
+					bean.setPhone_number(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("phone_number",obj);
 					obj = rs.getObject("account");
-					bean.setAccount(ConvertUtil.obj2Str(obj));
+					bean.setAccount(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("account",obj);
 					obj = rs.getObject("password");
-					bean.setPassword(ConvertUtil.obj2Str(obj));
+					bean.setPassword(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("password",obj);
 						obj = rs.getInt("is_activity");
-					bean.setIs_activity(ConvertUtil.obj2Integer(obj));
+					bean.setIs_activity(Convert.toInt(obj));
 				bean.BEAN_VALUES.put("is_activity",obj);
 					obj = rs.getObject("add_time");
-					bean.setAdd_time(ConvertUtil.obj2Long(obj));
+					bean.setAdd_time(Convert.toLong(obj));
 				bean.BEAN_VALUES.put("add_time",obj);
 				return bean;
 			}

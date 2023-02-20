@@ -1,6 +1,8 @@
 package com.wubaoguo.springboot.manage.controller;
 
 import com.wubaoguo.springboot.constant.ShiroConstants;
+import com.wubaoguo.springboot.core.bean.CurrentUser;
+import com.wubaoguo.springboot.core.request.ViewResult;
 import com.wubaoguo.springboot.manage.service.ManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,9 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.wustrive.java.core.bean.CurrentUser;
-import org.wustrive.java.core.exception.BusinessException;
-import org.wustrive.java.core.request.ViewResult;
+
 
 /**
  * Description: 主页功能controller

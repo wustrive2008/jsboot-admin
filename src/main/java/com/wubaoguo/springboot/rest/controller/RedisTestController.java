@@ -1,5 +1,6 @@
 package com.wubaoguo.springboot.rest.controller;
 
+import com.wubaoguo.springboot.core.request.ViewResult;
 import com.wubaoguo.springboot.redis.StringRedisCache;
 import com.wubaoguo.springboot.rest.service.RedisTestService;
 import io.swagger.annotations.ApiOperation;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.wustrive.java.core.request.ViewResult;
 
 @CacheConfig(cacheNames = "user")
 @RestController

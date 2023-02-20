@@ -1,5 +1,7 @@
 package com.wubaoguo.springboot.rest.service;
 
+import com.wubaoguo.springboot.core.request.ViewResult;
+import com.wubaoguo.springboot.dao.jdbc.dao.BaseDao;
 import com.wubaoguo.springboot.entity.SysAdmin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.klock.annotation.Klock;
@@ -7,8 +9,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-import org.wustrive.java.core.request.ViewResult;
-import org.wustrive.java.dao.jdbc.dao.BaseDao;
 
 import java.util.List;
 import java.util.Map;

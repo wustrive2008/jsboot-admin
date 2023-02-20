@@ -1,8 +1,8 @@
 package com.wubaoguo.springboot.redis;
 
+import com.wubaoguo.springboot.common.redis.util.AbstractRedisManagerSupport;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.wustrive.java.common.redis.util.AbstractRedisManagerSupport;
 
 @Component
 public class JwtSubjectCache extends AbstractRedisManagerSupport {

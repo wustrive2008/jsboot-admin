@@ -1,23 +1,22 @@
 package com.wubaoguo.springboot.manage.controller;
 
 
-import java.util.Map;
-
-import com.wubaoguo.springboot.manage.controller.commond.ResourceCommond;
+import cn.hutool.core.convert.Convert;
+import com.wubaoguo.springboot.constant.ShiroConstants;
+import com.wubaoguo.springboot.core.request.ViewResult;
+import com.wubaoguo.springboot.entity.SysAdmin;
+import com.wubaoguo.springboot.entity.SysResources;
+import com.wubaoguo.springboot.entity.SysRole;
 import com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond.QueryCommondSession;
+import com.wubaoguo.springboot.manage.controller.commond.ResourceCommond;
+import com.wubaoguo.springboot.manage.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.wustrive.java.common.util.ConvertUtil;
-import org.wustrive.java.core.request.ViewResult;
 
-import com.wubaoguo.springboot.constant.ShiroConstants;
-import com.wubaoguo.springboot.entity.SysAdmin;
-import com.wubaoguo.springboot.entity.SysResources;
-import com.wubaoguo.springboot.entity.SysRole;
-import com.wubaoguo.springboot.manage.service.ResourceService;
+import java.util.Map;
 
 /**
  * Description: 系统管理相关模块
@@ -169,7 +168,7 @@ public class ResourceController {
     public String getRoleForm(@PathVariable("id") String id, ModelMap map) {
         Map<String, Object> roleMap = resourceService.getSysRole(id);
         map.put("data", roleMap);
-        map.put("selectList", resourceService.findSysRoleResourcesByRoleCode(ConvertUtil.obj2Str(roleMap.get("code"))));
+        map.put("selectList", resourceService.findSysRoleResourcesByRoleCode(Convert.toStr(roleMap.get("code"))));
         map.put("sysResourcesList", resourceService.findSysResourceZtree());
         return "/manage/resource/roleform";
     }

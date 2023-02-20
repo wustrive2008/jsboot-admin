@@ -1,6 +1,7 @@
 package com.wubaoguo.springboot.rest.controller;
 
 import com.google.common.collect.ImmutableMap;
+import com.wubaoguo.springboot.core.request.ViewResult;
 import com.wubaoguo.springboot.dao.SysAdminMapper;
 import com.wubaoguo.springboot.entity.SysAdmin;
 import com.wubaoguo.springboot.rest.service.MyBatisTestService;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.wustrive.java.core.request.ViewResult;
 
 /**
  * Description:mybatis示例

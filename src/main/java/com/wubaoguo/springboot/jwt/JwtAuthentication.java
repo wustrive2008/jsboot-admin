@@ -1,8 +1,8 @@
 package com.wubaoguo.springboot.jwt;
 
-import org.wustrive.java.core.bean.AuthBean;
 
 import com.nimbusds.jose.JWSObject;
+import com.wubaoguo.springboot.core.bean.AuthBean;
 import com.wubaoguo.springboot.util.JWTUtil;
 
 /**
@@ -14,7 +14,7 @@ import com.wubaoguo.springboot.util.JWTUtil;
  * @date: 2018/7/21 9:01
  * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
-public class JwtAuthentication extends AuthBean{
+public class JwtAuthentication extends AuthBean {
     
     private String deviceId;  //设备id
     

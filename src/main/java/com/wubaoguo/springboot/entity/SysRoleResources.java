@@ -1,22 +1,22 @@
 package com.wubaoguo.springboot.entity;
 
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.IdUtil;
+import com.wubaoguo.springboot.dao.jdbc.bean.BaseBean;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.jdbc.core.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-import org.springframework.jdbc.core.RowMapper;
-import org.wustrive.java.common.util.ConvertUtil;
-import org.wustrive.java.common.util.StringUtil;
-import org.wustrive.java.dao.jdbc.bean.BaseBean;
-
 /**
  * 角色资源管理表
  */
 @SuppressWarnings("unchecked")
-public class SysRoleResources implements BaseBean{
+public class SysRoleResources implements BaseBean {
 
 	/**
 	 * 
@@ -115,7 +115,7 @@ public class SysRoleResources implements BaseBean{
 			return role_code;
 		}
 		/**
-		 * @param  the role_code to role_code 角色编码 set
+		 * @param  role_code to role_code 角色编码 set
 		 */
 		public SysRoleResources setRole_code(String role_code) {
 			this.role_code = role_code;
@@ -130,7 +130,7 @@ public class SysRoleResources implements BaseBean{
 			return resources_id;
 		}
 		/**
-		 * @param  the resources_id to resources_id 资源主键 set
+		 * @param  resources_id to resources_id 资源主键 set
 		 */
 		public SysRoleResources setResources_id(String resources_id) {
 			this.resources_id = resources_id;
@@ -207,7 +207,7 @@ public class SysRoleResources implements BaseBean{
 		@Override
 		public SysRoleResources insert() {
 			if (StringUtils.isBlank(id)) {
-				this.setId(StringUtil.getUUID());
+				this.setId(IdUtil.randomUUID());
 			}
 			dao.execute(getInsertSql(),BEAN_VALUES);
 			return this;
@@ -261,14 +261,14 @@ public class SysRoleResources implements BaseBean{
 			public SysRoleResources mapRow(ResultSet rs, int rownum) throws SQLException {
 				SysRoleResources bean = new SysRoleResources();
 				Object id = rs.getObject("id");
-				bean.setId(ConvertUtil.obj2Str(id));
+				bean.setId(Convert.toStr(id));
 				bean.BEAN_VALUES.put("id",id);
 				Object obj = null;
 					obj = rs.getObject("role_code");
-					bean.setRole_code(ConvertUtil.obj2Str(obj));
+					bean.setRole_code(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("role_code",obj);
 					obj = rs.getObject("resources_id");
-					bean.setResources_id(ConvertUtil.obj2Str(obj));
+					bean.setResources_id(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("resources_id",obj);
 				return bean;
 			}

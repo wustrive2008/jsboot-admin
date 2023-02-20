@@ -1,22 +1,20 @@
 package com.wubaoguo.springboot.redis;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import com.google.common.collect.ImmutableMap;
+import com.wubaoguo.springboot.common.redis.support.RedisCacheSupport;
+import com.wubaoguo.springboot.dao.jdbc.dao.QuerySupport;
+import com.wubaoguo.springboot.entity.SysDictionary;
+import jodd.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.wustrive.java.common.redis.support.RedisCacheSupport;
-import org.wustrive.java.common.util.StringUtil;
-import org.wustrive.java.dao.jdbc.dao.QuerySupport;
-
 import redis.clients.jedis.Jedis;
 
-import com.google.common.collect.ImmutableMap;
-import com.wubaoguo.springboot.entity.SysDictionary;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Component
 public class SysDictionaryCache extends RedisCacheSupport {

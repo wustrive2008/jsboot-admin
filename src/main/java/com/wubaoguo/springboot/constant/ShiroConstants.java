@@ -1,11 +1,12 @@
 package com.wubaoguo.springboot.constant;
 
-import java.util.List;
 
+import com.wubaoguo.springboot.core.bean.CurrentRole;
+import com.wubaoguo.springboot.core.bean.CurrentUser;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
-import org.wustrive.java.core.bean.CurrentRole;
-import org.wustrive.java.core.bean.CurrentUser;
+
+import java.util.List;
 
 /**
  * Description: shiro相关常量

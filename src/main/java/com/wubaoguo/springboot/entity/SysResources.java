@@ -1,5 +1,11 @@
 package com.wubaoguo.springboot.entity;
 
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.IdUtil;
+import com.wubaoguo.springboot.dao.jdbc.bean.BaseBean;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.jdbc.core.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -7,17 +13,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-import org.springframework.jdbc.core.RowMapper;
-import org.wustrive.java.common.util.ConvertUtil;
-import org.wustrive.java.common.util.StringUtil;
-import org.wustrive.java.dao.jdbc.bean.BaseBean;
-
 /**
  * 管理员资源表
  */
 @SuppressWarnings("unchecked")
-public class SysResources implements BaseBean{
+public class SysResources implements BaseBean {
 
 	/**
 	 * 
@@ -169,7 +169,7 @@ public class SysResources implements BaseBean{
 			return menu_name;
 		}
 		/**
-		 * @param  the menu_name to menu_name 菜单名称，菜单显示名称 set
+		 * @param  menu_name to menu_name 菜单名称，菜单显示名称 set
 		 */
 		public SysResources setMenu_name(String menu_name) {
 			this.menu_name = menu_name;
@@ -184,7 +184,7 @@ public class SysResources implements BaseBean{
 			return uri;
 		}
 		/**
-		 * @param  the uri to uri 菜单uri地址 set
+		 * @param  uri to uri 菜单uri地址 set
 		 */
 		public SysResources setUri(String uri) {
 			this.uri = uri;
@@ -199,7 +199,7 @@ public class SysResources implements BaseBean{
 			return is_activity;
 		}
 		/**
-		 * @param  the is_activity to is_activity 活动状态 1 活动 2 作废 set
+		 * @param  is_activity to is_activity 活动状态 1 活动 2 作废 set
 		 */
 		public SysResources setIs_activity(Integer is_activity) {
 			this.is_activity = is_activity;
@@ -214,7 +214,7 @@ public class SysResources implements BaseBean{
 			return group_id;
 		}
 		/**
-		 * @param  the group_id to group_id 资源组主键 set
+		 * @param  group_id to group_id 资源组主键 set
 		 */
 		public SysResources setGroup_id(String group_id) {
 			this.group_id = group_id;
@@ -229,7 +229,7 @@ public class SysResources implements BaseBean{
 			return sort;
 		}
 		/**
-		 * @param  the sort to sort 排序 set
+		 * @param  sort to sort 排序 set
 		 */
 		public SysResources setSort(Integer sort) {
 			this.sort = sort;
@@ -244,7 +244,7 @@ public class SysResources implements BaseBean{
 			return icon;
 		}
 		/**
-		 * @param  the icon to icon 显示图标 set
+		 * @param  icon to icon 显示图标 set
 		 */
 		public SysResources setIcon(String icon) {
 			this.icon = icon;
@@ -259,7 +259,7 @@ public class SysResources implements BaseBean{
 			return code;
 		}
 		/**
-		 * @param  the code to code 资源编码 set
+		 * @param  code to code 资源编码 set
 		 */
 		public SysResources setCode(String code) {
 			this.code = code;
@@ -366,7 +366,7 @@ public class SysResources implements BaseBean{
 		@Override
 		public SysResources insert() {
 			if (StringUtils.isBlank(id)) {
-				this.setId(StringUtil.getUUID());
+				this.setId(IdUtil.randomUUID());
 			}
 			dao.execute(getInsertSql(),BEAN_VALUES);
 			return this;
@@ -420,29 +420,29 @@ public class SysResources implements BaseBean{
 			public SysResources mapRow(ResultSet rs, int rownum) throws SQLException {
 				SysResources bean = new SysResources();
 				Object id = rs.getObject("id");
-				bean.setId(ConvertUtil.obj2Str(id));
+				bean.setId(Convert.toStr(id));
 				bean.BEAN_VALUES.put("id",id);
 				Object obj = null;
 					obj = rs.getObject("menu_name");
-					bean.setMenu_name(ConvertUtil.obj2Str(obj));
+					bean.setMenu_name(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("menu_name",obj);
 					obj = rs.getObject("uri");
-					bean.setUri(ConvertUtil.obj2Str(obj));
+					bean.setUri(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("uri",obj);
 						obj = rs.getInt("is_activity");
-					bean.setIs_activity(ConvertUtil.obj2Integer(obj));
+					bean.setIs_activity(Convert.toInt(obj));
 				bean.BEAN_VALUES.put("is_activity",obj);
 					obj = rs.getObject("group_id");
-					bean.setGroup_id(ConvertUtil.obj2Str(obj));
+					bean.setGroup_id(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("group_id",obj);
 						obj = rs.getObject("sort");
-					bean.setSort(ConvertUtil.obj2Integer(obj));
+					bean.setSort(Convert.toInt(obj));
 				bean.BEAN_VALUES.put("sort",obj);
 					obj = rs.getObject("icon");
-					bean.setIcon(ConvertUtil.obj2Str(obj));
+					bean.setIcon(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("icon",obj);
 					obj = rs.getObject("code");
-					bean.setCode(ConvertUtil.obj2Str(obj));
+					bean.setCode(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("code",obj);
 				return bean;
 			}

@@ -1,17 +1,13 @@
 package com.wubaoguo.springboot.shiro;
 
-import java.util.List;
-import java.util.Set;
-
+import com.wubaoguo.springboot.constant.ShiroConstants;
+import com.wubaoguo.springboot.core.bean.AuthBean;
+import com.wubaoguo.springboot.core.bean.CurrentRole;
+import com.wubaoguo.springboot.core.exception.LoginSecurityException;
+import com.wubaoguo.springboot.manage.service.AuthenticationService;
+import jodd.util.StringUtil;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AccountException;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.ConcurrentAccessException;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -19,13 +15,9 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.wustrive.java.common.util.StringUtil;
-import org.wustrive.java.core.bean.AuthBean;
-import org.wustrive.java.core.bean.CurrentRole;
-import org.wustrive.java.core.exception.LoginSecurityException;
 
-import com.wubaoguo.springboot.constant.ShiroConstants;
-import com.wubaoguo.springboot.manage.service.AuthenticationService;
+import java.util.List;
+import java.util.Set;
 
 /**
  *

@@ -1,12 +1,9 @@
 package com.wubaoguo.springboot.conf;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import javax.servlet.DispatcherType;
-import javax.servlet.Filter;
-
+import com.wubaoguo.springboot.filter.AjaxFormAuthenticationFilter;
 import com.wubaoguo.springboot.filter.PermissionFilter;
+import com.wubaoguo.springboot.shiro.MyShiroRealm;
+import jodd.util.StringUtil;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -25,10 +22,11 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.DelegatingFilterProxy;
-import org.wustrive.java.common.util.StringUtil;
 
-import com.wubaoguo.springboot.filter.AjaxFormAuthenticationFilter;
-import com.wubaoguo.springboot.shiro.MyShiroRealm;
+import javax.servlet.DispatcherType;
+import javax.servlet.Filter;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Description: shiro配置

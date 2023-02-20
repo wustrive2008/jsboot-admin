@@ -1,7 +1,9 @@
 package com.wubaoguo.springboot.filter;
 
 
-import java.io.IOException;
+import com.google.common.collect.ImmutableSet;
+import com.wubaoguo.springboot.core.filter.ThreadContentFilter;
+import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -9,11 +11,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang.StringUtils;
-import org.wustrive.java.core.filter.ThreadContentFilter;
-
-import com.google.common.collect.ImmutableSet;
+import java.io.IOException;
 
 /**
  * Description: ThreadLocal 解决线程变量副本问题

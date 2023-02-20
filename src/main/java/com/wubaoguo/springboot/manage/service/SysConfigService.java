@@ -1,17 +1,16 @@
 package com.wubaoguo.springboot.manage.service;
 
+import cn.hutool.core.convert.Convert;
+import com.wubaoguo.springboot.constant.ShiroConstants;
+import com.wubaoguo.springboot.dao.jdbc.dao.BaseDao;
+import com.wubaoguo.springboot.entity.SysConfig;
+import jodd.util.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.wustrive.java.common.util.ConvertUtil;
-import org.wustrive.java.common.util.StringUtil;
-import org.wustrive.java.dao.jdbc.dao.BaseDao;
-
-import com.wubaoguo.springboot.constant.ShiroConstants;
-import com.wubaoguo.springboot.entity.SysConfig;
 
 @Service
 public class SysConfigService {
@@ -37,7 +36,7 @@ public class SysConfigService {
         if (rList != null && rList.size() > 0) {
             rMap = new HashMap<>(rList.size());
             for (Map<String, Object> map : rList) {
-                rMap.put(ConvertUtil.obj2StrBlank(map.get("item_key")), map.get("item_value"));
+                rMap.put(Convert.toStr(map.get("item_key")), map.get("item_value"));
             }
         }
         return rMap;

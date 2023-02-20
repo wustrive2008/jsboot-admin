@@ -1,28 +1,23 @@
 package com.wubaoguo.springboot.manage.service;
 
-import java.util.List;
-import java.util.Map;
-
+import cn.hutool.core.convert.Convert;
+import cn.hutool.crypto.digest.DigestUtil;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.wubaoguo.springboot.constant.ShiroConstants;
+import com.wubaoguo.springboot.core.request.BaseState;
+import com.wubaoguo.springboot.core.request.StateMap;
+import com.wubaoguo.springboot.dao.jdbc.dao.BaseDao;
+import com.wubaoguo.springboot.dao.jdbc.dao.QuerySupport;
+import com.wubaoguo.springboot.entity.*;
 import com.wubaoguo.springboot.manage.controller.commond.ResourceCommond;
+import jodd.util.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.wustrive.java.common.secret.MD5Encrypt;
-import org.wustrive.java.common.util.ConvertUtil;
-import org.wustrive.java.common.util.StringUtil;
-import org.wustrive.java.core.request.BaseState;
-import org.wustrive.java.core.request.StateMap;
-import org.wustrive.java.dao.jdbc.dao.BaseDao;
 
-import com.google.common.collect.ImmutableMap;
-import com.wubaoguo.springboot.constant.ShiroConstants;
-import com.wubaoguo.springboot.entity.SysAdmin;
-import com.wubaoguo.springboot.entity.SysAdminRole;
-import com.wubaoguo.springboot.entity.SysResources;
-import com.wubaoguo.springboot.entity.SysRole;
-import com.wubaoguo.springboot.entity.SysRoleResources;
-import org.wustrive.java.dao.jdbc.dao.QuerySupport;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class ResourceService {
@@ -77,7 +72,7 @@ public class ResourceService {
     public List<Map<String, Object>> findSysResourceTree(String roleCode) {
         List<Map<String, Object>> rList = findSysResource("root");
         for (Map<String, Object> map : rList) {
-            String resourceId = ConvertUtil.obj2Str(map.get("id"));
+            String resourceId = Convert.toStr(map.get("id"));
             map.put("isChoice", isBindResource(roleCode, resourceId));
             List<Map<String, Object>> rListB = findSysResource(resourceId);
             map.put("children", rListB);
@@ -89,7 +84,7 @@ public class ResourceService {
     }
 
     private boolean isBindResource(String roleCode, String resourceId) {
-        if (StringUtil.isAnyBlank(roleCode, resourceId)) {
+        if (StringUtils.isAnyBlank(roleCode, resourceId)) {
             return false;
         }
         Integer count = baseDao.queryForInteger("select count(*) from sys_role_resources where role_code = :role_code and resources_id = :resources_id", ImmutableMap.of("role_code", roleCode, "resources_id", resourceId));
@@ -188,7 +183,7 @@ public class ResourceService {
     public List<Map<String, Object>> findSysAdmin() {
         List<Map<String, Object>> rList = baseDao.queryForListMap("select * from sys_admin order by add_time desc", null);
         for (Map<String, Object> map : rList) {
-            map.put("roles", findSysAdminRole(ConvertUtil.obj2Str(map.get("id"))));
+            map.put("roles", findSysAdminRole(Convert.toStr(map.get("id"))));
         }
         return rList;
     }
@@ -205,7 +200,7 @@ public class ResourceService {
             if (dbSysAdmin != null && StringUtil.isNotBlank(dbSysAdmin.getId())) {
                 return new BaseState(StateMap.S_CLIENT_WARNING, "新增帐号已存在");
             }
-            sysAdmin.setPassword(MD5Encrypt.MD5(sysAdmin.getPassword()));
+            sysAdmin.setPassword(DigestUtil.md5Hex(sysAdmin.getPassword()));
             sysAdmin.setAdd_time(ShiroConstants.currentTimeSecond());
         } else {
             // 删除 该角色以绑定 旧资源数据
@@ -219,7 +214,7 @@ public class ResourceService {
     }
 
     public BaseState doResetAdminPassword(String id, String password) {
-        new SysAdmin(id).setPassword(MD5Encrypt.MD5(password)).update();
+        new SysAdmin(id).setPassword(DigestUtil.md5Hex(password)).update();
         return new BaseState();
     }
 
@@ -275,7 +270,7 @@ public class ResourceService {
         commond.setPager(true);
         List<Map<String, Object>> rList = querySupport.find(sql.toString(), param, commond);
         for (Map<String, Object> map : rList) {
-            map.put("roles", findSysAdminRole(ConvertUtil.obj2Str(map.get("id"))));
+            map.put("roles", findSysAdminRole(Convert.toStr(map.get("id"))));
         }
         return rList;
     }

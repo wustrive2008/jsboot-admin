@@ -1,25 +1,24 @@
 package com.wubaoguo.springboot.manage.service;
 
 
+import cn.hutool.crypto.digest.DigestUtil;
+import com.google.common.collect.ImmutableMap;
+import com.wubaoguo.springboot.constant.ShiroConstants;
+import com.wubaoguo.springboot.core.bean.CurrentRole;
+import com.wubaoguo.springboot.core.request.BaseState;
+import com.wubaoguo.springboot.dao.jdbc.dao.BaseDao;
+import com.wubaoguo.springboot.entity.SysAdmin;
+import com.wubaoguo.springboot.entity.SysResources;
+import com.wubaoguo.springboot.manage.domain.SearchResults;
+import jodd.util.StringUtil;
+import org.apache.shiro.SecurityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.shiro.SecurityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.wustrive.java.common.secret.MD5Encrypt;
-import org.wustrive.java.common.util.StringUtil;
-import org.wustrive.java.core.bean.CurrentRole;
-import org.wustrive.java.core.request.BaseState;
-import org.wustrive.java.dao.jdbc.dao.BaseDao;
-
-import com.google.common.collect.ImmutableMap;
-import com.wubaoguo.springboot.constant.ShiroConstants;
-import com.wubaoguo.springboot.entity.SysAdmin;
-import com.wubaoguo.springboot.entity.SysResources;
-import com.wubaoguo.springboot.manage.domain.SearchResults;
 
 @Service
 public class ManageService {
@@ -116,13 +115,13 @@ public class ManageService {
             return new BaseState(BaseState.S_AUTH_ERROR, "当前登录账号已被禁用");
         }
 
-        String passwordMD5 = MD5Encrypt.MD5Encode(oldpwd);
+        String passwordMD5 = DigestUtil.md5Hex(oldpwd);
         // 验证旧密码是否正确
         if (baseUser.getPassword().equals(passwordMD5)) {
             // 验证成功，在验证新密码
             String sql = "update sys_admin set password=:pwd where account=:account";
             Map<String, String> paramMap = new HashMap<String, String>(2);
-            paramMap.put("pwd", MD5Encrypt.MD5Encode(pwd));
+            paramMap.put("pwd", DigestUtil.md5Hex(pwd));
             paramMap.put("account", account);
             baseDao.execute(sql, paramMap);
             return new BaseState();

@@ -1,7 +1,7 @@
 package com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond;
 
+import com.wubaoguo.springboot.dao.jdbc.BaseCommond;
 import lombok.Data;
-import org.wustrive.java.dao.jdbc.BaseCommond;
 
 /**
  * Description: 缓存条件对象 用户缓存查询条件

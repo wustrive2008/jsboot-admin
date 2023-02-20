@@ -1,22 +1,22 @@
 package com.wubaoguo.springboot.entity;
 
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.IdUtil;
+import com.wubaoguo.springboot.dao.jdbc.bean.BaseBean;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.jdbc.core.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-import org.springframework.jdbc.core.RowMapper;
-import org.wustrive.java.common.util.ConvertUtil;
-import org.wustrive.java.common.util.StringUtil;
-import org.wustrive.java.dao.jdbc.bean.BaseBean;
-
 /**
  * 数据词典
  */
 @SuppressWarnings("unchecked")
-public class SysDictionary implements BaseBean{
+public class SysDictionary implements BaseBean {
 
 	/**
 	 * 
@@ -155,7 +155,7 @@ public class SysDictionary implements BaseBean{
 			return title;
 		}
 		/**
-		 * @param  the title to title 词典标题 set
+		 * @param  title to title 词典标题 set
 		 */
 		public SysDictionary setTitle(String title) {
 			this.title = title;
@@ -170,7 +170,7 @@ public class SysDictionary implements BaseBean{
 			return tag_code;
 		}
 		/**
-		 * @param  the tag_code to tag_code 字典 编码 唯一标识 set
+		 * @param  tag_code to tag_code 字典 编码 唯一标识 set
 		 */
 		public SysDictionary setTag_code(String tag_code) {
 			this.tag_code = tag_code;
@@ -185,7 +185,7 @@ public class SysDictionary implements BaseBean{
 			return description;
 		}
 		/**
-		 * @param  the description to description 描述简介 set
+		 * @param  description to description 描述简介 set
 		 */
 		public SysDictionary setDescription(String description) {
 			this.description = description;
@@ -200,7 +200,7 @@ public class SysDictionary implements BaseBean{
 			return res_code;
 		}
 		/**
-		 * @param  the res_code to res_code 资源组标识 set
+		 * @param  res_code to res_code 资源组标识 set
 		 */
 		public SysDictionary setRes_code(String res_code) {
 			this.res_code = res_code;
@@ -215,7 +215,7 @@ public class SysDictionary implements BaseBean{
 			return content;
 		}
 		/**
-		 * @param  the content to content 字典显示内容 set
+		 * @param  content to content 字典显示内容 set
 		 */
 		public SysDictionary setContent(String content) {
 			this.content = content;
@@ -230,7 +230,7 @@ public class SysDictionary implements BaseBean{
 			return add_time;
 		}
 		/**
-		 * @param  the add_time to add_time 添加时间 set
+		 * @param  add_time to add_time 添加时间 set
 		 */
 		public SysDictionary setAdd_time(Long add_time) {
 			this.add_time = add_time;
@@ -331,7 +331,7 @@ public class SysDictionary implements BaseBean{
 		@Override
 		public SysDictionary insert() {
 			if (StringUtils.isBlank(id)) {
-				this.setId(StringUtil.getUUID());
+				this.setId(IdUtil.randomUUID());
 			}
 			dao.execute(getInsertSql(),BEAN_VALUES);
 			return this;
@@ -385,26 +385,26 @@ public class SysDictionary implements BaseBean{
 			public SysDictionary mapRow(ResultSet rs, int rownum) throws SQLException {
 				SysDictionary bean = new SysDictionary();
 				Object id = rs.getObject("id");
-				bean.setId(ConvertUtil.obj2Str(id));
+				bean.setId(Convert.toStr(id));
 				bean.BEAN_VALUES.put("id",id);
 				Object obj = null;
 					obj = rs.getObject("title");
-					bean.setTitle(ConvertUtil.obj2Str(obj));
+					bean.setTitle(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("title",obj);
 					obj = rs.getObject("tag_code");
-					bean.setTag_code(ConvertUtil.obj2Str(obj));
+					bean.setTag_code(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("tag_code",obj);
 					obj = rs.getObject("description");
-					bean.setDescription(ConvertUtil.obj2Str(obj));
+					bean.setDescription(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("description",obj);
 					obj = rs.getObject("res_code");
-					bean.setRes_code(ConvertUtil.obj2Str(obj));
+					bean.setRes_code(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("res_code",obj);
 					obj = rs.getObject("content");
-					bean.setContent(ConvertUtil.obj2Str(obj));
+					bean.setContent(Convert.toStr(obj));
 				bean.BEAN_VALUES.put("content",obj);
 					obj = rs.getObject("add_time");
-					bean.setAdd_time(ConvertUtil.obj2Long(obj));
+					bean.setAdd_time(Convert.toLong(obj));
 				bean.BEAN_VALUES.put("add_time",obj);
 				return bean;
 			}

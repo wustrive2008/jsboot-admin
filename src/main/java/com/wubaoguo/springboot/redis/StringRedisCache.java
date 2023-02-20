@@ -1,7 +1,7 @@
 package com.wubaoguo.springboot.redis;
 
+import com.wubaoguo.springboot.common.redis.support.RedisCacheSupport;
 import org.springframework.stereotype.Component;
-import org.wustrive.java.common.redis.support.RedisCacheSupport;
 
 @Component
 public class StringRedisCache extends RedisCacheSupport {

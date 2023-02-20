@@ -1,17 +1,16 @@
 package com.wubaoguo.springboot.manage.controller;
 
 
+import com.wubaoguo.springboot.core.request.ViewResult;
+import com.wubaoguo.springboot.entity.SysDictionary;
 import com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond.CondCacheCommond;
 import com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond.QueryCommondSession;
+import com.wubaoguo.springboot.manage.service.SysDictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.wustrive.java.core.request.ViewResult;
-
-import com.wubaoguo.springboot.entity.SysDictionary;
-import com.wubaoguo.springboot.manage.service.SysDictionaryService;
 
 @Controller
 @RequestMapping("/manage/sysdictionary")

@@ -1,26 +1,19 @@
 package com.wubaoguo.springboot.jwt.filter;
 
-import java.io.IOException;
-
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.wustrive.java.common.util.WebUtil;
-import org.wustrive.java.core.exception.LoginSecurityException;
-import org.wustrive.java.core.request.StateMap;
-import org.wustrive.java.core.request.ViewResult;
-
 import com.wubaoguo.springboot.conf.JwtConfig;
+import com.wubaoguo.springboot.core.exception.LoginSecurityException;
+import com.wubaoguo.springboot.core.request.StateMap;
+import com.wubaoguo.springboot.core.request.ViewResult;
 import com.wubaoguo.springboot.jwt.JwtAuthentication;
 import com.wubaoguo.springboot.jwt.JwtAuthorizingRealm;
+import com.wubaoguo.springboot.util.WebUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Description: jwt过滤器

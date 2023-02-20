@@ -1,24 +1,15 @@
 package com.wubaoguo.springboot.util;
 
-import java.text.ParseException;
-import java.util.Date;
-
-import net.minidev.json.JSONObject;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
-import org.wustrive.java.common.util.DateUtil;
-import org.wustrive.java.core.exception.BusinessException;
-
-import com.nimbusds.jose.JOSEException;
-import com.nimbusds.jose.JWSAlgorithm;
-import com.nimbusds.jose.JWSHeader;
-import com.nimbusds.jose.JWSObject;
-import com.nimbusds.jose.JWSSigner;
-import com.nimbusds.jose.KeyLengthException;
-import com.nimbusds.jose.Payload;
+import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
+import com.wubaoguo.springboot.core.exception.BusinessException;
+import net.minidev.json.JSONObject;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
+
+import java.text.ParseException;
+import java.util.Date;
 
 public class JWTUtil {
     
@@ -34,7 +25,6 @@ public class JWTUtil {
      * 
      * @param jwsObject
      * @return
-     * @throws BusinessException
      */
     public static boolean verify(JWSObject jwsObject) {
          try {

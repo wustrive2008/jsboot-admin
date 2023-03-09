@@ -9,7 +9,6 @@ import com.wubaoguo.springboot.dao.jdbc.dao.BaseDao;
 import com.wubaoguo.springboot.dao.jdbc.dao.QuerySupport;
 import com.wubaoguo.springboot.entity.SysDictionary;
 import com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond.CondCacheCommond;
-import com.wubaoguo.springboot.redis.SysDictionaryCache;
 import com.wubaoguo.springboot.util.BeanUtil;
 import jodd.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +24,6 @@ public class SysDictionaryService {
     QuerySupport querySupport;
     @Autowired
     BaseDao baseDao;
-    @Autowired
-    SysDictionaryCache sysDictionaryCache;
 
     /**
      * 查询单个字典内容
@@ -53,7 +50,6 @@ public class SysDictionaryService {
             return new BaseState(StateMap.S_CLIENT_WARNING, "词典编码重复");
         } else {
             sysDictionary.setAdd_time(ShiroConstants.currentTimeSecond());
-            sysDictionaryCache.sync(sysDictionary);
             sysDictionary.insert();
             return new BaseState();
         }
@@ -81,8 +77,6 @@ public class SysDictionaryService {
         // 修改 同步到缓存
         SysDictionary dbSysDictionary = new SysDictionary(id).queryForBean();
         BeanUtil.copyPropertiesIgnoreNull(sysDictionary, dbSysDictionary);
-        sysDictionaryCache.sync(dbSysDictionary);
-
         updateSysDictionary(sysDictionary);
         return value;
     }

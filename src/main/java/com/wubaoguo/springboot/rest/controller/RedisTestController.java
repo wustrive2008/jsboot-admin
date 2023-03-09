@@ -1,7 +1,6 @@
 package com.wubaoguo.springboot.rest.controller;
 
 import com.wubaoguo.springboot.core.request.ViewResult;
-import com.wubaoguo.springboot.redis.StringRedisCache;
 import com.wubaoguo.springboot.rest.service.RedisTestService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,26 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
 @CacheConfig(cacheNames = "user")
 @RestController
 @RequestMapping("/open/redis")
 public class RedisTestController {
 
-    @Autowired
-    private StringRedisCache stringRedisCache;
-
-    @Autowired
+    @Resource
     private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
     RedisTestService redisTestService;
 
-    @ApiOperation(value = "数据存储到redis-外置redis", notes = "将数据存储到redis")
-    @RequestMapping(value = {"put/{key}:{value}"}, method = RequestMethod.GET)
-    public String putValue(@PathVariable String key, @PathVariable String value) {
-        stringRedisCache.addStringToJedis(key, value, -1);
-        return "Success";
-    }
 
     @ApiOperation(value = "数据存储到redis-内置redis", notes = "将数据存储到redis")
     @RequestMapping(value = {"add/{key}:{value}"}, method = RequestMethod.GET)

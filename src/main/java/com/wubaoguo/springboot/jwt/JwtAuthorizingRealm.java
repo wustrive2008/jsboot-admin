@@ -8,22 +8,23 @@ import com.wubaoguo.springboot.core.exception.LoginSecurityException;
 import com.wubaoguo.springboot.core.filter.ThreadContentFilter;
 import com.wubaoguo.springboot.core.request.StateMap;
 import com.wubaoguo.springboot.core.request.ViewResult;
-import com.wubaoguo.springboot.redis.JwtSubjectCache;
 import com.wubaoguo.springboot.rest.service.JwtAuthService;
 import com.wubaoguo.springboot.util.JWTUtil;
 import net.minidev.json.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
 public class JwtAuthorizingRealm {
-    
-    @Autowired
-    private JwtSubjectCache jwtSubjectCache;
+
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
     
     
     @Autowired
@@ -50,7 +51,7 @@ public class JwtAuthorizingRealm {
                 Map<String,Object> res = new HashMap<String,Object>();
                 res.put("Authorization", accessToken);
                 //APP用户缓存 key:userId+authType 用于限制多终端登录
-                jwtSubjectCache.put(auth.getUserId() + auth.getAuthType(), auth.getDeviceId());
+                stringRedisTemplate.opsForValue().set(auth.getUserId() + auth.getAuthType(), auth.getDeviceId());
                 return viewResult.setData(res).success();
             } catch(BusinessException e) {
                 throw new LoginSecurityException(StateMap.S_SERVER_EXCEPTION, "未知错误,请联系管理员");
@@ -119,7 +120,7 @@ public class JwtAuthorizingRealm {
      * @throws BusinessException 
      */
     private boolean isAuthOfDevice(JwtAuthentication auth) throws BusinessException {
-        Object deviceId = jwtSubjectCache.get(auth.getUserId()+auth.getAuthType());
+        Object deviceId = stringRedisTemplate.opsForValue().get(auth.getUserId()+auth.getAuthType());
         if(null != deviceId && deviceId.toString().equals(auth.getDeviceId())){
             return true;
         }

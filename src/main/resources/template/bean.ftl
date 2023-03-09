@@ -8,9 +8,8 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.jdbc.core.RowMapper;
 
-import org.wustrive.java.common.util.ConvertUtil;
-import org.wustrive.java.common.util.StringUtil;
-import org.wustrive.java.dao.jdbc.bean.BaseBean;
+import cn.hutool.core.convert.Convert;
+import com.wubaoguo.springboot.dao.jdbc.bean.BaseBean;
 
 
 /**
@@ -265,13 +264,13 @@ public class ${ClassName} implements BaseBean{
 			public ${ClassName} mapRow(ResultSet rs, int rownum) throws SQLException {
 				${ClassName} bean = new ${ClassName}();
 				Object id = rs.getObject("${PK.COLUMN_NAME?lower_case}");
-				bean.setId(ConvertUtil.obj2Str(id));
+				bean.setId(Convert.toStr(id));
 				bean.BEAN_VALUES.put("${PK.COLUMN_NAME?lower_case}",id);
 				Object obj;
 				<#list columns as column>
 				<#if column.COLUMN_TYPE == "String">
 					obj = rs.getObject("${column.COLUMN_NAME?lower_case}");
-					bean.set${column.COLUMN_NAME?lower_case?cap_first}(ConvertUtil.obj2Str(obj));
+					bean.set${column.COLUMN_NAME?lower_case?cap_first}(Convert.toStr(obj));
 				</#if>
 				<#if column.COLUMN_TYPE == "Integer">
 					<#if column.COLUMN_TYPE_TINYINT == "Integer">
@@ -279,15 +278,15 @@ public class ${ClassName} implements BaseBean{
 					<#else>
 						obj = rs.getObject("${column.COLUMN_NAME?lower_case}");
 					</#if>
-					bean.set${column.COLUMN_NAME?lower_case?cap_first}(ConvertUtil.obj2Integer(obj));
+					bean.set${column.COLUMN_NAME?lower_case?cap_first}(Convert.toInt(obj));
 				</#if>
 				<#if column.COLUMN_TYPE == "Long">
 					obj = rs.getObject("${column.COLUMN_NAME?lower_case}");
-					bean.set${column.COLUMN_NAME?lower_case?cap_first}(ConvertUtil.obj2Long(obj));
+					bean.set${column.COLUMN_NAME?lower_case?cap_first}(Convert.toLong(obj));
 				</#if>
 				<#if column.COLUMN_TYPE == "Double">
 					obj = rs.getObject("${column.COLUMN_NAME?lower_case}");
-					bean.set${column.COLUMN_NAME?lower_case?cap_first}(ConvertUtil.obj2Double(obj));
+					bean.set${column.COLUMN_NAME?lower_case?cap_first}(Convert.toDouble(obj));
 				</#if>
 				bean.BEAN_VALUES.put("${column.COLUMN_NAME?lower_case}",obj);
 				</#list>

@@ -28,7 +28,7 @@
 					<option value="50" ${(commond.pageSize == 50)?string('selected="selected"', '')}>50</option>
 					<option value="100" ${(commond.pageSize == 100)?string('selected="selected"', '')}>100</option>
 				</select>-->
-				<span class="input-group-addon">每页显示&nbsp;&nbsp;${commond.pageSize}&nbsp;&nbsp;条&nbsp;&nbsp;共&nbsp;${commond.totalCount}&nbsp;条记录&nbsp;&nbsp;[#if commond.pageCount == 0]0[#else]${commond.pageNumber!1}[/#if]/${commond.pageCount!1}&nbsp;页</span>
+				<span style="width: 100%" class="input-group-addon">每页显示&nbsp;&nbsp;${commond.pageSize}&nbsp;&nbsp;条&nbsp;&nbsp;共&nbsp;${commond.totalCount}&nbsp;条记录&nbsp;&nbsp;[#if commond.pageCount == 0]0[#else]${commond.pageNumber!1}[/#if]/${commond.pageCount!1}&nbsp;页</span>
 			</div>
 	   </td>
    </tr>

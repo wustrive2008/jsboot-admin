@@ -1,17 +1,15 @@
 package com.wubaoguo.springboot.conf;
 
-import java.io.IOException;
-
-import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.DefaultObjectWrapperBuilder;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateHashModel;
 import freemarker.template.Version;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.PostConstruct;
+import java.io.IOException;
 
 /**
 * @ClassName: FreeMarkerConfig
@@ -23,7 +21,7 @@ import freemarker.template.Version;
 @Configuration
 public class FreeMarkerConfig {
 	@Autowired  
-    protected freemarker.template.Configuration configuration;  
+    protected freemarker.template.Configuration configuration;
 	
 	//ftl渲染视图
 	@Autowired  
@@ -44,14 +42,14 @@ public class FreeMarkerConfig {
 
 		BeansWrapper wrapper = new DefaultObjectWrapperBuilder(version).build();
 		TemplateHashModel staticModels = wrapper.getStaticModels();
-		configuration.setSharedVariable("StringUtil",staticModels.get("org.wustrive.java.common.util.StringUtil"));
-		configuration.setSharedVariable("DateUtil",staticModels.get("org.wustrive.java.common.util.DateUtil"));
-		configuration.setSharedVariable("ConvertUtil",staticModels.get("org.wustrive.java.common.util.ConvertUtil"));
+		configuration.setSharedVariable("StringUtil",staticModels.get("org.apache.commons.lang.StringUtils"));
+		configuration.setSharedVariable("DateUtil",staticModels.get("com.wubaoguo.springboot.util.DateUtil"));
+		configuration.setSharedVariable("ConvertUtil",staticModels.get("cn.hutool.core.convert.Convert"));
 		
 		configuration.setSharedVariable("Constants",staticModels.get("com.wubaoguo.springboot.constant.ShiroConstants"));
 		
-		configuration.setSetting("template_update_delay", "1");  
-        configuration.setSetting("default_encoding", "UTF-8");  
+		configuration.setSetting("template_update_delay", "1");
+        configuration.setSetting("default_encoding", "UTF-8");
         
         //解析jsp文件
 		/*

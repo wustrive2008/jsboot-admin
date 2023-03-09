@@ -74,6 +74,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.27</version>
         </dependency>
 
         <!-- mybatis -->
@@ -87,7 +88,7 @@
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>1.2.5</version>
+            <version>1.4.1</version>
         </dependency>
 
         <!--druid 数据源监控-->
@@ -95,7 +96,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.2.6</version>
+            <version>1.2.5</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -9,11 +9,12 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.jdbc.core.RowMapper;
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.IdUtil;
 import com.wubaoguo.springboot.dao.jdbc.bean.BaseBean;
 
 
 /**
- * 数据库实体自动生成:
+ * 实体生成工具
  * ${COMMENTS}
  */
 @SuppressWarnings("unchecked")
@@ -22,7 +23,7 @@ public class ${ClassName} implements BaseBean{
 	public final static Map<String, String> KEYS = new HashMap<>();
 	private static final long serialVersionUID = 1L;
 	private Map<String, Object> BEAN_VALUES = null;
-	
+
 	static {
 		KEYS.put("${PK.COLUMN_NAME?lower_case}", "String");
 		<#list columns as column>
@@ -32,10 +33,10 @@ public class ${ClassName} implements BaseBean{
 	public Map<String, String> getColumnMap(){
 		return KEYS;
 	}
-	
+
 	private String id;
 	private Boolean isSetted_id = false;
-	
+
 	<#list columns as column>
 	private ${column.COLUMN_TYPE} ${column.COLUMN_NAME?lower_case};
 	private Boolean isSetted_${column.COLUMN_NAME?lower_case} = false;
@@ -48,11 +49,11 @@ public class ${ClassName} implements BaseBean{
 			BEAN_VALUES.put("${column.COLUMN_NAME?lower_case}", null);
 		</#list>
 	}
-	
+
 	public ${ClassName}() {
 		initBeanValues();
 	}
-	
+
 	public ${ClassName}(String id) {
 		super();
 		this.id = id;
@@ -76,7 +77,7 @@ public class ${ClassName} implements BaseBean{
 		BEAN_VALUES.put("id",id);
 		return this;
 	}
-	
+
 	@Override
 	public String getUpdateSql() {
 		StringBuilder sBuffer = new StringBuilder("update " + getTableName() + " set ");
@@ -88,8 +89,8 @@ public class ${ClassName} implements BaseBean{
 		String sql = sBuffer.toString();
 		return StringUtils.removeEnd(sql, ",") + " where ${PK.COLUMN_NAME?lower_case}=:id";
 	}
-	
-	
+
+
 	@Override
 	public String getInsertSql() {
 		StringBuilder sBuffer = new StringBuilder("insert into " + getTableName() + " set ");
@@ -104,7 +105,7 @@ public class ${ClassName} implements BaseBean{
 		sBuffer.append(StringUtils.removeEnd(fileds.toString(), ","));
 		return sBuffer.toString();
 	}
-	
+
 
 	<#list columns as column>
 		/**
@@ -133,7 +134,7 @@ public class ${ClassName} implements BaseBean{
 			}
 			dao.execute("delete from " + getTableName() + " where ${PK.COLUMN_NAME?lower_case} = :id", BEAN_VALUES);
 		}
-	
+
 		@Override
 		public ${ClassName} getInstanceById() {
 			if (StringUtils.isBlank(id)) {
@@ -141,10 +142,10 @@ public class ${ClassName} implements BaseBean{
 			}
 			return dao.queryForBean("select * from " + getTableName() + " where ${PK.COLUMN_NAME?lower_case}=:id", BEAN_VALUES, this);
 		}
-	
+
 	   <#list MYFK as pk>
 		<#if pk.TABLE_NAME?lower_case == TABLENAME?lower_case>
-		public ${pk.R_TABLE_NAME?upper_case} get${pk.R_TABLE_NAME?upper_case}() {         
+		public ${pk.R_TABLE_NAME?upper_case} get${pk.R_TABLE_NAME?upper_case}() {
 			if(null == get${pk.COLUMN_NAME?lower_case?cap_first}()){
 				throw new RuntimeException("${pk.COLUMN_NAME} is null");
 			}
@@ -153,10 +154,10 @@ public class ${ClassName} implements BaseBean{
 		}
 		</#if>
 		</#list>
-		
+
 		<#list MYFK as pk>
 		<#if pk.R_TABLE_NAME?lower_case == TABLENAME?lower_case>
-		public List<${pk.TABLE_NAME?upper_case}> get${pk.TABLE_NAME?upper_case}List() {         
+		public List<${pk.TABLE_NAME?upper_case}> get${pk.TABLE_NAME?upper_case}List() {
 			if(null == get${pk.R_COLUMN_NAME?lower_case?cap_first}()){
 				throw new RuntimeException("${pk.R_COLUMN_NAME} is null");
 			}
@@ -164,7 +165,7 @@ public class ${ClassName} implements BaseBean{
 		}
 		</#if>
 		</#list>
-		
+
 		@Override
 		public ${ClassName} queryForBean() {
 			StringBuilder sBuffer = new StringBuilder("select * from " + getTableName() + " where ");
@@ -180,7 +181,7 @@ public class ${ClassName} implements BaseBean{
 			sql = StringUtils.removeEnd(sql, " and ");
 			return dao.queryForBean(sql,this);
 		}
-		
+
 		@Override
 		public String getParameter(){
 			StringBuilder sBuffer = new StringBuilder("");
@@ -192,22 +193,22 @@ public class ${ClassName} implements BaseBean{
 					sBuffer.append("${column.COLUMN_NAME?lower_case}=:${column.COLUMN_NAME?lower_case} and ");
 				}
 			</#list>
-			
+
 			String sql = sBuffer.toString();
 			return StringUtils.removeEnd(sql, " and ");
-		
+
 		}
-	
+
 		@Override
 		public String getTableName() {
 			return "${TABLENAME?lower_case}";
 		}
-		
-		
+
+
 		public Map<String, Object> getBeanValues(){
 			return this.BEAN_VALUES;
 		}
-	
+
 		@Override
 		public ${ClassName} insert() {
 			if (StringUtils.isBlank(id)) {
@@ -216,7 +217,7 @@ public class ${ClassName} implements BaseBean{
 			dao.execute(getInsertSql(),BEAN_VALUES);
 			return this;
 		}
-	
+
 		@Override
 		public ${ClassName} update() {
 			if (StringUtils.isBlank(id)) {
@@ -224,8 +225,8 @@ public class ${ClassName} implements BaseBean{
 			}
 			dao.execute(getUpdateSql(),BEAN_VALUES);
 			return this;
-		}  
-		
+		}
+
 		public ${ClassName} insertOrUpdate(){
 			if (StringUtils.isNotBlank(id)) {
 				return update();
@@ -233,16 +234,16 @@ public class ${ClassName} implements BaseBean{
 				return insert();
 			}
 		}
-		
+
 		/**
 		 * 通过ID获取该条信息的Map结构
 		 */
 		public Map<String, Object> getBeanMapById() {
-			
+
 			if (StringUtils.isBlank(id)) {
 				throw new RuntimeException("ID不能为空!");
 			}
-			
+
 			return dao.queryForMap("select * from " + getTableName() + " where ${PK.COLUMN_NAME?lower_case}=:id",BEAN_VALUES);
 		}
 
@@ -255,11 +256,11 @@ public class ${ClassName} implements BaseBean{
 			sb.append("]");
 			return sb.toString();
 		}
-		
+
 		public ${ClassName} newInstance(){
 			return new ${ClassName}();
 		}
-		
+
 		private static class Mapper implements RowMapper<${ClassName}> {
 			public ${ClassName} mapRow(ResultSet rs, int rownum) throws SQLException {
 				${ClassName} bean = new ${ClassName}();
@@ -292,8 +293,8 @@ public class ${ClassName} implements BaseBean{
 				</#list>
 				return bean;
 			}
-    	}	
-		
+    	}
+
 		public RowMapper<${ClassName}> newMapper(){
 			return new ${ClassName}.Mapper();
 		}

@@ -28,13 +28,13 @@ import java.util.*;
 public class EntityGeneratorUtil {
 
     //数据库名称
-    private final static String TABLE_SCHEMA = "tw_gzt";
-    //表名
-    private final static String TABLE_NAME = "'payroll_factory_type'";
+    private final static String TABLE_SCHEMA = "jsboot";
+    //表名，多个用逗号分隔
+    private final static String TABLE_NAME = "'sys_admin'";
     //位置
-    private final static String FILE_PATH = "src/main/java/com/tianwensk/gzt/entity/payroll/";
+    private final static String FILE_PATH = "src/main/java/com/wubaoguo/springboot/entity/";
     //包名
-    private final static String PACKAGE_PATH = "com.tianwensk.gzt.entity.payroll";
+    private final static String PACKAGE_PATH = "com.wubaoguo.springboot.entity";
 
     private List<Map> freeMakerList;
 

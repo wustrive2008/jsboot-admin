@@ -14,7 +14,6 @@ import javax.sql.DataSource;
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
  * @date: 2018/7/18 21:04
- * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
 @Configuration
 public class DruidDataSourceConfig {

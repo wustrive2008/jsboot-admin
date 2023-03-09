@@ -1,4 +1,4 @@
-package com.wubaoguo.springboot.dao.jdbc;
+package com.wubaoguo.springboot.core.dao.jdbc;
 
 import java.io.Serializable;
 

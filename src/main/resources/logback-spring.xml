@@ -3,7 +3,7 @@
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
 
 	<!-- 定义日志文件存放目录 -->
-	<property name="LOG_HOME" value="/logs/base-framework" />
+	<property name="LOG_HOME" value="/logs/jsboot-admin" />
 
 	<!-- 控制台输出样式 -->
 	<appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
@@ -35,7 +35,7 @@
 	<!-- 记录开发过程中的DEBUG信息 -->
 	<appender name="debug"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<File>${LOG_HOME}/dgztc-web-debug.log</File>
+		<File>${LOG_HOME}/web-debug.log</File>
 		<Append>TRUE</Append>
 		<encoder>
 			<pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
@@ -49,7 +49,7 @@
 		</filter>   
 		
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_HOME}/dgztc-web-debug.%d{yyyy-MM-dd}.log
+			<fileNamePattern>${LOG_HOME}/web-debug.%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 			<!-- keep 20 days' worth of history -->
 			<MaxHistory>20</MaxHistory>
@@ -59,7 +59,7 @@
 	<!-- 记录一些操作日志记录方面的信息 -->
 	<appender name="info"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<File>${LOG_HOME}/dgztc-web-info.log</File>
+		<File>${LOG_HOME}/web-info.log</File>
 		<Append>TRUE</Append>
 		<encoder>
 			<pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
@@ -76,7 +76,7 @@
 		</filter>   
 		
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_HOME}/dgztc-web-info.%d{yyyy-MM-dd}.log
+			<fileNamePattern>${LOG_HOME}/web-info.%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 			<!-- keep 20 days' worth of history -->
 			<MaxHistory>20</MaxHistory>
@@ -86,7 +86,7 @@
 	<!-- 错误日志 -->
 	<appender name="error"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<File>${LOG_HOME}/dgztc-web-error.log</File>
+		<File>${LOG_HOME}/web-error.log</File>
 		<Append>TRUE</Append>
 		<encoder>
 			<pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
@@ -97,7 +97,7 @@
 	        <level>WARN</level>   
 		</filter>   
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_HOME}/dgztc-web-error.%d{yyyy-MM-dd}.log
+			<fileNamePattern>${LOG_HOME}/web-error.%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 			<!-- keep 20 days' worth of history -->
 			<MaxHistory>20</MaxHistory>

@@ -10,7 +10,6 @@ import lombok.Data;
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
  * @date: 2018/7/20 11:23
- * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
 @Data
 public class ResourceCommond extends CondCacheCommond {

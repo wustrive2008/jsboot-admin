@@ -14,7 +14,6 @@ import java.util.List;
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
  * @date: 2018/7/23 11:11
- * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
 public class ShiroConstants {
     

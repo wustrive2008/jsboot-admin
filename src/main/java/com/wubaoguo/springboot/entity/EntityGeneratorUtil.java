@@ -1,7 +1,7 @@
 package com.wubaoguo.springboot.entity;
 
-import com.wubaoguo.springboot.dao.jdbc.SqlParameter;
-import com.wubaoguo.springboot.dao.jdbc.dao.BaseDao;
+import com.wubaoguo.springboot.core.dao.jdbc.SqlParameter;
+import com.wubaoguo.springboot.core.dao.jdbc.dao.BaseDao;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.apache.commons.lang.StringUtils;

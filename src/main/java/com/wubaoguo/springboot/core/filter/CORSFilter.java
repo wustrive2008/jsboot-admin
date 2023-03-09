@@ -1,6 +1,7 @@
 package com.wubaoguo.springboot.core.filter;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -11,6 +12,7 @@ import java.io.IOException;
  * @date: 2017年4月18日 下午9:03:03
  * @version: v0.0.1
  */
+@WebFilter(urlPatterns = "/*")
 public class CORSFilter implements Filter {
 
     @Override

@@ -1,4 +1,4 @@
-package com.wubaoguo.springboot.util;
+package com.wubaoguo.springboot.core.util;
 
 import java.util.HashSet;
 import java.util.Set;

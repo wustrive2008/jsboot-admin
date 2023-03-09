@@ -9,7 +9,6 @@ import org.apache.shiro.session.Session;
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
  * @date: 2017/8/10 9:47
- * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
 public class QueryCommondSession {
 

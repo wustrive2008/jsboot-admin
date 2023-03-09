@@ -5,10 +5,10 @@ import freemarker.template.DefaultObjectWrapperBuilder;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateHashModel;
 import freemarker.template.Version;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.io.IOException;
 
 /**
@@ -20,20 +20,21 @@ import java.io.IOException;
  */
 @Configuration
 public class FreeMarkerConfig {
-	@Autowired  
+
+	@Resource
     protected freemarker.template.Configuration configuration;
 	
 	//ftl渲染视图
-	@Autowired  
+	@Resource
     protected org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver resolver;  
 	
 	//jsp渲染视图
 	//@Autowired
     //protected org.springframework.web.servlet.view.InternalResourceViewResolver springResolver;
 	
-	public static Version version = new Version("2.3.21"); //FreeMarker版本号  
-	
-	
+	public static Version version = new Version("2.3.21"); //FreeMarker版本号
+
+
 	@PostConstruct
 	public void setSharedVariable() throws TemplateException, IOException {
 	    configuration = getConfiguration();
@@ -43,7 +44,7 @@ public class FreeMarkerConfig {
 		BeansWrapper wrapper = new DefaultObjectWrapperBuilder(version).build();
 		TemplateHashModel staticModels = wrapper.getStaticModels();
 		configuration.setSharedVariable("StringUtil",staticModels.get("org.apache.commons.lang.StringUtils"));
-		configuration.setSharedVariable("DateUtil",staticModels.get("com.wubaoguo.springboot.util.DateUtil"));
+		configuration.setSharedVariable("DateUtil",staticModels.get("com.wubaoguo.springboot.core.util.DateUtil"));
 		configuration.setSharedVariable("ConvertUtil",staticModels.get("cn.hutool.core.convert.Convert"));
 		
 		configuration.setSharedVariable("Constants",staticModels.get("com.wubaoguo.springboot.constant.ShiroConstants"));

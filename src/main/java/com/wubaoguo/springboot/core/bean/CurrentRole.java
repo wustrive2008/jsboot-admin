@@ -1,34 +1,22 @@
 package com.wubaoguo.springboot.core.bean;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
+ * Description: 
  * 
- * @Description: 当前角色
- * @author wubaoguo
- * @mail: wustrive2008@gmail.com
- * @date: 2017年3月27日 下午7:06:04
- * @version: v0.0.1
+ * @author: wubaoguo
+ * @email: wustrive2008@gmail.com
+ * @date: 2023-3-9 20:29
+ * 
  */
+@Data
 public class CurrentRole implements Serializable{
     private static final long serialVersionUID = -8436272707319248710L;
 
     private String name;
     private String code;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
 }

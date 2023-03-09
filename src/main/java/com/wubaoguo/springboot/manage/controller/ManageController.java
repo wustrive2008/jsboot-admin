@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
  * @date: 2018/7/23 11:07
- * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
 @Controller
 @RequestMapping("/manage")
@@ -73,7 +72,6 @@ public class ManageController {
      * @param roleCode
      * @param map
      * @return
-     * @throws BusinessException
      */
     @RequestMapping(value = "/menu/{roleCode}", method = RequestMethod.GET)
     public String menu(@PathVariable("roleCode") String roleCode, ModelMap map) {

@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.IdUtil;
-import com.wubaoguo.springboot.dao.jdbc.bean.BaseBean;
+import com.wubaoguo.springboot.core.dao.jdbc.bean.BaseBean;
 
 
 /**

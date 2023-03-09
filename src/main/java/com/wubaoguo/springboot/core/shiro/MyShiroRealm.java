@@ -1,8 +1,9 @@
-package com.wubaoguo.springboot.shiro;
+package com.wubaoguo.springboot.core.shiro;
 
 import com.wubaoguo.springboot.constant.ShiroConstants;
 import com.wubaoguo.springboot.core.bean.AuthBean;
 import com.wubaoguo.springboot.core.bean.CurrentRole;
+import com.wubaoguo.springboot.core.bean.LoginParam;
 import com.wubaoguo.springboot.core.exception.LoginSecurityException;
 import com.wubaoguo.springboot.manage.service.AuthenticationService;
 import org.apache.commons.lang.StringUtils;
@@ -20,13 +21,11 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * Description:
  *
- * Description: 
- * 
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
  * @date: 2018/3/19 16:01
- * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
 public class MyShiroRealm extends AuthorizingRealm {
 
@@ -35,7 +34,7 @@ public class MyShiroRealm extends AuthorizingRealm {
 
     /**
      * 认证信息.(身份验证) : Authentication 是用来验证用户身份
-     * 
+     *
      * @param authcToken
      * @return
      * @throws AuthenticationException
@@ -48,16 +47,14 @@ public class MyShiroRealm extends AuthorizingRealm {
         String username = token.getUsername();
 
         if (StringUtils.isNotBlank(username)) {
-            AuthBean authentication = new AuthBean();
             try {
-                authentication.setUsername(username);
-                authentication.setPassword(String.valueOf(token.getPassword()));
+                LoginParam loginParam = new LoginParam(token.getUsername(), String.valueOf(token.getPassword()));
                 // 登录信息数据底层校验
-                AuthBean auth = authenticationService.login(authentication);
+                AuthBean auth = authenticationService.login(loginParam);
                 this.setSession(ShiroConstants.SESSION_CURRENT_USER, auth);
                 // 查询底层角色信息
                 List<CurrentRole> roles =
-                        authenticationService.findUserRoles(authentication.getUsername());
+                        authenticationService.findUserRoles(loginParam.getUsername());
                 if (roles != null && !roles.isEmpty()) {
                     // 获取 多角色 第一个 角色 作为默认使用角色
                     this.setSession(ShiroConstants.SESSION_CURRENT_ROLE, roles.get(0).getCode());
@@ -65,7 +62,7 @@ public class MyShiroRealm extends AuthorizingRealm {
                 } else {
                     throw new ConcurrentAccessException("role not defined");
                 }
-                return new SimpleAuthenticationInfo(auth.getUsername(), auth.getPassword(),
+                return new SimpleAuthenticationInfo(loginParam.getUsername(), loginParam.getPassword(),
                         this.getName());
             } catch (LoginSecurityException | AccountException le) {
                 if (le instanceof LoginSecurityException) {

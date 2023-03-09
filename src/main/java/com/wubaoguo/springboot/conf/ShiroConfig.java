@@ -1,8 +1,8 @@
 package com.wubaoguo.springboot.conf;
 
-import com.wubaoguo.springboot.filter.AjaxFormAuthenticationFilter;
-import com.wubaoguo.springboot.filter.PermissionFilter;
-import com.wubaoguo.springboot.shiro.MyShiroRealm;
+import com.wubaoguo.springboot.core.filter.AjaxFormAuthenticationFilter;
+import com.wubaoguo.springboot.core.filter.PermissionFilter;
+import com.wubaoguo.springboot.core.shiro.MyShiroRealm;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
@@ -23,8 +23,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
+import java.security.NoSuchAlgorithmException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -34,7 +37,6 @@ import java.util.Map;
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
  * @date: 2018/7/20 15:10
- * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
 @Configuration
 public class ShiroConfig {
@@ -65,7 +67,7 @@ public class ShiroConfig {
 
     /**
      * ShiroFilterFactoryBean 处理拦截资源文件问题。
-     * 注意：单独一个ShiroFilterFactoryBean配置是或报错的，以为在
+     * 注意：单独一个ShiroFilterFactoryBean配置是或报错的，因为在
      * 初始化ShiroFilterFactoryBean的时候需要注入：SecurityManager
      * <p>
      * Filter Chain定义说明 1、一个URL可以配置多个Filter，使用逗号分隔 2、当设置多个过滤器时，全部验证通过，才视为通过
@@ -211,7 +213,7 @@ public class ShiroConfig {
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
         cookieRememberMeManager.setCookie(rememberMeCookie());
         //rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度(128 256 512 位)
-        cookieRememberMeManager.setCipherKey(Base64.decode("3AvVhmFLUs0KTA3Kprsdag=="));
+        cookieRememberMeManager.setCipherKey(Base64.decode("CpXuqaV7nYs8y1jwycYo3w=="));
         return cookieRememberMeManager;
     }
 
@@ -225,5 +227,16 @@ public class ShiroConfig {
         PermissionFilter permissionFilter = new PermissionFilter();
         permissionFilter.setRedirectUrl("/manage/loginout");
         return permissionFilter;
+    }
+
+    /**
+     * rememberMe的key随机生成，保证每个项目不同
+     * @param args
+     * @throws NoSuchAlgorithmException
+     */
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        KeyGenerator keygen = KeyGenerator.getInstance("AES");
+        SecretKey deskey = keygen.generateKey();
+        System.out.println(Base64.encodeToString(deskey.getEncoded()));
     }
 }

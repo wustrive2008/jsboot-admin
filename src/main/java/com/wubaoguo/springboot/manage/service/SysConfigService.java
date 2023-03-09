@@ -2,7 +2,7 @@ package com.wubaoguo.springboot.manage.service;
 
 import cn.hutool.core.convert.Convert;
 import com.wubaoguo.springboot.constant.ShiroConstants;
-import com.wubaoguo.springboot.dao.jdbc.dao.BaseDao;
+import com.wubaoguo.springboot.core.dao.jdbc.dao.BaseDao;
 import com.wubaoguo.springboot.entity.SysConfig;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

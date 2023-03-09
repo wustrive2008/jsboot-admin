@@ -19,7 +19,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
  * @date: 2018/7/23 10:52
- * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
 @Configuration
 @EnableSwagger2

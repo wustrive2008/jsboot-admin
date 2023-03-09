@@ -6,7 +6,7 @@ import com.google.common.collect.ImmutableMap;
 import com.wubaoguo.springboot.constant.ShiroConstants;
 import com.wubaoguo.springboot.core.bean.CurrentRole;
 import com.wubaoguo.springboot.core.request.BaseState;
-import com.wubaoguo.springboot.dao.jdbc.dao.BaseDao;
+import com.wubaoguo.springboot.core.dao.jdbc.dao.BaseDao;
 import com.wubaoguo.springboot.entity.SysAdmin;
 import com.wubaoguo.springboot.entity.SysResources;
 import com.wubaoguo.springboot.manage.domain.SearchResults;

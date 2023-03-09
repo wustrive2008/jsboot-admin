@@ -1,6 +1,6 @@
 package com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond;
 
-import com.wubaoguo.springboot.dao.jdbc.BaseCommond;
+import com.wubaoguo.springboot.core.dao.jdbc.BaseCommond;
 import lombok.Data;
 
 /**
@@ -9,7 +9,6 @@ import lombok.Data;
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
  * @date: 2018/7/23 11:15
- * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
 @Data
 public class CondCacheCommond extends BaseCommond {

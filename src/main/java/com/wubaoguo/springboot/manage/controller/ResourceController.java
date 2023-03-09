@@ -24,7 +24,6 @@ import java.util.Map;
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
  * @date: 2018/7/20 14:08
- * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
 @Controller
 @RequestMapping("/manage/resource")

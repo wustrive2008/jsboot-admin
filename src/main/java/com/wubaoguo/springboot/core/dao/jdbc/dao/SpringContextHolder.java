@@ -1,4 +1,4 @@
-package com.wubaoguo.springboot.dao.jdbc.dao;
+package com.wubaoguo.springboot.core.dao.jdbc.dao;
 
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;

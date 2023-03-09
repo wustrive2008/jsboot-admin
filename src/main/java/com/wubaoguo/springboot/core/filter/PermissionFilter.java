@@ -1,4 +1,4 @@
-package com.wubaoguo.springboot.filter;
+package com.wubaoguo.springboot.core.filter;
 
 import com.wubaoguo.springboot.constant.ShiroConstants;
 import com.wubaoguo.springboot.manage.service.ManageService;
@@ -16,7 +16,6 @@ import java.io.PrintWriter;
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
  * @date: 2017/9/6 16:07
- * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
 public class PermissionFilter implements Filter {
 
@@ -62,7 +61,7 @@ public class PermissionFilter implements Filter {
      */
     private boolean isStaticFile(String uri) {
         String suffix = StringUtils.substringAfterLast(uri, ".").toLowerCase();
-        return SubThreadContent.ignoreSuffix.contains(suffix);
+        return ThreadContentFilter.ignoreSuffix.contains(suffix);
     }
 
     @Override

@@ -1,7 +1,7 @@
-package com.wubaoguo.springboot.dao.jdbc.dao;
+package com.wubaoguo.springboot.core.dao.jdbc.dao;
 
-import com.wubaoguo.springboot.dao.jdbc.BaseCommond;
-import com.wubaoguo.springboot.dao.jdbc.bean.BaseBean;
+import com.wubaoguo.springboot.core.dao.jdbc.BaseCommond;
+import com.wubaoguo.springboot.core.dao.jdbc.bean.BaseBean;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -2,18 +2,21 @@ package com.wubaoguo.springboot.core.filter;
 
 import com.google.common.collect.ImmutableSet;
 import com.wubaoguo.springboot.core.response.Parameter;
-import com.wubaoguo.springboot.util.WebUtil;
+import com.wubaoguo.springboot.core.util.WebUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+
+@WebFilter(urlPatterns = "/*")
 public class ThreadContentFilter implements Filter {
 
     static Logger logger = LoggerFactory.getLogger(ThreadContentFilter.class);
@@ -138,8 +141,8 @@ public class ThreadContentFilter implements Filter {
     /**
      * 静态文件后缀名
      */
-    ImmutableSet<String> ignoreSuffix = new ImmutableSet.Builder<String>().add("jpg", "jpeg", "ico", "txt", "doc", "ppt", "xls", "pdf", "gif", "png",
-            "bmp", "css", "js", "html", "htm", "swf", "flv", "mp3", "htc").build();
+    public static ImmutableSet<String> ignoreSuffix = new ImmutableSet.Builder<String>().add("jpg", "jpeg", "ico", "txt", "doc", "ppt", "xls", "pdf", "gif", "png",
+            "bmp", "css", "js", "swf", "flv", "mp3", "htc", "woff", "woff2", "ttf").build();
 
     /**
      * 判断是否过滤该请求

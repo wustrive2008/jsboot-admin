@@ -1,8 +1,8 @@
-package com.wubaoguo.springboot.dao.jdbc.dao;
+package com.wubaoguo.springboot.core.dao.jdbc.dao;
 
 import cn.hutool.core.convert.Convert;
-import com.wubaoguo.springboot.dao.jdbc.SqlParameter;
-import com.wubaoguo.springboot.dao.jdbc.bean.BaseBean;
+import com.wubaoguo.springboot.core.dao.jdbc.SqlParameter;
+import com.wubaoguo.springboot.core.dao.jdbc.bean.BaseBean;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;

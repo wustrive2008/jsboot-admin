@@ -1,4 +1,4 @@
-package com.wubaoguo.springboot.util;
+package com.wubaoguo.springboot.core.util;
 
 
 import javax.servlet.http.HttpServletRequest;

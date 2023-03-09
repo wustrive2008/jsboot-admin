@@ -1,7 +1,8 @@
-package com.wubaoguo.springboot.jwt;
+package com.wubaoguo.springboot.core.jwt;
 
 import com.nimbusds.jose.JWSObject;
 import com.wubaoguo.springboot.constant.JwtConstants;
+import com.wubaoguo.springboot.core.bean.AuthBean;
 import com.wubaoguo.springboot.core.filter.ThreadContentFilter;
 import org.apache.commons.lang3.StringUtils;
 
@@ -11,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
  * @date: 2018/7/23 11:15
- * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
 public class JwtSubject {
 
@@ -38,13 +38,13 @@ public class JwtSubject {
         this.jwsObject = jwsObject;
     }
     
-    public static JwtAuthentication getJwtUser() {
+    public static AuthBean getJwtUser() {
         return ThreadContentFilter.getData(JwtConstants.THREAD_CURRENT_USER);
     }
     
     public static boolean isLogin() {
         // 直接进行非空验证.后期做修改
-        JwtAuthentication jwtUser = getJwtUser();
+        AuthBean jwtUser = getJwtUser();
         if(jwtUser != null && StringUtils.isNotBlank(jwtUser.getUserId())) {
             return true;
         }

@@ -1,7 +1,7 @@
-package com.wubaoguo.springboot.dao.jdbc.bean;
+package com.wubaoguo.springboot.core.dao.jdbc.bean;
 
-import com.wubaoguo.springboot.dao.jdbc.dao.BaseDao;
-import com.wubaoguo.springboot.dao.jdbc.dao.SpringContextHolder;
+import com.wubaoguo.springboot.core.dao.jdbc.dao.BaseDao;
+import com.wubaoguo.springboot.core.dao.jdbc.dao.SpringContextHolder;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.io.Serializable;

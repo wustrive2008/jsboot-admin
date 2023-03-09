@@ -1,4 +1,4 @@
-package com.wubaoguo.springboot.util;
+package com.wubaoguo.springboot.core.util;
 
 import cn.hutool.core.convert.Convert;
 import org.apache.commons.lang3.StringUtils;

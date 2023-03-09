@@ -1,10 +1,10 @@
-package com.wubaoguo.springboot.filter;
+package com.wubaoguo.springboot.core.filter;
 
 
 import com.wubaoguo.springboot.constant.ShiroConstants;
 import com.wubaoguo.springboot.core.request.StateMap;
 import com.wubaoguo.springboot.core.request.ViewResult;
-import com.wubaoguo.springboot.util.WebUtil;
+import com.wubaoguo.springboot.core.util.WebUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
  * @date: 2018/7/23 11:11
- * @Copyright: 2017-2018 dgztc Inc. All rights reserved.
  */
 public class AjaxFormAuthenticationFilter extends FormAuthenticationFilter {
 

@@ -1,9 +1,10 @@
 package com.wubaoguo.springboot.rest.service;
 
-import com.wubaoguo.springboot.jwt.JwtAuthentication;
+import com.wubaoguo.springboot.core.bean.AuthBean;
+import com.wubaoguo.springboot.core.bean.LoginParam;
 
 public interface JwtAuthService {
 
-    JwtAuthentication login(JwtAuthentication auth);
+    AuthBean login(LoginParam auth);
 
 }

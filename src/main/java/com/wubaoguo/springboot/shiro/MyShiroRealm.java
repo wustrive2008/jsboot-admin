@@ -5,7 +5,7 @@ import com.wubaoguo.springboot.core.bean.AuthBean;
 import com.wubaoguo.springboot.core.bean.CurrentRole;
 import com.wubaoguo.springboot.core.exception.LoginSecurityException;
 import com.wubaoguo.springboot.manage.service.AuthenticationService;
-import jodd.util.StringUtil;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -47,7 +47,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         String username = token.getUsername();
 
-        if (StringUtil.isNotBlank(username)) {
+        if (StringUtils.isNotBlank(username)) {
             AuthBean authentication = new AuthBean();
             try {
                 authentication.setUsername(username);

@@ -11,8 +11,8 @@ import com.wubaoguo.springboot.dao.jdbc.dao.BaseDao;
 import com.wubaoguo.springboot.dao.jdbc.dao.QuerySupport;
 import com.wubaoguo.springboot.entity.*;
 import com.wubaoguo.springboot.manage.controller.commond.ResourceCommond;
-import jodd.util.StringUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.jsoup.helper.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -151,7 +151,7 @@ public class ResourceService {
         if (StringUtil.isBlank(sysRole.getId())) {
             // 维护角色id为 null 校验 该角色编码是否已被使用
             SysRole dbSysRole = new SysRole().setCode(roleCode).queryForBean();
-            if (dbSysRole != null && StringUtil.isNotBlank(dbSysRole.getId())) {
+            if (dbSysRole != null && StringUtils.isNotBlank(dbSysRole.getId())) {
                 return new BaseState(StateMap.S_CLIENT_PARAM_ERROR, "新建角色编码重复，添加失败");
             }
         } else {
@@ -197,7 +197,7 @@ public class ResourceService {
         if (StringUtil.isBlank(sysAdmin.getId())) {
             // 维护角色id为 null 校验 该角色编码是否已被使用
             SysAdmin dbSysAdmin = new SysAdmin().setAccount(account).queryForBean();
-            if (dbSysAdmin != null && StringUtil.isNotBlank(dbSysAdmin.getId())) {
+            if (dbSysAdmin != null && StringUtils.isNotBlank(dbSysAdmin.getId())) {
                 return new BaseState(StateMap.S_CLIENT_WARNING, "新增帐号已存在");
             }
             sysAdmin.setPassword(DigestUtil.md5Hex(sysAdmin.getPassword()));
@@ -244,20 +244,20 @@ public class ResourceService {
         StringBuilder sql = new StringBuilder(" select a.*,b.code from sys_admin a left join sys_admin_role b  on b.admin_id = a.id where 1=1 ");
         commond.setPager(true);
         Map<String, Object> param = Maps.newHashMap();
-        if (StringUtil.isNotBlank(commond.getRoleCode())) {
+        if (StringUtils.isNotBlank(commond.getRoleCode())) {
             sql.append(" and b.code =:roleCode ");
             param.put("roleCode", commond.getRoleCode());
         }
-        if (StringUtil.isNotBlank(commond.getName())) {
+        if (StringUtils.isNotBlank(commond.getName())) {
             sql.append(" and a.name like :name ");
             param.put("name", "%" + commond.getName() + "%");
         }
-        if (StringUtil.isNotBlank(commond.getPhone())) {
+        if (StringUtils.isNotBlank(commond.getPhone())) {
             sql.append(" and a.phone_number like :phone ");
             param.put("phone", "%" + commond.getPhone() + "%");
         }
 
-        if (StringUtil.isNotBlank(commond.getState())) {
+        if (StringUtils.isNotBlank(commond.getState())) {
             sql.append(" and a.is_activity like :state ");
             param.put("state", commond.getState());
         }

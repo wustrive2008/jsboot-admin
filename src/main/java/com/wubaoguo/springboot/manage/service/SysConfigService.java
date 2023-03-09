@@ -4,7 +4,7 @@ import cn.hutool.core.convert.Convert;
 import com.wubaoguo.springboot.constant.ShiroConstants;
 import com.wubaoguo.springboot.dao.jdbc.dao.BaseDao;
 import com.wubaoguo.springboot.entity.SysConfig;
-import jodd.util.StringUtil;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +43,7 @@ public class SysConfigService {
     }
 
     public void initSysConfigToSession(String userId) {
-        Map<String, Object> rMap = findSysConfigToMap(StringUtil.isBlank(userId) ?
+        Map<String, Object> rMap = findSysConfigToMap(StringUtils.isBlank(userId) ?
                 ShiroConstants.getCurrentUser().getId() : userId);
         ShiroConstants.getSession().setAttribute(ShiroConstants.SESSION_SYS_CONFIG, rMap);
     }
@@ -53,7 +53,7 @@ public class SysConfigService {
         SysConfig sysConfig = new SysConfig();
         sysConfig.setSys_damin_id(admin_id);
         SysConfig dbSysConfig = sysConfig.setItem_key(item_key).queryForBean();
-        if (dbSysConfig != null && StringUtil.isNotBlank(dbSysConfig.getId())) {
+        if (dbSysConfig != null && StringUtils.isNotBlank(dbSysConfig.getId())) {
             dbSysConfig.setItem_value(value);
             dbSysConfig.update();
         } else {

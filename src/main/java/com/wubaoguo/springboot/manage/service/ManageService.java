@@ -10,8 +10,9 @@ import com.wubaoguo.springboot.dao.jdbc.dao.BaseDao;
 import com.wubaoguo.springboot.entity.SysAdmin;
 import com.wubaoguo.springboot.entity.SysResources;
 import com.wubaoguo.springboot.manage.domain.SearchResults;
-import jodd.util.StringUtil;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.jsoup.helper.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,7 @@ public class ManageService {
         if (current_resource != null && current_resource instanceof List) {
             return (List<SysResources>) current_resource;
         }
-        if (StringUtil.isNotBlank(roleCode)) {
+        if (StringUtils.isNotBlank(roleCode)) {
             StringBuilder querySql = new StringBuilder("SELECT re.* FROM sys_admin a, sys_admin_role r, sys_role_resources rrl, sys_resources re ");
             querySql.append("WHERE rrl.role_code = r.`code` AND re.is_activity = 1 AND rrl.resources_id = re.id AND a.id = r.admin_id ");
             querySql.append("AND (r.`code` =:role_code OR r.code = 'all') ");
@@ -97,13 +98,13 @@ public class ManageService {
      * @param oldpwd  明文旧密码
      */
     public BaseState updateUserPwd(String account, String pwd, String oldpwd) {
-        if (StringUtil.isBlank(account)) {
+        if (StringUtils.isBlank(account)) {
             return new BaseState(BaseState.S_AUTH_ERROR, "账号不正确");
         }
-        if (StringUtil.isBlank(pwd)) {
+        if (StringUtils.isBlank(pwd)) {
             return new BaseState(BaseState.S_AUTH_ERROR, "新密码未正确填写");
         }
-        if (StringUtil.isBlank(oldpwd)) {
+        if (StringUtils.isBlank(oldpwd)) {
             return new BaseState(BaseState.S_AUTH_ERROR, "旧密码未正确填写");
         }
 

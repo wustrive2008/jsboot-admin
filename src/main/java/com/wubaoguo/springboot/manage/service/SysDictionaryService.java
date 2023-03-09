@@ -10,7 +10,7 @@ import com.wubaoguo.springboot.dao.jdbc.dao.QuerySupport;
 import com.wubaoguo.springboot.entity.SysDictionary;
 import com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond.CondCacheCommond;
 import com.wubaoguo.springboot.util.BeanUtil;
-import jodd.util.StringUtil;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +46,7 @@ public class SysDictionaryService {
 
     public BaseState saveSysDictionary(SysDictionary sysDictionary) {
         SysDictionary dbSysDictionary = new SysDictionary().setTag_code(sysDictionary.getTag_code()).queryForBean();
-        if (dbSysDictionary != null && StringUtil.isNotBlank(dbSysDictionary.getId())) {
+        if (dbSysDictionary != null && StringUtils.isNotBlank(dbSysDictionary.getId())) {
             return new BaseState(StateMap.S_CLIENT_WARNING, "词典编码重复");
         } else {
             sysDictionary.setAdd_time(ShiroConstants.currentTimeSecond());

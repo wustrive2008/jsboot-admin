@@ -3,7 +3,7 @@ package com.wubaoguo.springboot.conf;
 import com.wubaoguo.springboot.filter.AjaxFormAuthenticationFilter;
 import com.wubaoguo.springboot.filter.PermissionFilter;
 import com.wubaoguo.springboot.shiro.MyShiroRealm;
-import jodd.util.StringUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -152,7 +152,7 @@ public class ShiroConfig {
         redisManager.setPort(port);
         redisManager.setExpire(1800);// 配置缓存过期时间
         // redisManager.setTimeout(timeout);
-        if (StringUtil.isNotBlank(password)) {
+        if (StringUtils.isNotBlank(password)) {
             redisManager.setPassword(password);
         }
         return redisManager;

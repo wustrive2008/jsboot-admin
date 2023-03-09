@@ -11,7 +11,6 @@ import com.wubaoguo.springboot.core.exception.LoginSecurityException;
 import com.wubaoguo.springboot.dao.jdbc.dao.BaseDao;
 import com.wubaoguo.springboot.entity.SysAdmin;
 import com.wubaoguo.springboot.entity.SysRole;
-import jodd.util.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.DisabledAccountException;
@@ -45,7 +44,7 @@ public class AuthenticationService {
             LoginSecurityException {
         // 查询预登录员工信息
         SysAdmin baseUser = new SysAdmin().setAccount(auth.getUsername()).queryForBean();
-        if (baseUser != null && StringUtil.isNotBlank(baseUser.getId())) {
+        if (baseUser != null && StringUtils.isNotBlank(baseUser.getId())) {
             if (ShiroConstants.IS_ACTIVITY_NO.equals(baseUser.getIs_activity())) {
                 throw new DisabledAccountException("当前登录账号已被禁用");
             }

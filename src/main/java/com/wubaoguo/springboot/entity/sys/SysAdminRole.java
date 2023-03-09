@@ -1,4 +1,4 @@
-package com.wubaoguo.springboot.entity;
+package com.wubaoguo.springboot.entity.sys;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.IdUtil;

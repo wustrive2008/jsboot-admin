@@ -9,7 +9,7 @@ import com.wubaoguo.springboot.core.request.BaseState;
 import com.wubaoguo.springboot.core.request.StateMap;
 import com.wubaoguo.springboot.core.dao.jdbc.dao.BaseDao;
 import com.wubaoguo.springboot.core.dao.jdbc.dao.QuerySupport;
-import com.wubaoguo.springboot.entity.*;
+import com.wubaoguo.springboot.entity.sys.*;
 import com.wubaoguo.springboot.manage.controller.commond.ResourceCommond;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.helper.StringUtil;

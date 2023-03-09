@@ -7,7 +7,7 @@ import com.wubaoguo.springboot.core.request.BaseState;
 import com.wubaoguo.springboot.core.request.StateMap;
 import com.wubaoguo.springboot.core.dao.jdbc.dao.BaseDao;
 import com.wubaoguo.springboot.core.dao.jdbc.dao.QuerySupport;
-import com.wubaoguo.springboot.entity.SysDictionary;
+import com.wubaoguo.springboot.entity.sys.SysDictionary;
 import com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond.CondCacheCommond;
 import com.wubaoguo.springboot.core.util.BeanUtil;
 import org.apache.commons.lang.StringUtils;

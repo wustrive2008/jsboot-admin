@@ -3,7 +3,10 @@ package com.wubaoguo.springboot.core.util;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
+import com.wubaoguo.springboot.constant.JwtConstants;
+import com.wubaoguo.springboot.core.bean.AuthBean;
 import com.wubaoguo.springboot.core.exception.BusinessException;
+import com.wubaoguo.springboot.core.filter.ThreadContentFilter;
 import net.minidev.json.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -142,6 +145,19 @@ public class JWTUtil {
             return jsonObjcet.get(key);
         }
         return null;
+    }
+
+    public static AuthBean getJwtUser() {
+        return ThreadContentFilter.getData(JwtConstants.THREAD_CURRENT_USER);
+    }
+
+    public static boolean isLogin() {
+        // 直接进行非空验证.后期做修改
+        AuthBean jwtUser = getJwtUser();
+        if(jwtUser != null && StringUtils.isNotBlank(jwtUser.getUserId())) {
+            return true;
+        }
+        return false;
     }
 
 }

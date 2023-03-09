@@ -7,8 +7,8 @@ import com.wubaoguo.springboot.core.exception.BusinessException;
 import com.wubaoguo.springboot.core.exception.LoginSecurityException;
 import com.wubaoguo.springboot.core.request.StateMap;
 import com.wubaoguo.springboot.core.request.ViewResult;
-import com.wubaoguo.springboot.core.util.JWTUtil;
 import com.wubaoguo.springboot.core.util.WebUtil;
+import com.wubaoguo.springboot.core.util.JWTUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.*;

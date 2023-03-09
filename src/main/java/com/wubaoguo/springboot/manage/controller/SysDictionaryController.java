@@ -2,7 +2,7 @@ package com.wubaoguo.springboot.manage.controller;
 
 
 import com.wubaoguo.springboot.core.request.ViewResult;
-import com.wubaoguo.springboot.entity.SysDictionary;
+import com.wubaoguo.springboot.entity.sys.SysDictionary;
 import com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond.CondCacheCommond;
 import com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond.QueryCommondSession;
 import com.wubaoguo.springboot.manage.service.SysDictionaryService;

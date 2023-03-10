@@ -74,7 +74,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>[8.0.28,)</version>
+            <version>8.0.31</version>
         </dependency>
 
         <!--druid 数据源监控-->
@@ -99,14 +99,14 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>[1.2.83,)</version>
+            <version>1.2.83</version>
         </dependency>
 
         <!-- java HTML解析器，获取document对象 -->
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>[1.15.3,)</version>
+            <version>1.15.3</version>
         </dependency>
 
         <!-- jpa -->
@@ -125,6 +125,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!--分布式锁-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>lock4j-redis-template-spring-boot-starter</artifactId>
+            <version>2.2.4</version>
         </dependency>
 
         <!-- aop -->
@@ -162,7 +169,7 @@
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
-            <version>[1.7.1,)</version>
+            <version>1.7.1</version>
         </dependency>
 
         <!-- shiro redis -->
@@ -176,7 +183,7 @@
         <dependency>
             <groupId>com.nimbusds</groupId>
             <artifactId>nimbus-jose-jwt</artifactId>
-            <version>[7.9,)</version>
+            <version>7.9</version>
         </dependency>
 
         <dependency>

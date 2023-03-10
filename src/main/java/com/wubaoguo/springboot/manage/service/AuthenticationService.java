@@ -4,11 +4,11 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.google.common.collect.ImmutableMap;
 import com.wubaoguo.springboot.constant.ShiroConstants;
-import com.wubaoguo.springboot.core.bean.AuthBean;
 import com.wubaoguo.springboot.core.bean.CurrentRole;
+import com.wubaoguo.springboot.core.bean.CurrentUser;
 import com.wubaoguo.springboot.core.bean.LoginParam;
-import com.wubaoguo.springboot.core.exception.LoginSecurityException;
 import com.wubaoguo.springboot.core.dao.jdbc.dao.BaseDao;
+import com.wubaoguo.springboot.core.exception.LoginSecurityException;
 import com.wubaoguo.springboot.entity.sys.SysAdmin;
 import com.wubaoguo.springboot.entity.sys.SysRole;
 import org.apache.commons.lang3.StringUtils;
@@ -38,7 +38,7 @@ public class AuthenticationService {
     SysConfigService sysConfigService;
 
 
-    public AuthBean login(LoginParam auth) throws AccountException,
+    public CurrentUser login(LoginParam auth) throws AccountException,
             LoginSecurityException {
         // 查询预登录员工信息
         SysAdmin baseUser = new SysAdmin().setAccount(auth.getUsername()).queryForBean();
@@ -50,11 +50,13 @@ public class AuthenticationService {
                 String passwordMD5 = DigestUtil.md5Hex(auth.getPassword());
                 // 验证密码是否正确
                 if (baseUser.getPassword().equals(passwordMD5)) {
-                    AuthBean authBean = new AuthBean();
-                    authBean.setUserId(baseUser.getId());
+                    // 验证成功登录返回员工信息
+                    // 员工帐号密码值需向上copy
+                    CurrentUser currentUser = new CurrentUser();
+                    currentUser.setId(baseUser.getId());
                     // 初始化 系统配置到当前 用户session
-                    sysConfigService.initSysConfigToSession(authBean.getUserId());
-                    return authBean;
+                    sysConfigService.initSysConfigToSession(currentUser.getId());
+                    return currentUser;
                 } else {
                     throw new IncorrectCredentialsException("密码错误");
                 }

@@ -49,7 +49,7 @@ public class SysConfigService {
     }
 
     public boolean save(String item_key, String value) {
-        String admin_id = ShiroConstants.getCurrentUser().getUserId();
+        String admin_id = ShiroConstants.getCurrentUser().getId();
         SysConfig sysConfig = new SysConfig();
         sysConfig.setSys_damin_id(admin_id);
         SysConfig dbSysConfig = sysConfig.setItem_key(item_key).queryForBean();

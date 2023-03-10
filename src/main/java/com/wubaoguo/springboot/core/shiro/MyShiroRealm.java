@@ -1,8 +1,8 @@
 package com.wubaoguo.springboot.core.shiro;
 
 import com.wubaoguo.springboot.constant.ShiroConstants;
-import com.wubaoguo.springboot.core.bean.AuthBean;
 import com.wubaoguo.springboot.core.bean.CurrentRole;
+import com.wubaoguo.springboot.core.bean.CurrentUser;
 import com.wubaoguo.springboot.core.bean.LoginParam;
 import com.wubaoguo.springboot.core.exception.LoginSecurityException;
 import com.wubaoguo.springboot.manage.service.AuthenticationService;
@@ -50,8 +50,8 @@ public class MyShiroRealm extends AuthorizingRealm {
             try {
                 LoginParam loginParam = new LoginParam(token.getUsername(), String.valueOf(token.getPassword()));
                 // 登录信息数据底层校验
-                AuthBean auth = authenticationService.login(loginParam);
-                this.setSession(ShiroConstants.SESSION_CURRENT_USER, auth);
+                CurrentUser currentUser = authenticationService.login(loginParam);
+                this.setSession(ShiroConstants.SESSION_CURRENT_USER, currentUser);
                 // 查询底层角色信息
                 List<CurrentRole> roles =
                         authenticationService.findUserRoles(loginParam.getUsername());
@@ -60,7 +60,7 @@ public class MyShiroRealm extends AuthorizingRealm {
                     this.setSession(ShiroConstants.SESSION_CURRENT_ROLE, roles.get(0).getCode());
                     this.setSession(ShiroConstants.SESSION_CURRENT_ROLES, roles);
                 } else {
-                    throw new ConcurrentAccessException("role not defined");
+                    throw new ConcurrentAccessException("当前用户未配置角色");
                 }
                 return new SimpleAuthenticationInfo(loginParam.getUsername(), loginParam.getPassword(),
                         this.getName());

@@ -73,7 +73,7 @@ public class ManageService {
         querySql.append("AND re.`menu_name` like :keywords ");
         paramMap.put("keywords", "%" + keywords + "%");
         paramMap.put("role_code", currentRole.getCode());
-        paramMap.put("user_id", ShiroConstants.getCurrentUser().getUserId());
+        paramMap.put("user_id", ShiroConstants.getCurrentUser().getId());
         List<SysResources> sysResourcess = baseDao.queryForBeanList(querySql.toString(), paramMap, new SysResources());
         List<SearchResults> rList = new ArrayList<SearchResults>();
         for (SysResources sysResources : sysResourcess) {

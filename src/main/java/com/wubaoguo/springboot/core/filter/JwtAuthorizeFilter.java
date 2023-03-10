@@ -1,5 +1,6 @@
 package com.wubaoguo.springboot.core.filter;
 
+import cn.hutool.core.convert.Convert;
 import com.nimbusds.jose.JWSObject;
 import com.wubaoguo.springboot.constant.JwtConstants;
 import com.wubaoguo.springboot.core.bean.AuthBean;
@@ -7,8 +8,8 @@ import com.wubaoguo.springboot.core.exception.BusinessException;
 import com.wubaoguo.springboot.core.exception.LoginSecurityException;
 import com.wubaoguo.springboot.core.request.StateMap;
 import com.wubaoguo.springboot.core.request.ViewResult;
-import com.wubaoguo.springboot.core.util.WebUtil;
 import com.wubaoguo.springboot.core.util.JWTUtil;
+import com.wubaoguo.springboot.core.util.WebUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.*;
@@ -43,7 +44,7 @@ public class JwtAuthorizeFilter implements Filter {
             String token = httpRequest.getHeader("accessToken");
 
             if (StringUtils.isBlank(token)) {
-                WebUtil.write(viewResult.fail("header中token不能为空").json(), httpResponse);
+                WebUtil.write(viewResult.fail("Header中accessToken不能为空").json(), httpResponse);
                 return;
             }
             //不强制登录接口
@@ -98,6 +99,8 @@ public class JwtAuthorizeFilter implements Filter {
                     // token 信息过期，需客户端重新获取
                     throw new LoginSecurityException(StateMap.S_AUTH_TIMEOUT, "登录已过期，请重新登录");
                 }
+                auth.setIsAuth(true);
+                auth.setUserId(Convert.toStr(JWTUtil.getValue(jwsObject, "userId")));
                 // 添加用户信息到当前线程
                 ThreadContentFilter.addData(JwtConstants.THREAD_CURRENT_USER, auth);
                 return true;

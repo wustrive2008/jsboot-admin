@@ -6,9 +6,10 @@ import com.wubaoguo.springboot.core.util.WebUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -16,7 +17,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-@WebFilter(urlPatterns = "/*")
+@Component
+@Order(1)
 public class ThreadContentFilter implements Filter {
 
     static Logger logger = LoggerFactory.getLogger(ThreadContentFilter.class);
@@ -38,17 +40,15 @@ public class ThreadContentFilter implements Filter {
             this.request = request;
             this.response = response;
             parameter = null;
-            if (request instanceof HttpServletRequest) {
-                parameter = new Parameter((HttpServletRequest) request);
+            if (request != null) {
+                parameter = new Parameter(request);
             }
         }
     }
 
-    private static ThreadLocal<ThreadObject> THREAD_OBJECT = new ThreadLocal<ThreadObject>() {
-        protected ThreadObject initialValue() {
-            throw new RuntimeException(" 程序未初始化，请在web.xml中 配置");
-        }
-    };
+    private static ThreadLocal<ThreadObject> THREAD_OBJECT = ThreadLocal.withInitial(() -> {
+        throw new RuntimeException(" 程序未初始化，请在web.xml中 配置");
+    });
 
     /**
      * 从线程对象中获取数据

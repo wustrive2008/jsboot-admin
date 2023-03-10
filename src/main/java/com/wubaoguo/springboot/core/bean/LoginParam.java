@@ -1,7 +1,9 @@
 package com.wubaoguo.springboot.core.bean;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Description: 基础登录参数
@@ -11,8 +13,14 @@ import lombok.Data;
  * @date: 2023-3-9 20:25
  */
 @Data
-@AllArgsConstructor
 public class LoginParam {
     private String username;
     private String password;
+    private HttpServletRequest request;
+    private HttpServletResponse response;
+
+    public LoginParam(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }

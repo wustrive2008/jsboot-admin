@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -18,14 +19,14 @@ import java.util.Map;
  * @date: 2023-3-9 14:43
  */
 @RestController
-@RequestMapping("/rest/login")
+@RequestMapping("/front/login")
 public class LoginController {
 
     @Autowired
     BaseLoginService baseLoginService;
 
     @RequestMapping(value = "/baseLogin", method = RequestMethod.POST)
-    public String appLogin(LoginParam loginParam) {
+    public String appLogin(LoginParam loginParam) throws IOException {
         Map<String, Object> loginRes = baseLoginService.login(loginParam);
         return ViewResult.newInstance().success().setData(loginRes).json();
     }

@@ -10,17 +10,27 @@ import com.wubaoguo.springboot.core.filter.ThreadContentFilter;
 import net.minidev.json.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.util.Date;
 
+@Component
 public class JWTUtil {
-    
-    @Value("${jwt.secret}")
+
     private static String JWT_SECRET;
-    
-    @Value("${jwt.exp}")
+
     private static int JWT_EXP;
+
+    @Value("${jwt.secret}")
+    public void setJwtSecret(String jwtSecret) {
+        JWT_SECRET = jwtSecret;
+    }
+
+    @Value("${jwt.exp}")
+    public void setJwtExp(int jwtExp) {
+        JWT_EXP = jwtExp;
+    }
     
     
     /**

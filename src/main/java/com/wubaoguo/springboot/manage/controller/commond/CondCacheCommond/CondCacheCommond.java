@@ -2,6 +2,7 @@ package com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond;
 
 import com.wubaoguo.springboot.core.dao.jdbc.BaseCommond;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Description: 缓存条件对象 用户缓存查询条件
@@ -11,6 +12,7 @@ import lombok.Data;
  * @date: 2018/7/23 11:15
  */
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class CondCacheCommond extends BaseCommond {
     private static final long serialVersionUID = 1L;
 

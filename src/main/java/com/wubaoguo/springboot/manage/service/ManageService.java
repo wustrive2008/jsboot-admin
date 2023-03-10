@@ -1,18 +1,18 @@
 package com.wubaoguo.springboot.manage.service;
 
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.google.common.collect.ImmutableMap;
 import com.wubaoguo.springboot.constant.ShiroConstants;
 import com.wubaoguo.springboot.core.bean.CurrentRole;
-import com.wubaoguo.springboot.core.request.BaseState;
 import com.wubaoguo.springboot.core.dao.jdbc.dao.BaseDao;
+import com.wubaoguo.springboot.core.request.BaseState;
 import com.wubaoguo.springboot.entity.sys.SysAdmin;
 import com.wubaoguo.springboot.entity.sys.SysResources;
 import com.wubaoguo.springboot.manage.domain.SearchResults;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
-import org.jsoup.helper.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -109,7 +109,7 @@ public class ManageService {
         }
 
         SysAdmin baseUser = new SysAdmin().setAccount(account).queryForBean();
-        if (baseUser == null || StringUtil.isBlank(baseUser.getId())) {
+        if (baseUser == null || StrUtil.isBlank(baseUser.getId())) {
             return new BaseState(BaseState.S_AUTH_ERROR, "帐号不存在");
         }
         if (ShiroConstants.IS_ACTIVITY_NO.equals(baseUser.getIs_activity())) {

@@ -3,6 +3,7 @@ package com.wubaoguo.springboot.manage.controller.commond;
 
 import com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond.CondCacheCommond;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Description: 系统用户-角色-权限 管理模块查询条件
@@ -12,6 +13,7 @@ import lombok.Data;
  * @date: 2018/7/20 11:23
  */
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class ResourceCommond extends CondCacheCommond {
 
     //菜单

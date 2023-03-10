@@ -66,7 +66,7 @@ public class EntityGeneratorUtil {
                 }
                 map.put("COLUMN_LENGTH", !StringUtils.startsWith(column_type, "text") ?
                         column_type.substring(column_type.indexOf("(") + 1, column_type.length() - 1)
-                        : new Integer(65535));
+                        : Integer.valueOf(65535));
             }
             freeMakerList = list;
         }

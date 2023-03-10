@@ -136,7 +136,7 @@ public class JWTUtil {
      */
     public synchronized static String reExp(String jwtTemplate) throws KeyLengthException {
         if(StringUtils.isNotBlank(jwtTemplate)) {
-            return encrypt(decrypt(jwtTemplate).getPayload().toJSONObject());
+            return encrypt((JSONObject) decrypt(jwtTemplate).getPayload().toJSONObject());
         } 
         return null;
     }
@@ -150,7 +150,7 @@ public class JWTUtil {
      */
     public static Object getValue(JWSObject jwsObject, String key) {
         Payload payload = jwsObject.getPayload();
-        JSONObject jsonObjcet = payload.toJSONObject();
+        JSONObject jsonObjcet = (JSONObject) payload.toJSONObject();
         if(jsonObjcet.containsKey(key)) {
             return jsonObjcet.get(key);
         }

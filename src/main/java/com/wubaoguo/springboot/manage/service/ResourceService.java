@@ -1,18 +1,19 @@
 package com.wubaoguo.springboot.manage.service;
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.wubaoguo.springboot.constant.ShiroConstants;
-import com.wubaoguo.springboot.core.request.BaseState;
-import com.wubaoguo.springboot.core.request.StateMap;
 import com.wubaoguo.springboot.core.dao.jdbc.dao.BaseDao;
 import com.wubaoguo.springboot.core.dao.jdbc.dao.QuerySupport;
+import com.wubaoguo.springboot.core.request.BaseState;
+import com.wubaoguo.springboot.core.request.StateMap;
 import com.wubaoguo.springboot.entity.sys.*;
 import com.wubaoguo.springboot.manage.controller.commond.ResourceCommond;
 import org.apache.commons.lang3.StringUtils;
-import org.jsoup.helper.StringUtil;
+import org.jsoup.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -148,7 +149,7 @@ public class ResourceService {
             return new BaseState(StateMap.S_CLIENT_PARAM_ERROR, "角色资源必须绑定，若该角色暂不使用请作废。");
         }
         String roleCode = sysRole.getCode();
-        if (StringUtil.isBlank(sysRole.getId())) {
+        if (StrUtil.isBlank(sysRole.getId())) {
             // 维护角色id为 null 校验 该角色编码是否已被使用
             SysRole dbSysRole = new SysRole().setCode(roleCode).queryForBean();
             if (dbSysRole != null && StringUtils.isNotBlank(dbSysRole.getId())) {

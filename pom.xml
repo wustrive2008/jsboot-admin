@@ -168,8 +168,8 @@
         <!-- shiro redis -->
         <dependency>
             <groupId>org.crazycake</groupId>
-            <artifactId>shiro-redis</artifactId>
-            <version>2.4.2.1-RELEASE</version>
+            <artifactId>shiro-redis-spring-boot-starter</artifactId>
+            <version>3.3.1</version>
         </dependency>
 
         <!-- jwt -->

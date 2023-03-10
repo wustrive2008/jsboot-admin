@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Description:前端登录接口
+ * 前端登录接口
  *
  * @author: wubaoguo
  * @email: wustrive2008@gmail.com
@@ -25,6 +25,12 @@ public class LoginController {
     @Autowired
     BaseLoginService baseLoginService;
 
+    /**
+     * 登录接口
+     * @param loginParam
+     * @return
+     * @throws IOException
+     */
     @RequestMapping(value = "/baseLogin", method = RequestMethod.POST)
     public String appLogin(LoginParam loginParam) throws IOException {
         Map<String, Object> loginRes = baseLoginService.login(loginParam);

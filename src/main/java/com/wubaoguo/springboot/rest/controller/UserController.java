@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.wubaoguo.springboot.core.request.ViewResult;
 import com.wubaoguo.springboot.core.util.JWTUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -19,7 +20,7 @@ import java.util.Map;
 @RequestMapping("/rest/user")
 public class UserController {
 
-    @RequestMapping(value = "/info")
+    @RequestMapping(value = "/info", method = RequestMethod.POST)
     public String appLogin() {
         Map<String, Object> res = Maps.newHashMap();
         res.put("userId", JWTUtil.getJwtUser().getUserId());

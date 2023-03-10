@@ -14,7 +14,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Data
 public class LoginParam {
+    /**
+     * 账号
+     */
     private String username;
+    /**
+     * 密码
+     */
     private String password;
     private HttpServletRequest request;
     private HttpServletResponse response;

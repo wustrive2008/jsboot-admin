@@ -6,6 +6,6 @@ import com.wubaoguo.springboot.core.exception.LoginSecurityException;
 
 public interface JwtAuthService {
 
-    AuthBean login(LoginParam auth) throws LoginSecurityException;
+    AuthBean login(LoginParam loginParam) throws LoginSecurityException;
 
 }

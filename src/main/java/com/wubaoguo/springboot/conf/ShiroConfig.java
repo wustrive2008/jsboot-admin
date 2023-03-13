@@ -5,7 +5,7 @@ import com.wubaoguo.springboot.core.filter.PermissionFilter;
 import com.wubaoguo.springboot.core.shiro.MyShiroRealm;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.codec.Base64;
-import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.mgt.SessionsSecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.LogoutFilter;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
@@ -119,7 +119,7 @@ public class ShiroConfig {
     }
 
     @Bean
-    public SecurityManager securityManager() {
+    public SessionsSecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         // 设置realm.
         securityManager.setRealm(myShiroRealm());

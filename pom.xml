@@ -140,10 +140,11 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-        <!-- mail -->
+        <!-- 文件压缩 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.22</version>
         </dependency>
 
         <!-- freemarker -->

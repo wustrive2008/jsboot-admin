@@ -331,7 +331,7 @@ public class SysAdmin implements BaseBean {
 		@Override
 		public SysAdmin insert() {
 			if (StringUtils.isBlank(id)) {
-				this.setId(IdUtil.randomUUID());
+				this.setId(IdUtil.simpleUUID());
 			}
 			dao.execute(getInsertSql(),BEAN_VALUES);
 			return this;

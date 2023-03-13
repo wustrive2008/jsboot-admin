@@ -265,7 +265,7 @@ public class SysRole implements BaseBean {
 		@Override
 		public SysRole insert() {
 			if (StringUtils.isBlank(id)) {
-				this.setId(IdUtil.randomUUID());
+				this.setId(IdUtil.simpleUUID());
 			}
 			dao.execute(getInsertSql(),BEAN_VALUES);
 			return this;

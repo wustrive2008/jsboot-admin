@@ -212,7 +212,7 @@ public class ${ClassName} implements BaseBean{
 		@Override
 		public ${ClassName} insert() {
 			if (StringUtils.isBlank(id)) {
-				this.setId(StringUtil.getUUID());
+				this.setId(IdUtil.simpleUUID());
 			}
 			dao.execute(getInsertSql(),BEAN_VALUES);
 			return this;

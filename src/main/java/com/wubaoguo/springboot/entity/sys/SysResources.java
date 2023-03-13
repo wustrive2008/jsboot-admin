@@ -366,7 +366,7 @@ public class SysResources implements BaseBean {
 		@Override
 		public SysResources insert() {
 			if (StringUtils.isBlank(id)) {
-				this.setId(IdUtil.randomUUID());
+				this.setId(IdUtil.simpleUUID());
 			}
 			dao.execute(getInsertSql(),BEAN_VALUES);
 			return this;

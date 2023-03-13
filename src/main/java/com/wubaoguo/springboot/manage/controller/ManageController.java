@@ -45,6 +45,16 @@ public class ManageController {
         return "/manage/login";
     }
 
+    /**
+     * 表单生成器
+     *
+     * @return
+     */
+    @RequestMapping(value = "formbuilder")
+    public String formbuilder() {
+        return "/manage/form_builder";
+    }
+
     //登录请求
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String postLogin() {

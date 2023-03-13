@@ -238,7 +238,7 @@ public class SysConfig implements BaseBean {
 		@Override
 		public SysConfig insert() {
 			if (StringUtils.isBlank(id)) {
-				this.setId(IdUtil.randomUUID());
+				this.setId(IdUtil.simpleUUID());
 			}
 			dao.execute(getInsertSql(),BEAN_VALUES);
 			return this;

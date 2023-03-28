@@ -6,13 +6,13 @@ jsboot-admin一个更简洁、更灵活的Spring Boot项目脚手架，致力于
 
 ## 注意事项
 
-1. 项目中使用的一个基础类库[base-classlib](https://github.com/wustrive2008/base-classlib)
-2. 项目中使用到Lombok，请先安装对应ide插件
+1. 项目中使用到Lombok，请先安装对应ide插件
+2. 本项目未使用mybatis框架
 
 ## 特点
 
 集成框架(特色功能)：
-- 基于最新的Spring Boot 2
+- 基于Spring Boot 2.7
 - mysql 
 - druid 数据库连接池
 - 附带基础数据结构sql
@@ -22,12 +22,11 @@ jsboot-admin一个更简洁、更灵活的Spring Boot项目脚手架，致力于
 - freemarker
 - shiro + redis
 - jwt
-- mybatis/jdbcTemplate可选
+- jdbcTemplate封装
 - 定时任务
 - 内置用户-角色-权限控制
 - 多角色免重登切换
 - 模块标签页切换免刷新
-- AOP实现多数据源动态切换(分支:multi-datasource)
 
 ## 运行截图
 

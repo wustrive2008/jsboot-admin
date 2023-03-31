@@ -1,144 +1,83 @@
 package com.wubaoguo.springboot.core.dao.jdbc;
 
-import java.io.Serializable;
+import lombok.Data;
 
-public class BaseCommond implements Serializable {
+import java.io.Serializable;
+import java.util.List;
+
+@Data
+public abstract class BaseCommond implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private String orderBy;// 排序字段
-	private String orderTypeStr;
-	private boolean isPager = false;    
-	private String searchId;
-	private String selector;
-	private String orderByClause;
-	
-	private Pager pager;
-	/**
-	 * @return the orderByClause
-	 */
-	public String getOrderByClause() {
-		return orderByClause;
-	}
+    private String orderTypeStr;
+    private boolean isPager = false;
+    private String searchId;
+    private String selector;
+    private String orderByClause;
 
-	/**
-	 * @param orderByClause the orderByClause to set
-	 */
-	public void setOrderByClause(String orderByClause) {
-		this.orderByClause = orderByClause;
-	}
+    private Pager pager;
 
-	public BaseCommond() {
-		this.pager = new Pager();
-	}
-	
-	public Integer getPageNumber() {
-		return pager.getPageNumber();
-	}
+    public BaseCommond() {
+        this.pager = new Pager();
+    }
 
-	public void setPageNumber(Integer pageNumber) {
-		pager.setPageNumber(pageNumber);
-	}
+    public Integer getPageNumber() {
+        return pager.getPageNumber();
+    }
 
-	public Integer getPageSize() {
-		return pager.getPageSize();
-	}
+    public void setPageNumber(Integer pageNumber) {
+        pager.setPageNumber(pageNumber);
+    }
 
-	public void setPageSize(Integer pageSize) {
-		pager.setPageSize(pageSize);
-	}
+    public Integer getPageSize() {
+        return pager.getPageSize();
+    }
 
-	public Integer getTotalCount() {
-		return pager.getTotalCount();
-	}
+    public void setPageSize(Integer pageSize) {
+        pager.setPageSize(pageSize);
+    }
 
-	public void setTotalCount(Integer totalCount) {
-		pager.setTotalCount(totalCount);
-	}
+    public Integer getTotalCount() {
+        return pager.getTotalCount();
+    }
 
-	public Integer getPageCount() {
-		return pager.getPageCount();
-	}
+    public void setTotalCount(Integer totalCount) {
+        pager.setTotalCount(totalCount);
+    }
 
-	public void setPageCount(Integer pageCount) {
-		pager.setPageCount(pageCount);
-	}
+    public Integer getPageCount() {
+        return pager.getPageCount();
+    }
 
-	public String getOrderBy() {
-		return orderBy;
-	}
+    public void setPageCount(Integer pageCount) {
+        pager.setPageCount(pageCount);
+    }
 
-	public void setOrderBy(String orderBy) {
-		this.orderBy = orderBy;
-	}
 
-	public String getOrderTypeStr() {
-		return orderTypeStr;
-	}
+    public int getLimitStart() {
+        if (isPager) {
+            return pager.getPageStart();
+        }
+        return -1;
+    }
 
-	public void setOrderTypeStr(String orderTypeStr) {
-		this.orderTypeStr = orderTypeStr;
-	}
 
-	/**
-	 * @return the searchId
-	 */
-	public String getSearchId() {
-		return searchId;
-	}
+    public int getLimitEnd() {
+        if (isPager) {
+            return pager.getPageSize();
+        }
+        return -1;
+    }
 
-	/**
-	 * @param searchId the searchId to set
-	 */
-	public void setSearchId(String searchId) {
-		this.searchId = searchId;
-	}
+    public boolean isPager() {
+        return isPager;
+    }
 
-	/**
-	 * @return the limitStart
-	 */
-	public int getLimitStart() {
-		if(isPager) {
-			return pager.getPageStart();
-		}
-		return -1;
-	}
+    public void setPager(boolean isPager) {
+        this.isPager = isPager;
+    }
 
-	/**
-	 * @return the limitEnd
-	 */
-	public int getLimitEnd() {
-		if(isPager) {
-			return pager.getPageSize();
-		}
-		return -1;
-	}
+    public abstract List<String> getLikes();
 
-	/**
-	 * @return the isPager
-	 */
-	public boolean isPager() {
-		return isPager;
-	}
-
-	/**
-	 * @param isPager the isPager to set
-	 */
-	public void setPager(boolean isPager) {
-		this.isPager = isPager;
-	}
-
-	/**
-	 * @return the selector
-	 */
-	public String getSelector() {
-		return selector;
-	}
-
-	/**
-	 * @param selector the selector to set
-	 */
-	public void setSelector(String selector) {
-		this.selector = selector;
-	}
-	
 }

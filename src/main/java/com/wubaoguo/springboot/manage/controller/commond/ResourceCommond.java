@@ -5,6 +5,9 @@ import com.wubaoguo.springboot.manage.controller.commond.CondCacheCommond.CondCa
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Description: 系统用户-角色-权限 管理模块查询条件
  *
@@ -13,7 +16,7 @@ import lombok.EqualsAndHashCode;
  * @date: 2018/7/20 11:23
  */
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 public class ResourceCommond extends CondCacheCommond {
 
     //菜单
@@ -32,4 +35,9 @@ public class ResourceCommond extends CondCacheCommond {
 
     private String state;  //账号状态
 
+
+    @Override
+    public List<String> getLikes() {
+        return Arrays.asList("menuName", "roleCode");
+    }
 }
